@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="ts" label="Timestamp" language="en" table="x_snc_slackerbot_chat">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>ts</element>
+            <help/>
+            <hint/>
+            <label>Timestamp</label>
+            <language>en</language>
+            <name>x_snc_slackerbot_chat</name>
+            <plural>Timestamps</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-09-23 05:49:08</sys_created_on>
+            <sys_name>Timestamp</sys_name>
+            <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_slackerbot_chat_ts_en</sys_update_name>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

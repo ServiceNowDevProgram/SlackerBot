@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="22d0c62e1b861d10d806dc23b24bcb4f" label="Chat" max_length="40" name="x_snc_slackerbot_chat" type="collection">
+        <element label="Channel" max_length="40" name="channel" read_only="true" type="string"/>
+        <element label="Text" max_length="4000" name="text" read_only="true" type="string"/>
+        <element label="Thread timestamp" max_length="40" name="thread_ts" read_only="true" type="string"/>
+        <element label="Timestamp" max_length="40" name="ts" read_only="true" type="string"/>
+        <element label="User" max_length="32" name="user" read_only="true" reference="x_snc_slackerbot_user" type="reference"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

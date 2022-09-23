@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="56bc752a1b861d10d806dc23b24bcbc3" label="User" max_length="40" name="x_snc_slackerbot_user" type="collection">
+        <element display="true" label="Name" max_length="128" name="name" type="string"/>
+        <element label="User ID" max_length="40" name="user_id" read_only="true" type="string"/>
+    </element>
+</database>

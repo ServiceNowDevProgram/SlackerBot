@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Event</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    if (request.body.data.challenge){
+		response.setStatus(200);
+		response.setContentType('text/plain');
+		response.getStreamWriter().writeString(request.body.data.challenge);
+	} else {
+		if (request.body.data.event.bot_id) return;
+		//gs.info('slackoff: ' + (request.body.dataString));
+		var payload = new GlideRecord('x_snc_slackerbot_payload');
+		payload.initialize();
+		payload.setValue('payload', JSON.stringify(request.body.data, null, 2));
+		payload.insert(); 
+	}
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_slackerbot/slackerbot_event_handler</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 06:36:30</sys_created_on>
+        <sys_id>bbcb42a61bc61d10d806dc23b24bcbd2</sys_id>
+        <sys_name>Event</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_ws_operation_bbcb42a61bc61d10d806dc23b24bcbd2</sys_update_name>
+        <web_service_definition display_value="SlackerBot Event Handler">1fabce661bc61d10d806dc23b24bcbd6</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

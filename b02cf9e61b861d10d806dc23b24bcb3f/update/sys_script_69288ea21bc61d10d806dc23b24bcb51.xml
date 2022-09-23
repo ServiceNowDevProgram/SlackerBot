@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_snc_slackerbot_payload</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Points Party</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// TODO: Move this logic into a Script Include
+	var payloadObject = JSON.parse(current.payload); 
+
+	// DO NOT process bot messages
+	if (payloadObject.event.subtype == 'bot_message') {
+		return;
+	}
+
+	var plus_regex = /\+\+/gmi;
+	if (plus_regex.test(payloadObject.event.text)) return;
+
+	if (!payloadObject.event.thread_ts) return;
+	var regex = /(!pointsparty)/gmi;
+	if (regex.test(payloadObject.event.text)){
+		var thread_ts = payloadObject.event.thread_ts;
+		var this_user = payloadObject.event.user;
+		var participants = [];
+
+		var participants_gr = new GlideRecord('x_snc_slackerbot_payload');
+		participants_gr.addEncodedQuery('payloadLIKE"thread_ts": "' + thread_ts);
+		participants_gr.query();
+		while (participants_gr.next()){
+			var participants_payload = JSON.parse(participants_gr.getValue('payload'));
+			if (participants_payload.event.user && participants_payload.event.user != this_user && participants.indexOf('<@' + participants_payload.event.user + '> ++') == -1) participants.push('<@' + participants_payload.event.user + '> ++');
+		}
+
+		payloadObject.event.text += ' ' + participants.join(' ');
+
+		var matches = payloadObject.event.text.match(/\s?\@?(\S+)\s?\+\+/g); 
+
+		var messages = [];
+
+		//messages.push('```' + payloadObject.event.text + '```');
+
+		matches.forEach(function (t) {
+			var thing = t.replace('++', ''); 
+			thing = thing.trim();
+
+			// Check for self-points
+			if (thing.contains(payloadObject.event.user)) {
+				var denials = [
+					"you can pat yourself on the back, but no self-points are allowed.", 
+					"I can't give you a real point but... you tried?",
+					"you think you're real clever don't you.",
+					"all I can offer you is some sassy reply.",
+					"that's cute how you tried to give yourself a point.",
+					"no self-poiints.",
+					"you tried ¯\\_(ツ)_/¯"
+				];
+				messages.push(thing + " " + denials[Math.floor(Math.random() * denials.length)]);
+			} else {
+				var grSlackUser = new GlideRecord('x_snc_slackerbot_user'); 
+				grSlackUser.addQuery('user_id', thing); 
+				grSlackUser.query(); 
+
+				if (grSlackUser.next()) {
+					grSlackUser.points = grSlackUser.points + 1;  
+					grSlackUser.update(); 
+				} else {
+					grSlackUser.initialize(); 
+					grSlackUser.user_id = thing; 
+					grSlackUser.points = 1; 
+					grSlackUser.insert(); 
+				}
+
+				var grPointRecord = new GlideRecord('x_snc_slack_points_point');
+				grPointRecord.initialize();
+				grPointRecord.setValue('giver', payloadObject.event.user);
+				grPointRecord.setValue('target', grSlackUser.getUniqueValue());
+				grPointRecord.setValue('source_event', current.getUniqueValue());
+				grPointRecord.setValue('text', payloadObject.event.text);
+				grPointRecord.insert();
+
+				var count = new GlideAggregate('x_snc_slack_points_point');
+				count.addQuery('target', grSlackUser.getUniqueValue());
+				count.addEncodedQuery('sys_created_onONLast 90 days@javascript:gs.beginningOfLast90Days()@javascript:gs.endOfLast90Days()');
+				count.addAggregate('COUNT');
+				count.query();
+				var score = 0;
+				if(count.next()) 
+					score = count.getAggregate('COUNT');
+
+				var rank = '';
+				var leader = new GlideAggregate('x_snc_slack_points_point');
+				leader.addEncodedQuery('sys_created_onONLast 90 days@javascript:gs.beginningOfLast90Days()@javascript:gs.endOfLast90Days()');
+				leader.orderByAggregate('COUNT', 'target');
+				leader.addAggregate('COUNT', 'target');
+				leader.query();
+				var this_rank = 0;
+				while (leader.next()){
+					this_rank++;
+					if (leader.target == grSlackUser.getUniqueValue()) rank = this_rank;
+				}
+
+				var randomMessage = new x_snc_slack_points.RandomMessage();
+				var message = randomMessage.getMessage(thing, score, grSlackUser.points, rank);
+
+				messages.push(message);
+			}
+		}); 
+
+		var response = new x_snc_slack_points.SlackClient().sendChat(payloadObject.event.channel, messages.join('\n\n') , payloadObject.event.thread_ts);
+		var responseBody = response.getBody();
+		var statusCode = response.getStatusCode();
+
+	}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 06:23:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>69288ea21bc61d10d806dc23b24bcb51</sys_id>
+        <sys_name>Points Party</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_script_69288ea21bc61d10d806dc23b24bcb51</sys_update_name>
+        <template/>
+        <when>async_always</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=69288ea21bc61d10d806dc23b24bcb51"/>
+</record_update>

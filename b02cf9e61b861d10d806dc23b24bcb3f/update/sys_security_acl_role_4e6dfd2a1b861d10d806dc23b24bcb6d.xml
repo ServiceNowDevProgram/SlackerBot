@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 05:32:31</sys_created_on>
+        <sys_id>4e6dfd2a1b861d10d806dc23b24bcb6d</sys_id>
+        <sys_name>x_snc_slackerbot_user.x_snc_slackerbot.user_user</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_security_acl display_value="x_snc_slackerbot_user">756dfd2a1b861d10d806dc23b24bcb6b</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_4e6dfd2a1b861d10d806dc23b24bcb6d</sys_update_name>
+        <sys_user_role display_value="x_snc_slackerbot.admin" name="x_snc_slackerbot.admin">a16dfd2a1b861d10d806dc23b24bcb3d</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

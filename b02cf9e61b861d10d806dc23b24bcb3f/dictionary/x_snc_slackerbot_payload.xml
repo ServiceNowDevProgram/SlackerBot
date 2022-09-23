@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="683e3d6a1b861d10d806dc23b24bcb93" label="Payload" max_length="40" name="x_snc_slackerbot_payload" type="collection">
+        <element label="Payload" max_length="4000" name="payload" read_only="true" type="string"/>
+    </element>
+</database>

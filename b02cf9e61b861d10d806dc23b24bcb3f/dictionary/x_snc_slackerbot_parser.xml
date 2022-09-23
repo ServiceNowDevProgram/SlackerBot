@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="443f71ea1b861d10d806dc23b24bcb2d" label="Parser" max_length="40" name="x_snc_slackerbot_parser" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Activation example" max_length="40" name="activation_example" type="string"/>
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Description" max_length="128" name="description" type="string"/>
+        <element label="Flags" max_length="40" name="flags" type="string"/>
+        <element label="Regex" max_length="128" name="regex" type="string"/>
+        <element label="Script" max_length="8000" name="script" type="script"/>
+    </element>
+</database>

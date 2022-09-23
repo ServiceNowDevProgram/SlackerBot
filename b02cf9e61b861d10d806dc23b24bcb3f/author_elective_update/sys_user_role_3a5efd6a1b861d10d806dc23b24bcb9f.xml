@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="DELETE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_snc_slackerbot.payload_user</name>
+        <requires_subscription>-1</requires_subscription>
+        <scoped_admin>false</scoped_admin>
+        <suffix>payload_user</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 05:36:40</sys_created_on>
+        <sys_id>3a5efd6a1b861d10d806dc23b24bcb9f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_slackerbot.payload_user</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_user_role_3a5efd6a1b861d10d806dc23b24bcb9f</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-09-23 05:36:40</sys_updated_on>
+    </sys_user_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>671830c5dbbdbc1049eac597059619c5</instance_id>
+        <instance_name>earl</instance_name>
+        <name>sys_user_role_3a5efd6a1b861d10d806dc23b24bcb9f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role"><sys_user_role action="INSERT_OR_UPDATE"><assignable_by/><can_delegate>true</can_delegate><description/><elevated_privilege>false</elevated_privilege><grantable>true</grantable><includes_roles/><name>x_snc_slackerbot.payload_user</name><requires_subscription>-1</requires_subscription><scoped_admin>false</scoped_admin><suffix>payload_user</suffix><sys_class_name>sys_user_role</sys_class_name><sys_created_by>earl.duque</sys_created_by><sys_created_on>2022-09-23 05:36:40</sys_created_on><sys_id>3a5efd6a1b861d10d806dc23b24bcb9f</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_snc_slackerbot.payload_user</sys_name><sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package><sys_policy/><sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope><sys_update_name>sys_user_role_3a5efd6a1b861d10d806dc23b24bcb9f</sys_update_name><sys_updated_by>earl.duque</sys_updated_by><sys_updated_on>2022-09-23 05:36:40</sys_updated_on></sys_user_role></record_update>]]></payload>
+        <payload_hash>-777627111</payload_hash>
+        <record_name>x_snc_slackerbot.payload_user</record_name>
+        <reverted_from/>
+        <source>342cf9e61b861d10d806dc23b24bcb41</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 05:36:40</sys_created_on>
+        <sys_id>765efd6a1b861d10d806dc23b24bcba2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18368d912e10000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-09-23 05:36:40</sys_updated_on>
+        <type>Role</type>
+        <update_guid>be5efd6acd861d1001ef9cd202ccb8a1</update_guid>
+        <update_guid_history>be5efd6acd861d1001ef9cd202ccb8a1:-777627111</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="x_snc_slackerbot.payload_user">e56ef1aa1b861d10d806dc23b24bcb1a</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 05:36:51</sys_created_on>
+        <sys_db_object display_value="" name="sys_user_role">sys_user_role</sys_db_object>
+        <sys_id>0e0e1394f1914ede9792774cd178d384</sys_id>
+        <sys_metadata>3a5efd6a1b861d10d806dc23b24bcb9f</sys_metadata>
+        <sys_name>x_snc_slackerbot.payload_user</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_user_role_3a5efd6a1b861d10d806dc23b24bcb9f</sys_update_name>
+        <sys_update_version display_value="sys_user_role_3a5efd6a1b861d10d806dc23b24bcb9f">765efd6a1b861d10d806dc23b24bcba2</sys_update_version>
+    </sys_metadata_delete>
+</record_update>

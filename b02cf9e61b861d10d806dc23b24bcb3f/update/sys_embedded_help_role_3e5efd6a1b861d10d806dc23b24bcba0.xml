@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role/>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 05:36:40</sys_created_on>
+        <sys_id>3e5efd6a1b861d10d806dc23b24bcba0</sys_id>
+        <sys_name>3a5efd6a1b861d10d806dc23b24bcb9f</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_embedded_help_role_3e5efd6a1b861d10d806dc23b24bcba0</sys_update_name>
+    </sys_embedded_help_role>
+</record_update>

@@ -1,10 +1,10 @@
 /*
 activation_example:!xkcd wisdom of the ancients
 regex:!xkcd
-flags:
+flags:g
 */
 
-var search = gs.urlEncode(current.text.replace(/!xkcd/, '').trim());
+var search = gs.urlEncode(current.text.replace(/!xkcd/g, '').trim());
 
 var rm = new sn_ws.RESTMessageV2();
 rm.setHttpMethod('GET');

@@ -71,3 +71,18 @@ if (sentence == '') {
 5. Make updates to the application
 6. In Studio, commit your changes to source control
 7. Submit a pull request to the ServiceNowDevProgram/SlackerBot `main` branch
+
+An accepted Pull Request and merge does not necessarily mean the functionality will go live immediately, as an admin for the host instance will need to pull the application into ServiceNow.
+
+#### Notes for setting this app up in Studio
+
+System Properties
+
+- `x_snc_slackerbot.SlackerBot.token` is your Slack bot's user token. Required to send messages back to your Slack server
+- `x_snc_slackerbot.SlackerBot.supertoken` is any admin token for your Slack server. Used for deleting messages (see in-app SRAPI).
+- `x_snc_slackerbot.maps.token` is your Google Maps token (if you wish to use the !iss parser)
+
+Scripted Rest APIs (SRAPIs)
+
+- `SlackerBot Event Handler` is used to validate to the Slack Events handler and to convert incoming chats to the x_snc_slackerbot_payload table
+- `SlackerBotGitHub` is used to automate the creation of parsers from ServiceNowDevProgram/SlackerBot/Parsers

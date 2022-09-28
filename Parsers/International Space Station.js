@@ -11,7 +11,6 @@ var iss_long = get_coords.iss_position.longitude;
 //  	iss_lat = '34.0522';
 //  	iss_long = '118.2437';
 
-
 var get_location = new x_snc_slackerbot.ISS().get_location(iss_lat, iss_long);
 gs.info('slacker get_location: ' + JSON.stringify(get_location));
 var location = '';
@@ -37,6 +36,5 @@ var get_image = new x_snc_slackerbot.ISS().get_image(iss_lat, iss_long);
 //var area2 = 'test2';
 
 // 	var send_chat = new SlackFall().send_chat(current.channel, 'The International Space Station is currently above latitude: ' + get_coords.iss_position.latitude + ', longitute: ' + get_coords.iss_position.longitude + '\nThose coordinates place the ISS over ' + location, false, '', current.thread_ts);
-
 // 	send_attachment: function(channel, message, image, thread, pretext)
 var send_chat = new x_snc_slackerbot.Slacker().send_attachment(current.channel, 'The International Space Station is currently above latitude: ' + iss_lat + ', longitude: ' + iss_long + '\nThose coordinates place the ISS over ' + location, get_image, current.thread_ts, true);

@@ -39,4 +39,4 @@ var get_image = new x_snc_slackerbot.ISS().get_image(iss_lat, iss_long);
 // 	var send_chat = new SlackFall().send_chat(current.channel, 'The International Space Station is currently above latitude: ' + get_coords.iss_position.latitude + ', longitute: ' + get_coords.iss_position.longitude + '\nThose coordinates place the ISS over ' + location, false, '', current.thread_ts);
 
 // 	send_attachment: function(channel, message, image, thread, pretext)
-var send_chat = new x_snc_slackerbot.Slacker().send_attachment(current, 'The International Space Station is currently above latitude: ' + iss_lat + ', longitude: ' + iss_long + '\nThose coordinates place the ISS over ' + location, get_image, current.thread_ts, true);
+var send_chat = new x_snc_slackerbot.Slacker().send_attachment(current.channel, 'The International Space Station is currently above latitude: ' + iss_lat + ', longitude: ' + iss_long + '\nThose coordinates place the ISS over ' + location, get_image, current.thread_ts, true);

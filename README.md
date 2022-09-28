@@ -8,7 +8,9 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 
 ## Two ways to contribute
 
-### Easy method
+[Easy](#easy-method-adding-new-parser) or [Hard](#regular-method-adding-new-functionality-types)
+
+### Easy method (Adding new parser)
 
 Can be done without pulling this app into a ServiceNow instance
 
@@ -19,7 +21,7 @@ Can be done without pulling this app into a ServiceNow instance
 
 If approved, your new parser automatically goes live for the bot's immediate use!
 
-### Regular method
+### Regular method (Adding new functionality types)
 
 1. Fork this repo
 2. Go to your ServiceNow instance

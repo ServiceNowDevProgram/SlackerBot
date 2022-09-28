@@ -28,6 +28,8 @@ If approved, your new parser automatically goes live for the bot's immediate use
 3. Go to `System Applications` => `Studio`
 4. Once Studio loads, select `Import From Source Control`
 5. Use your forked repo to [Import your application](https://developer.servicenow.com/dev.do#!/learn/learning-plans/quebec/new_to_servicenow/app_store_learnv2_devenvironment_quebec_importing_an_application_from_source_control)
-5. Make updates to the application
+5. Make updates to the application (see [CONTRIBUTING.md](CONTRIBUTING.md) for additional details)
 6. In Studio, commit your changes to source control
 7. Submit a pull request to the ServiceNowDevProgram/SlackerBot `main` branch
+
+An accepted Pull Request and merge does not necessarily mean the functionality will go live immediately, as an admin for the host instance will need to pull the application into ServiceNow.

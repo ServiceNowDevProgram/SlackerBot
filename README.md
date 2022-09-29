@@ -64,6 +64,15 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 * Check the Payload `x_snc_slackerbot_payload` table to make sure SN is receiving Slack messages
 * Check 'Outbound HTTP Requests' to make sure the bot is replying to the channel
 
+## Auto populate your Parsers table
+
+To fill your Parsers `x_snc_slackerbot_parser` table with all the parsers that exist on this repo:
+
+* Go to the Parsers table list (type `x_snc_slackerbot_parser.list` in your filter navigator and press enter)
+* Click on the "Sync Parsers" Banner UI Action
+
+This syncs your table to *this* repo, if you rather sync it to another repo, change the value of your `x_snc_slackerbot.Parsers_Sync_Repo` system property.
+
 ## Setting up the GitHub to ServiceNow integration
 
 The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/ServiceNowDevProgram/SlackerBot/) is set up to send changes to the ServiceNow instance that @Slacker is hosted on (automatically, on every commit). To do this for your own fork and ServiceNow instance:

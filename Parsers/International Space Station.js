@@ -3,6 +3,7 @@ activation_example:!iss
 regex:!iss
 flags:gmi
 */
+
 var get_coords = new x_snc_slackerbot.ISS().get_coords();
 var iss_lat = get_coords.iss_position.latitude;
 var iss_long = get_coords.iss_position.longitude;

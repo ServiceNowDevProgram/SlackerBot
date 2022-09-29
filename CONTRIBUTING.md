@@ -8,6 +8,10 @@
 - Parser additions/updates must follow the [Parser template](#required-parser-template) below.
 - Low effort/spam Pull Requests will be marked as spam accordingly.
 
+## Ideas
+
+See the Issues tab for parser ideas. Make sure to leave a comment on an issue if you're working on it.
+
 ## Two ways to contribute
 
 [Easy](#easy-method-adding-new-parser) or [Hard](#regular-method-adding-new-functionality-types)

@@ -35,7 +35,7 @@ If approved, your new parser automatically goes live for the bot's immediate use
 
 An accepted Pull Request and merge does not necessarily mean the functionality will go live immediately, as an admin for the host instance will need to pull the application into ServiceNow.
 
-## Installing this bot on your own slack server
+## Installing this bot on your own Slack server
 
 ### Create Slack App, Install into Slack
 
@@ -64,7 +64,9 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 * Check the Payload `x_snc_slackerbot_payload` table to make sure SN is receiving Slack messages
 * Check 'Outbound HTTP Requests' to make sure the bot is replying to the channel
 
-## Setting up GitHub to send changes to the /parsers folder to your ServiceNow Instance
+## Setting up the GitHub to ServiceNow integration
+
+The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/ServiceNowDevProgram/SlackerBot/) is set up to send changes to the ServiceNow instance that @Slacker is hosted on (automatically, on every commit). To do this for your own fork and ServiceNow instance:
 
 * In your forked repository, click on the Actions tab
 * Click on "I understand" to activate workflows

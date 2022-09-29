@@ -8,8 +8,7 @@ flags:gmi
 		var term = current.text.substr(where).trim();
 		if (term == '') {
 			var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: !docs *something*', false);
-			return;
-		}
+		} else {
 		var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, 'https://docs.servicenow.com/search?q=' + escape(term) + '&labels=2', false);
-	
+	}
 

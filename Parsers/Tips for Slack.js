@@ -1,5 +1,5 @@
 /*
-activation_example:Tips for this Slack
+activation_example:!Tips
 regex:!tips
 flags:gmi
 */

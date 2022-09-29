@@ -3,6 +3,7 @@ activation_example:!help
 regex:!help
 flags:gmi
 */
+
 var parser = new GlideRecord('x_snc_slackerbot_parser');
 parser.orderBy('activation_example');
 parser.query();

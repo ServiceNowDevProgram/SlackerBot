@@ -3,6 +3,7 @@ activation_example:30c or 30 degrees celcius
 regex:(?:^|\s)(-?\d{1,3}\.?\d{0,2})°?\s?(?:degrees)?\s?c(?:elsius|elcius)?\b
 flags:gmi
 */
+
 var regextest = /(?:^|\s)(-?\d{1,3}\.?\d{0,2})°?\s?(?:degrees)?\s?c(?:elsius|elcius)?\b/gmi;
 var match = regextest.exec(current.text);
 var numbertest = /-?\d{1,}\.?\d{0,}/;

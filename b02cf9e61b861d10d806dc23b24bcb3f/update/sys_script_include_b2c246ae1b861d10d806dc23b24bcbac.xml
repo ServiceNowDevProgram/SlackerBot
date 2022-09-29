@@ -90,7 +90,7 @@ Slacker.prototype = {
 		}
 	},
 
-	send_reaction: function(channel, reaction, timestamp){
+	send_reaction: function(gr, reaction){
 		var rm = new sn_ws.RESTMessageV2();
 		rm.setHttpMethod('POST');
 		rm.setEndpoint('https://slack.com/api/reactions.add');
@@ -99,9 +99,9 @@ Slacker.prototype = {
 
 		var bodyString = '';
 		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-		bodyString += '&channel=' + gs.urlEncode(channel);
+		bodyString += '&channel=' + gs.urlEncode(gr.channel);
 		bodyString += '&name=' + gs.urlEncode(reaction);
-		bodyString += '&timestamp='+gs.urlEncode(timestamp);
+		bodyString += '&timestamp='+gs.urlEncode(gr.ts);
 		rm.setRequestBody(bodyString);
 		return rm.execute();
 	},
@@ -131,10 +131,13 @@ Slacker.prototype = {
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:06:00</sys_created_on>
         <sys_id>b2c246ae1b861d10d806dc23b24bcbac</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Slacker</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_include_b2c246ae1b861d10d806dc23b24bcbac</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-09-29 18:34:48</sys_updated_on>
     </sys_script_include>
 </record_update>

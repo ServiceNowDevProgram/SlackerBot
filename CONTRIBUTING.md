@@ -8,6 +8,10 @@
 - Parser additions/updates must follow the [Parser template](#required-parser-template) below.
 - Low effort/spam Pull Requests will be marked as spam accordingly.
 
+## Ideas
+
+See the Issues tab for parser ideas. Make sure to leave a comment on an issue if you're working on it.
+
 ## Two ways to contribute
 
 [Easy](#easy-method-adding-new-parser) or [Hard](#regular-method-adding-new-functionality-types)
@@ -35,6 +39,9 @@ If approved, your new parser automatically goes live for the bot's immediate use
   - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
   - `param 2` Required string. The chat message to be sent. Can be an expression, eg. `originalNumber + ' is the result.`
   - `param 3` Optional boolean. If set to true, will always push chat to the thread instead of to the main channel chat. Useful if param 2 is expected to be long and you don't want to flood chat.
+- `new x_snc_slackerbot.Slacker().send_reaction(`**param 1**, **param 2**`)` How to send reactions back to Slack after parsing.
+  - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
+  - `param 2` Required string. The name of the emoji to send. Do not include surrounding `:`. Eg. `joy` and *not* `:joy:`
 
 #### Required Parser Template
 
@@ -55,9 +62,9 @@ flags:gmi
 */
 var sentence = current.text.replace(/!clap/gmi, "").trim().toUpperCase();
 if (sentence == '') {
-	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: gimme something to clap!', false, '', current.thread_ts);
+	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
 } else {
-	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), current.thread_ts);
+	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), false);
 }
 ```
 

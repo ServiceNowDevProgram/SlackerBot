@@ -34,13 +34,14 @@ jobs:
       id: myRequest
       uses: fjogeleit/http-request-action@v1.8.1
       with:
-        url: 'https://devprogramresources.service-now.com/api/x_snc_slackerbot/slackerbotgithub'
+        url: ${{ format('https://{0}.service-now.com/api/x_snc_slackerbot/slackerbotgithub', secrets.SN_INSTANCE_NAME) }}
+#         url: 'https://devprogramresources.service-now.com/api/x_snc_slackerbot/slackerbotgithub'
 #         url: 'https://earl.service-now.com/api/x_snc_slackerbot/slackerbotgithub'
         method: 'POST'
         contentType: application/json
         data: ${{ toJson(github) }}
-        username: ${{ secrets.DPR_USERNAME }}
-        password: ${{ secrets.DPR_PASSWORD }}
+        username: ${{ secrets.ADMIN_USERNAME }}
+        password: ${{ secrets.ADMIN_PASSWORD }}
     - name: Show Response
       run: echo ${{ steps.myRequest.outputs.response }}
 

@@ -39,6 +39,7 @@
 						parserUpdate(parsers, files[j].raw_url, 'update');
 					} else {
 						parsers.newRecord();
+						parsers.setValue('active', 'true');
 						parsers.setValue('description', files[j].filename.split("/")[1].split(".")[0]);
 						parserUpdate(parsers, files[j].raw_url, 'insert');
 					}

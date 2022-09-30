@@ -5,5 +5,5 @@ flags:gmi
 */
 
 for (var i = 1; i <= 7; i++){
-    x_snc_slackerbot.Slacker().send_reaction(current, 'parrotwave'+i);
+    new x_snc_slackerbot.Slacker().send_reaction(current, 'parrotwave'+i);
 }

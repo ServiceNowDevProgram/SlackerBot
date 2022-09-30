@@ -4,7 +4,7 @@ regex:!whois
 flags:gmi
 */
 
-if (current.channel != "GD51HTR46" && current.channel != "G9LAJG7G8") { //admin channels on sndevs
+if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8") { //admin channels on sndevs
   var rm = new sn_ws.RESTMessageV2();
   rm.setHttpMethod('GET');
   rm.setLogLevel('all');

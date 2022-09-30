@@ -22,7 +22,7 @@ Can be done without pulling this app into a ServiceNow instance
 
 1. Fork this repo
 2. Create a new branch (name it according to what functionality you are adding)
-3. Create a new .js file in the [Parsers](Parsers) folder
+3. Create a new .js file in the [Parsers](Parsers) folder. Make sure to give it a descriptive name as this is what's used in the !help command.
 4. Submit a pull request to the ServiceNowDevProgram/SlackerBot `main` branch
 
 If approved, your new parser automatically goes live for the bot's immediate use!

@@ -29,7 +29,7 @@ jobs:
         method: 'POST'
         contentType: application/json
         data: ${{ toJson(github) }}
-        username: ${{ secrets.ADMIN_PASSWORD }}
-        password: ${{ secrets.ADMIN_USERNAME }}
+        username: ${{ secrets.ADMIN_USERNAME }}
+        password: ${{ secrets.ADMIN_PASSWORD }}
     - name: Show Response
       run: echo ${{ steps.myRequest.outputs.response }}

@@ -5,7 +5,7 @@ flags:gmi
 */
 
 var term = /(?:!wiki )(.*)/gmi.exec(current.text);
-gs.info("WIKI: " + term);
+//gs.info("WIKI: " + term);
 
 if (term == null) {
 	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: !wiki *something*', false);

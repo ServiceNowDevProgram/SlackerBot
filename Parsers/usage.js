@@ -6,8 +6,6 @@ flags:i
 
 var count, message, query, report_on, regex;
 
-current = { 'text': '!usage' };
-
 regex = /^(!usage|!report) (.*)/i;
 report_on = current.text.match( regex ) ? current.text.match( regex )[2] : null;
 

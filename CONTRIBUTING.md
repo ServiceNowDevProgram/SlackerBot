@@ -45,6 +45,10 @@ If approved, your new parser automatically goes live for the bot's immediate use
 
 #### Required Parser Template
 
+##### For chat parsers
+
+Eg. Run a script when a user says ____
+
 - Line 1 must always be `/*`
 - Line 2 must always be `activation_example:` followed by a short description of how this parser would be activate
 - Line 3 must always be `regex:` followed by a regex expression that validates if the parser should run. Do not include the opening and closing `/`
@@ -52,7 +56,7 @@ If approved, your new parser automatically goes live for the bot's immediate use
 - Line 5 must always be `*/`
 - The rest of the file should be the JavaScript (ES5) that does your desired parsing.
 
-Example acceptable file (From [Clap back.js](Parsers/Clap%20back.js)):
+Example acceptable chat parser file (From [Clap back.js](Parsers/Clap%20back.js)):
 
 ```js
 /*
@@ -65,6 +69,27 @@ if (sentence == '') {
 	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
 } else {
 	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), false);
+}
+```
+
+#### For reaction-added parsers
+
+Eg. Run a script when a user adds a specific emoji as a reaction
+
+- Line 1 must always be /*
+- Line 2 must always be `emoji:` followed by commas separated list of emojis that will run the below script
+- Line 3 must always be */
+- The rest of the file should be the JavaScript (ES5) that does your desired parsing.
+
+Example acceptable react parser file (From [Parrot wave starter.js](Parsers/Parrot%20wave%20starter.js)
+
+```
+/*
+emoji:parrotwave1
+*/
+
+for (var i = 2; i <= 7; i++){
+  new x_snc_slackerbot.Slacker().send_reaction(current, 'parrotwave' + i);
 }
 ```
 

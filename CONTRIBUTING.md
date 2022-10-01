@@ -64,9 +64,10 @@ activation_example:!clap your sentence
 regex:!clap
 flags:gmi
 */
+
 var sentence = current.text.replace(/!clap/gmi, "").trim().toUpperCase();
 if (sentence == '') {
-	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
+	new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
 } else {
 	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), false);
 }
@@ -83,7 +84,7 @@ Eg. Run a script when a user adds a specific emoji as a reaction
 
 Example acceptable react parser file (From [Parrot wave starter.js](Parsers/Parrot%20wave%20starter.js)
 
-```
+```js
 /*
 emoji:parrotwave1
 */

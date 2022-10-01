@@ -9,6 +9,6 @@ parser.orderBy('activation_example');
 parser.query();
 var helps = [];
 while(parser.next()){
-	helps.push('`' + parser.getValue('activation_example') + '` ' + parser.getValue('description'));
+	helps.push('`' + (parser.getValue('activation_example') ? parser.getValue('activation_example') : 'React with ' + parser.getValue('emoji')) + '` ' + parser.getValue('description'));
 }
 new Slacker().send_chat(current, helps.join('\n'), true);

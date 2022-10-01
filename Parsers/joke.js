@@ -1,5 +1,5 @@
 /*
-activation_example:!xkcd wisdom of the ancients
+activation_example:!joke
 regex:(!joke)
 flags:gmi
 */

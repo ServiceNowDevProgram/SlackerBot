@@ -1,5 +1,5 @@
 /*
-activation_example:!trout Helming
+activation_example:!bang @person
 regex:!bang
 flags:gm
 */

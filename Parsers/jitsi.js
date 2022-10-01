@@ -1,7 +1,7 @@
 /*
 activation_example:!jitsi
 regex:^(!jitsi|!meet|!call)
-flags:
+flags:gi
 */
 
 var meeting_room, regex, response;

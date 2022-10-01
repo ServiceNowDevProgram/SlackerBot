@@ -24,6 +24,6 @@ var text;
 
 //Determine text to send
 if(!split || split == '' || split <= 0) text = "You're not going to get any :ajb: with that attitude! Add a number and try again.";
-else text = (split > 10 ? 'Now that would just be rude. Shame on you' : (split > 0 ? '' : choices.join('').repeat(split)));
+else text = (split > 10 ? 'Now that would just be rude. Shame on you' : choices.join('').repeat(split));
 
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, text, false);

@@ -11,7 +11,7 @@ report_on = current.text.match( regex ) ? current.text.match( regex )[2] : null;
 
 if ( !report_on ) {
     message = ':upside_down_face: !usage *something*';
-    return new x_snc_slackerbot.Slacker().send_chat( current, message, false );
+    new x_snc_slackerbot.Slacker().send_chat( current, message, false );
 }
 
 query = [
@@ -29,6 +29,6 @@ message = [
         ' times in the channels I\'ve been watching in the last seven days.'
     ].join( '' );
 
-return new x_snc_slackerbot.Slacker().send_chat( current, message, false );
+new x_snc_slackerbot.Slacker().send_chat( current, message, false );
 
 

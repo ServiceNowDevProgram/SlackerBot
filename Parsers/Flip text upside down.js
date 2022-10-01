@@ -4,18 +4,6 @@ regex:(!flip|!invert)
 flags:g
 */
 
-var where = 0;
-
-//Boolean for whether or not we're flippin, bois
-var flipFlag = current.text.IndexOf('!flip') > -1;
-
-where = (flipFlag > -1 ? current.text.IndexOf(!flip) + 6 : current.text.IndexOf('!invert') + 8);
-
-var term = current.text.substring(where).trim();
-var msg = (term ? flipString(term.toLowerCase()) : ':upside_down_face: !flip or !invert *something*');
-
-var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
-
 var flipTable = {
     'a' : '\u0250',
     'b' : 'q',
@@ -55,13 +43,29 @@ var flipTable = {
     '\r' : '\n' 
 };
 
+var where = 0;
+
+//Boolean for whether or not we're flippin, bois
+var flipFlag = (current.text.indexOf('!flip') > -1);
+
+//Determine if the input was '!flip' or '!invert'
+where = (flipFlag ? current.text.indexOf('!flip') + 6 : current.text.indexOf('!invert') + 8);
+
+//Capture the term, and determine message
+var term = current.text.substring(where).trim();
+var msg = (term ? flipString(term.toLowerCase()) : ':upside_down_face: !flip or !invert *something*');
+
+//Send the Slack message
+var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
+
 function flipString(aString) {
     var last = aString.length - 1;
 
     var result = new Array(aString.length);
     for (var i = last; i >= 0; --i) {
         var c = aString.charAt(i);
-        var r = flipTable[c];
+        //If the character is in the table, flip it, otherwise, use the original
+        var r = flipTable[c] ? flipTable[c] : c;
         result[last - i] = r != undefined ? r : c;
     }
     return result.join('');

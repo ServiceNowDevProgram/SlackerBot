@@ -4,20 +4,6 @@ regex:(!joke)
 flags:gmi
 */
 
-var random = Math.floor(Math.random() * jokes.length);
-
-var jokeMsg = jokes[random].joke;
-
-//Send the chat, and store the resulting response
-var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, jokeMsg, false);
-
-if(jokes[random].punchline){
-    //Get the joke TS from the response 
-    var responseTs = JSON.parse(sendIt).message.ts;
-    //Send the punchline as a thread reply
-    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(current, jokeMsg, responseTs);
-}
-
 var jokes = [
     {
         "joke": "What did the fish say when it hit the wall?",
@@ -2545,3 +2531,18 @@ var jokes = [
         "punchline": "They won't sell much ice cream driving that fast."
     }
 ];
+
+
+var random = Math.floor(Math.random() * jokes.length);
+
+var jokeMsg = jokes[random].joke;
+
+//Send the chat, and store the resulting response
+var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, jokeMsg, false);
+
+if(jokes[random].punchline){
+    //Get the joke TS from the response 
+    var responseTs = JSON.parse(sendIt).message.ts;
+    //Send the punchline as a thread reply
+    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat({'channel':responseTs}, jokeMsg, true);
+}

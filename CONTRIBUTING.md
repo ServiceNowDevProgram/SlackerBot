@@ -78,7 +78,7 @@ if (sentence == '') {
 Eg. Run a script when a user adds a specific emoji as a reaction
 
 - Line 1 must always be /*
-- Line 2 must always be `emoji:` followed by commas separated list of emojis that will run the below script
+- Line 2 must always be `emoji:` followed by a comma separated list of emojis that will activate this parser
 - Line 3 must always be */
 - The rest of the file should be the JavaScript (ES5) that does your desired parsing.
 

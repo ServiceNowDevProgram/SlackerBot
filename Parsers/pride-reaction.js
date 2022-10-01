@@ -20,5 +20,5 @@ var pridemojis = [
 
 
 for (var i = 0; i < pridemojis.length ; i++){
-    x_snc_slackerbot.Slacker().send_reaction(current, pridemojis[i]);
+    new x_snc_slackerbot.Slacker().send_reaction(current, pridemojis[i]);
 }

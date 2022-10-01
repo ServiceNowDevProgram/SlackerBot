@@ -15,7 +15,7 @@ try{
         meeting_room = current.user.name.replace(' ','_');
     }    
 }
-catch( errorMessage ){
+catch( e ){
     gs.error( "An error occured when SlackerBot tried to get the user's name.\nError: " + e.name + ": " + e.message );
     response = "An error occured when SlackerBot tried to get the user's name. Please notify the sndev admins.";
 }

@@ -1,23 +1,8 @@
 /*
-activation_example:!zalgo string
+activation_example:!zalgo Some text
 regex:(!zalgo|!curse)
 flags:gm
 */
-
-var zalgoFlag = (current.text.indexOf('!zalgo') > -1);
-
-//Determine substring
-var where = (current.text.indexOf((zalgoFlag ? '!zalgo' : '!curse') + 7));
-
-//Get the term
-var term = current.text.substring(where).trim();
-
-//The long string for when users don't specify a term
-var badInputStr = 'yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding.\n\njust kidding, you need to include something after !zalgo or !curse for it to work';
-
-var msg = (term ? zalgo_textarea(term) : badInputStr);
-
-var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
 
 var zalgo_mid = [
     '\u0315', /*     ̕     */		'\u031b', /*     ̛     */		'\u0340', /*     ̀     */		'\u0341', /*     ́     */
@@ -27,6 +12,21 @@ var zalgo_mid = [
     '\u035f', /*     ͟     */		'\u0360', /*     ͠     */		'\u0362', /*     ͢     */		'\u0338', /*     ̸     */
     '\u0337', /*     ̷     */		'\u0361' /*     ͡     */	
 ];
+
+var zalgoFlag = (current.text.indexOf('!zalgo') > -1);
+
+//Determine substring
+var where = (current.text.indexOf((zalgoFlag ? '!zalgo' : '!curse'))  + 7);
+
+//Get the term
+var term = current.text.substring(where).trim();
+
+//The long string for when users don't specify a term
+var badInputStr = 'yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding. yoU HaVe MIsused tHe ZalGo CompilER and noW i, tHe BeaST of SErvICENoW HaS BeEN SumMoneD TO Do your bIdding.\n\nJust kidding, you need to include something after !zalgo or !curse for it to work';
+
+var msg = (term ? zalgo_textarea(term) : badInputStr);
+
+var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
 
 function flipString(aString) {
     var last = aString.length - 1;
@@ -71,7 +71,6 @@ function is_zalgo_char(c)
 //---------------------------------------------------
 function zalgo_textarea(text)
 {
-    var return_this = '';
     var txt = text;
     var newtxt = '';
 

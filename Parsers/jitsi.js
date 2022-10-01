@@ -16,7 +16,7 @@ try{
     }    
 }
 catch( errorMessage ){
-    gs.error( "An error occured when SlackerBot tried to get the user's name.\nError: " + e.name + ": " + e.message; );
+    gs.error( "An error occured when SlackerBot tried to get the user's name.\nError: " + e.name + ": " + e.message );
     response = "An error occured when SlackerBot tried to get the user's name. Please notify the sndev admins.";
 }
 

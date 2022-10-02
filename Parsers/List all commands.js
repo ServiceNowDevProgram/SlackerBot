@@ -5,6 +5,7 @@ flags:gmi
 */
 
 var parser = new GlideRecord('x_snc_slackerbot_parser');
+parser.addQuery('active', 'true');
 parser.orderBy('activation_example');
 parser.query();
 var helps = [];

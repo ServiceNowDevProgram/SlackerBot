@@ -9,13 +9,14 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
   rm.setHttpMethod('GET');
   rm.setLogLevel('all');
   rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  var bodyString = '';
-  bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+  rm.setRequestHeader('authorization', 'Bearer '+gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token')));
+//   var bodyString = '';
+//   bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
   var user_id = current.text;
   user_id = user_id.replace('!whois <@', '');
   user_id = user_id.replace('>', '').trim();
-  bodyString += '&user=' + gs.urlEncode(user_id);
-  rm.setEndpoint('https://slack.com/api/users.info'+'?'+bodyString);
+//   bodyString += '&user=' + gs.urlEncode(user_id);
+  rm.setEndpoint('https://slack.com/api/users.info'+'?user='+user_id);
   var response = rm.execute();
   var response_body = JSON.parse(response.getBody());
 
@@ -31,7 +32,7 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
   }
 
   if (response_body.user.name){
-    var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, '```' + message_body + '```');
+    var send_chat = new x_snc_slackerbot.Slacker().send_chat(current,message_body,true);
   } else {
     var send_chat2 = new x_snc_slackerbot.Slacker().send_chat(current, 'i dunno');
   }

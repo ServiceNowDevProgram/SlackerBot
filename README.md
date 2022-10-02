@@ -39,14 +39,26 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 
 ### Create Slack App, Install into Slack
 
-* Create new Slack app (in an instance where you are an admin, not in SNDevs) (https://api.slack.com/apps/new)
-* Enable events
-* Request URL =  https://YOURDEVINSTANCE.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
-* Subscribe to Workspace Events (message.channels, message.groups)
-* Add a bot user
-* Give bot permissions to post messages (chat:write:bot)
-* Make a note of the "Bot User OAuth Access Token" (for ServiceNow sys_properties later on)
-* Install app into your Slack channel
+* Create a new app
+* Select the Slack Workspace into which you want to install this app
+* Navigate to `Features` > `Event Subscriptions`
+* Turn on `Enable Events`
+* Populate the `Request URL` with: https://YOURDEVINSTANCE.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
+> `When you tab out of the field, make sure the URL is "Verified" before you proceed.`
+* Expand the `Subscribe to bot events` section
+* Click the `Add bot User Event` button
+* Search for and select `message.channels`
+* Search for and select `message.groups`
+* Click the `Save Changes` button
+* Navigate to `Features` > `OAuth & Permissions`
+* Scroll down to `Bot Token Scopes`
+* Click the `Add an OAuth Scope` button
+* Search for and select `chat:write`
+* Navigate to `Settings` > `Install App`
+* Click the `Install to Workspace` button
+* Verify the `view` and `do` permissions
+* Click the `Allow` button
+* Copy the `Bot User OAuth Token` for the ServiceNow system property configuration later
 
 ### Connect them together
 

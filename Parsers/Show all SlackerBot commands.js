@@ -16,3 +16,12 @@ while(parser.next()){
 	}
 }
 new Slacker().send_chat(current, helps.join('\n'), true);
+
+// var message = new global.GlideQuery( 'x_snc_slackerbot_parser' )
+// .where( 'active', true )
+// .orderBy( 'activation_example' )
+// .select( 'activation_example', 'description' )
+// .reduce( function( arr, rec ){
+//     arr.push( '`' + rec.activation_example + '` ' + rec.description );
+//     return arr;
+// }, [] );

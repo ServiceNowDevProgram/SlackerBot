@@ -6,6 +6,7 @@ flags:gmi
 var sentence = current.text.replace(/!ice breaker/gmi, "").trim().toUpperCase();
 if (sentence == '') {
 	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':
+	var choices = [
     how many siblings do you have,
     what's your favorite movie,
     what do you do for fun,

@@ -1,5 +1,5 @@
 /*
-activation_example:30c or 30 degrees celcius
+activation_example:30c or 30 degrees celsius
 regex:(?:^|\s)(-?\d{1,3}\.?\d{0,2})°?\s?(?:degrees)?\s?c(?:elsius|elcius)?\b
 flags:gmi
 */

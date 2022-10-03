@@ -2545,8 +2545,8 @@ if(jokes[random].punchline){
     //Send the response for testing
     var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, sendIt.getBody(), false);
 
-    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse("'" + sendIt.getBody() + "'").channel, "1: " + jokes[random].punchline, !sendIt.haveError());
-    var sendItAgainAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse("'" + sendIt.getBody() + "'"), "2: " + jokes[random].punchline, !sendIt.haveError());
+    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()).channel, "1: " + jokes[random].punchline, !sendIt.haveError());
+    var sendItAgainAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), "2: " + jokes[random].punchline, !sendIt.haveError());
     var sendItAgainAgainAgain = new x_snc_slackerbot.Slacker().send_chat(sendIt.getBody(), "3: " +  jokes[random].punchline, !sendIt.haveError());
     var sendItAgainAgainAgainAgain = new x_snc_slackerbot.Slacker().send_chat(current, "4: " + jokes[random].punchline, !sendIt.haveError());
 }

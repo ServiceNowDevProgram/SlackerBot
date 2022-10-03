@@ -8,11 +8,12 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 
 ## Two ways to contribute
 
-[Easy](#easy-method-adding-new-parser) or [Hard](#regular-method-adding-new-functionality-types)
+[Easy](#easy-method-adding-new-parser) or [Hard](#hard-method-adding-new-functionality-types)
 
-### Easy method (Adding new parser)
+### **Easy method (Adding new parser)**
 
-Can be done without pulling this app into a ServiceNow instance
+Can be done without pulling this app into a ServiceNow instance.<br>
+This is the preferred method for adding simple call & response parsers (see [Bowtie when chuck is mentioned](https://github.com/ServiceNowDevProgram/SlackerBot/blob/main/Parsers/Bowtie%20when%20chuck%20is%20mentioned.js), or [Clap Back](https://github.com/ServiceNowDevProgram/SlackerBot/blob/main/Parsers/Clap%20back.js) for examples)
 
 1. Fork this repo
 2. Create a new branch (name it according to what functionality you are adding)
@@ -21,7 +22,11 @@ Can be done without pulling this app into a ServiceNow instance
 
 If approved, your new parser automatically goes live for the bot's immediate use!
 
-### Regular method (Adding new functionality types)
+<br>
+
+### **Hard method (Adding new functionality types)**
+
+This method requires more setup, but is the preferred method for more complex parsers and functionalities, as it provides a method to robustly test before submitting a pull request.
 
 1. Fork this repo
 2. Go to your ServiceNow instance

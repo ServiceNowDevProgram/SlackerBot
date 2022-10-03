@@ -1,0 +1,16 @@
+/*
+activation_example:!ice breaker
+regex:!ice breaker
+flags:gmi
+*/
+var sentence = current.text.replace(/!ice breaker/gmi, "").trim().toUpperCase();
+if (sentence == '') {
+	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':
+    how many siblings do you have,
+    what's your favorite movie,
+    what do you do for fun,
+    would you rather fight 100 duck-sized horses or 1 horse-sized duck?
+', false, '', current.thread_ts);
+} else {
+	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :ice breaker: '), current.thread_ts);
+}

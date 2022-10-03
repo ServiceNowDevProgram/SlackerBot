@@ -44,7 +44,21 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 
 ### Create Slack App, Install into Slack
 
-* Create a new app
+#### Via a Manifest
+
+* Create a new app, select "From an app manifest"
+* Select the Slack Workspace into which you want to install this app
+* Copy and paste the manifest from either [App Manifest.json]("Slack App Manifest/appmanifest.json") or [App Manifest.yaml]("Slack App Manifest/appmanifest.yaml")
+* Create the app
+* Navigate to `Settings` > `Install App`
+* Click the `Install to Workspace` button
+* Verify the `view` and `do` permissions
+* Click the `Allow` button
+* Copy the `Bot User OAuth Token` for the ServiceNow system property configuration later
+
+#### Manually
+
+* Create a new app, select "From scratch"
 * Select the Slack Workspace into which you want to install this app
 * Navigate to `Features` > `Event Subscriptions`
 * Turn on `Enable Events`

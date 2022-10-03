@@ -2540,7 +2540,9 @@ var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, jokes[random].jok
 
 if(jokes[random].punchline){
     //Send the punchline, as a thread reply if the TS existed, else, as a new message in the current channel
-    var response = JSON.parse(sendIt);
+    //var response = JSON.parse(sendIt);
+
+    gs.log(sendIt);
 
     //Send the response for testing
     var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, JSON.stringify(response), false);

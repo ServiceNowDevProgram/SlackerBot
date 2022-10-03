@@ -1,0 +1,63 @@
+display_information:
+  name: Slacker
+  description: Say !help to see what I can do. Spoiler alert, it's not much.
+  background_color: "#5f79c7"
+features:
+  bot_user:
+    display_name: Slacker
+    always_online: true
+  slash_commands:
+    - command: /codesnippets
+      url: https://devprogramresources.service-now.com/api/x_snc_code_snippet/code_snippets/username
+      description: Associates your GitHub Username to your slack ID
+      usage_hint: githubname
+      should_escape: false
+oauth_config:
+  redirect_urls:
+    - https://devprogramresources.service-now.com
+  scopes:
+    user:
+      - emoji:read
+      - users:read
+      - chat:write
+    bot:
+      - calls:read
+      - calls:write
+      - channels:read
+      - chat:write
+      - dnd:read
+      - files:read
+      - groups:read
+      - im:history
+      - im:read
+      - im:write
+      - mpim:history
+      - mpim:read
+      - mpim:write
+      - pins:write
+      - reactions:read
+      - reactions:write
+      - remote_files:read
+      - remote_files:share
+      - remote_files:write
+      - team:read
+      - users:read
+      - users:read.email
+      - users:write
+      - channels:history
+      - groups:history
+      - commands
+settings:
+  event_subscriptions:
+    request_url: https://devprogramresources.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
+    bot_events:
+      - message.channels
+      - message.groups
+      - reaction_added
+      - team_join
+  interactivity:
+    is_enabled: true
+    request_url: https://devprogramresources.service-now.com/api/x_snc_code_snippet/code_snippets/assign
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

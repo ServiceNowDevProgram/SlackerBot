@@ -1,6 +1,6 @@
 /*
 activation_example:!lmgtfy or !google search term 
-regex:!lmgtfy
+regex: (!lmgtfy)||(!google)
 flags:gmi
 */
 
@@ -21,7 +21,7 @@ if (current.text.indexOf('!lmgtfy') > -1) {
 var term = current.text.substr(where).trim();
 
 if (term == '') {
-    var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: !docs *something*', false, '', current.thread_ts);
+    var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: !'+ where + '*something*', false, '', current.thread_ts);
 
 }
 if (which == 'lmgtfy')

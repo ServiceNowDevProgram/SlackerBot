@@ -30,13 +30,19 @@
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	var parser = new GlideRecord('x_snc_slackerbot_parser');
 	parser.addQuery('active', 'true');
+	//Loop in decreasing order
+	parser.orderByDesc('order');
 	parser.query();
+	
 	while (parser.next()){
 		var regex = new RegExp(parser.getValue('regex'), parser.getValue('flags'));
 		//new x_snc_slackerbot.Slacker().send_chat(current.channel, regex);
 		if (regex.test(current.text)){
 			new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
 		}
+		
+		//If stop processing is checked, 
+		if(parser.stop_processing) break;
 	}
 
 })(current, previous);]]></script>

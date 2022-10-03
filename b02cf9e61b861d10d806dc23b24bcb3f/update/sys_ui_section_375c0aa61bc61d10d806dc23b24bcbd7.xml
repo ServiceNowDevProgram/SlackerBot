@@ -3,84 +3,112 @@
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>description</element>
             <position>0</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>620952a21b0a1d10d806dc23b24bcb49</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>09455d421b5251105218fcc6cc4bcb59</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>activation_example</element>
             <position>1</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>6a0952a21b0a1d10d806dc23b24bcb49</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>89455d421b5251105218fcc6cc4bcb59</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>active</element>
             <position>2</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>6e0952a21b0a1d10d806dc23b24bcb49</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>0d455d421b5251105218fcc6cc4bcb59</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>stop_processing</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>8d455d421b5251105218fcc6cc4bcb59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>order</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>01455d421b5251105218fcc6cc4bcb5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>regex</element>
-            <position>3</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>620952a21b0a1d10d806dc23b24bcb4a</sys_id>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>81455d421b5251105218fcc6cc4bcb5a</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>flags</element>
-            <position>4</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>660952a21b0a1d10d806dc23b24bcb4a</sys_id>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>4d459d421b5251105218fcc6cc4bcbdb</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>script</element>
-            <position>5</position>
-            <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:15</sys_created_on>
-            <sys_id>6a0952a21b0a1d10d806dc23b24bcb4a</sys_id>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-10-03 23:35:52</sys_created_on>
+            <sys_id>cd459d421b5251105218fcc6cc4bcbdb</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_parser" sys_domain="global" view="Default view">375c0aa61bc61d10d806dc23b24bcbd7</sys_ui_section>
-            <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:15</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-10-03 23:35:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

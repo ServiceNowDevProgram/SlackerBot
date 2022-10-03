@@ -4,7 +4,7 @@ This [manifest](https://api.slack.com/reference/manifests) is a configurations b
 
 Please note that Slacker is the amalgamation of several different succesful and failed attempts to create different bot features. Thus, there is likely more scopes requisitioned than remotely necessary. This is just to get you to the finish line faster.
 
-You would use this file when presented with this option:
+You would use this file when presented with this option (see this repo's [readme](https://github.com/ServiceNowDevProgram/SlackerBot/blob/178bd9d7f507c535ed70724a08229110cebb3f34/README.md) for full instructions):
 
 ![fromanappmanifest.png](fromanappmanifest.png)
 

@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="order" table="x_snc_slackerbot_parser">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
         <calculation/>
         <choice/>
@@ -11,7 +11,7 @@
         <column_label>Order</column_label>
         <comments/>
         <create_roles/>
-        <default_value>100</default_value>
+        <default_value/>
         <defaultsort/>
         <delete_roles/>
         <dependent/>

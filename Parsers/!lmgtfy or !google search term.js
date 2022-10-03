@@ -1,6 +1,6 @@
 /*
 activation_example:!lmgtfy or !google search term 
-regex:(SN)||(HCLTECH)||(SERVICENOW)
+regex:!lmgtfy
 flags:gmi
 */
 

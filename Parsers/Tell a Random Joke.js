@@ -2532,16 +2532,16 @@ var jokes = [
     }
 ];
 
-var joke;
+var selectedJoke;
 
 // Get a random joke from the array, and make sure it has both a joke and a punchline
-while (!joke){
-    joke = jokes[Math.floor(Math.random() * jokes.length)];
-    if(!joke.punchline || !joke.joke) joke = null;
+while (!selectedJoke){
+    selectedJoke = jokes[Math.floor(Math.random() * jokes.length)];
+    if(!selectedJoke.punchline || !selectedJoke.joke) selectedJoke = null;
 }
 
 //Send the chat containing the joke, and store the resulting response
-var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, jokes[random].joke, false);
+var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, selectedJoke.joke, false);
 
 //Send the punchline
-var sendItTwoElectricBoogaloo = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), jokes[random].punchline, !sendIt.haveError());
+var sendItTwoElectricBoogallo = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), selectedJoke.punchline, !sendIt.haveError());

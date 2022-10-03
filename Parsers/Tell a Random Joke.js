@@ -2532,21 +2532,16 @@ var jokes = [
     }
 ];
 
+var joke;
 
-var random = Math.floor(Math.random() * jokes.length);
+// Get a random joke from the array, and make sure it has both a joke and a punchline
+while (!joke){
+    joke = jokes[Math.floor(Math.random() * jokes.length)];
+    if(!joke.punchline || !joke.joke) joke = null;
+}
 
-//Send the chat, and store the resulting response
+//Send the chat containing the joke, and store the resulting response
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, jokes[random].joke, false);
 
-if(jokes[random].punchline){
-    //Send the punchline, as a thread reply if the TS existed, else, as a new message in the current channel
-    //var response = JSON.parse(sendIt);
-
-    //Send the response for testing
-    var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, sendIt.getBody(), false);
-
-    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()).channel, "1: " + jokes[random].punchline, !sendIt.haveError());
-    var sendItAgainAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), "2: " + jokes[random].punchline, !sendIt.haveError());
-    var sendItAgainAgainAgain = new x_snc_slackerbot.Slacker().send_chat(sendIt.getBody(), "3: " +  jokes[random].punchline, !sendIt.haveError());
-    var sendItAgainAgainAgainAgain = new x_snc_slackerbot.Slacker().send_chat(current, "4: " + jokes[random].punchline, !sendIt.haveError());
-}
+//Send the punchline
+var sendItTwoElectricBoogaloo = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), jokes[random].punchline, !sendIt.haveError());

@@ -49,7 +49,9 @@ If approved, your new parser automatically goes live for the bot's immediate use
 - Line 2 must always be `activation_example:` followed by a short description of how this parser would be activate
 - Line 3 must always be `regex:` followed by a regex expression that validates if the parser should run. Do not include the opening and closing `/`
 - Line 4 must always be `flags:` followed by the regex flags needed for line 3. If no flags are needed then leave the line as `flags:`
-- Line 5 must always be `*/`
+- *Optional*: `order:` that the parser should run (higher orders run first, default value is `100`).
+- *Optional*: `stop_processing:` if set to `true`, will stop the parser from running any other parsers after this one.
+- The file header must always end with `*/`
 - The rest of the file should be the JavaScript (ES5) that does your desired parsing.
 
 Example acceptable file (From [Clap back.js](Parsers/Clap%20back.js)):
@@ -59,6 +61,8 @@ Example acceptable file (From [Clap back.js](Parsers/Clap%20back.js)):
 activation_example:!clap your sentence
 regex:!clap
 flags:gmi
+order:200
+stop_processing:false
 */
 var sentence = current.text.replace(/!clap/gmi, "").trim().toUpperCase();
 if (sentence == '') {

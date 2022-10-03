@@ -8,7 +8,7 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 
 ## Two ways to contribute
 
-[Easy](#easy-method-adding-new-parser) or [Hard](#regular-method-adding-new-functionality-types)
+[Easy](#easy-method-adding-new-parser) or [Hard](#hard-method-adding-new-functionality-types)
 
 ### **Easy method (Adding new parser)**
 

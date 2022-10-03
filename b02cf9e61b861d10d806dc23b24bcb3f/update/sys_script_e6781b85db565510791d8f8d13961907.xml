@@ -11,14 +11,14 @@
         <advanced>true</advanced>
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
-        <collection>x_snc_slackerbot_chat</collection>
+        <collection>x_snc_slackerbot_payload</collection>
         <condition/>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>Parse chat</name>
+        <name>Parse reacts</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -28,15 +28,20 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var payload = JSON.parse(current.payload);
+	if (payload.event.type != 'reaction_added') return;
 	
+	current.channel = payload.event.item.channel;
+	current.ts = payload.event.item.ts;
+
 	var parser = new GlideRecord('x_snc_slackerbot_parser');
 	parser.addQuery('active', 'true');
-	parser.addEncodedQuery('activation_example!=NULL');
+	parser.addEncodedQuery('emoji!=NULL');
 	parser.query();
 	while (parser.next()){
-		var regex = new RegExp(parser.getValue('regex'), parser.getValue('flags') ? parser.getValue('flags') : "g");
-		//new x_snc_slackerbot.Slacker().send_chat(current.channel, regex);
-		if (regex.test(current.text)){
+		var emojis = parser.getValue('emoji').split(',');
+		if (emojis.indexOf(payload.event.reaction) > -1){
 			new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
 		}
 	}
@@ -44,21 +49,21 @@
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
-        <sys_created_on>2022-09-23 06:30:55</sys_created_on>
+        <sys_created_on>2022-10-01 06:35:29</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>b64906e21bc61d10d806dc23b24bcbd9</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>Parse chat</sys_name>
+        <sys_id>e6781b85db565510791d8f8d13961907</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>Parse reacts</sys_name>
         <sys_overrides/>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>sys_script_b64906e21bc61d10d806dc23b24bcbd9</sys_update_name>
+        <sys_update_name>sys_script_e6781b85db565510791d8f8d13961907</sys_update_name>
         <sys_updated_by>earl.duque</sys_updated_by>
-        <sys_updated_on>2022-10-01 06:37:43</sys_updated_on>
+        <sys_updated_on>2022-10-01 06:59:22</sys_updated_on>
         <template/>
         <when>async_always</when>
     </sys_script>
-    <sys_translated_text action="delete_multiple" query="documentkey=b64906e21bc61d10d806dc23b24bcbd9"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=e6781b85db565510791d8f8d13961907"/>
 </record_update>

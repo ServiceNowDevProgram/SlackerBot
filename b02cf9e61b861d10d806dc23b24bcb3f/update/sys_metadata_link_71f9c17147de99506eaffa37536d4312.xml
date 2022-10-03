@@ -4,20 +4,39 @@
         <documentkey>a6324df9479e99506eaffa37536d43e8</documentkey>
         <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
     &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
-        &lt;activation_example&gt;!lorem&lt;/activation_example&gt;
+        &lt;activation_example&gt;!lorem 10 words||para&lt;/activation_example&gt;
         &lt;active&gt;true&lt;/active&gt;
         &lt;description&gt;Lorem Ipsum Text Generator&lt;/description&gt;
         &lt;emoji/&gt;
-        &lt;flags&gt;i&lt;/flags&gt;
+        &lt;flags&gt;gmi&lt;/flags&gt;
         &lt;regex&gt;!lorem&lt;/regex&gt;
-        &lt;script&gt;&lt;![CDATA[new x_snc_slackerbot.Slacker().send_chat(current, 'Lorem ipsum');
-]]&gt;&lt;/script&gt;
+        &lt;script&gt;&lt;![CDATA[	/**
+	* Use the lipsum generator to generate Lorem Ipsum dummy paragraphs / words / bytes.	
+	* @param what in ['paras','words','bytes'], default: 'paras'
+	* @param amount of paras/words/bytes, default: 2 (for words minimum is 5, for bytes it is 27)
+	* @param start always start with 'Lorem Ipsum', default = true
+	* activation_example: !lorem 10 words||paras||bytes	
+     **/
+
+
+   var wordCount = current.text.replace('!lorem','').trim().split(' ');
+    
+	var rm = new sn_ws.RESTMessageV2();
+	rm.setHttpMethod('GET');
+	rm.setLogLevel('all');
+	rm.setEndpoint('https://www.lipsum.com/feed/json?start=yes&amp;amount=' + wordCount[0] + '&amp;what=' +  wordCount[1]);
+	var response = rm.execute();
+	var response_body = JSON.parse(response.getBody());
+	var loremText = response_body.feed.lipsum;
+
+
+	new x_snc_slackerbot.Slacker().send_chat(current, loremText);]]&gt;&lt;/script&gt;
         &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
         &lt;sys_created_on&gt;2022-10-03 03:35:15&lt;/sys_created_on&gt;
         &lt;sys_id&gt;a6324df9479e99506eaffa37536d43e8&lt;/sys_id&gt;
-        &lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;
+        &lt;sys_mod_count&gt;25&lt;/sys_mod_count&gt;
         &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
-        &lt;sys_updated_on&gt;2022-10-03 04:06:21&lt;/sys_updated_on&gt;
+        &lt;sys_updated_on&gt;2022-10-03 21:31:38&lt;/sys_updated_on&gt;
     &lt;/x_snc_slackerbot_parser&gt;
 &lt;/record_update&gt;
 </payload>
@@ -25,14 +44,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-10-03 04:08:01</sys_created_on>
         <sys_id>71f9c17147de99506eaffa37536d4312</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Created 2022-10-02 20:35:15</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_metadata_link_71f9c17147de99506eaffa37536d4312</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-03 04:08:01</sys_updated_on>
+        <sys_updated_on>2022-10-03 21:32:43</sys_updated_on>
         <tablename>x_snc_slackerbot_parser</tablename>
     </sys_metadata_link>
 </record_update>

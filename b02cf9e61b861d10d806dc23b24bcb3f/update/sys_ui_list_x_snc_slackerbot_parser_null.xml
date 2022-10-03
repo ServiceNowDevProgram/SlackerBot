@@ -9,11 +9,11 @@
             <position>0</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>3629d2a21b0a1d10d806dc23b24bcb55</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>ed2997c5db565510791d8f8d13961970</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -24,11 +24,11 @@
             <position>1</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>ba29d2a21b0a1d10d806dc23b24bcb55</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>a52997c5db565510791d8f8d13961971</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -39,11 +39,11 @@
             <position>2</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>3e29d2a21b0a1d10d806dc23b24bcb55</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>292997c5db565510791d8f8d13961971</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -54,11 +54,11 @@
             <position>3</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>be29d2a21b0a1d10d806dc23b24bcb55</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>a92997c5db565510791d8f8d13961971</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -69,11 +69,26 @@
             <position>4</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>3229d2a21b0a1d10d806dc23b24bcb56</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>2d2997c5db565510791d8f8d13961971</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>emoji</element>
+            <list_id display_value="x_snc_slackerbot_parser" element="NULL" name="x_snc_slackerbot_parser" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7629d2a21b0a1d10d806dc23b24bcb54</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>ad2997c5db565510791d8f8d13961971</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -81,14 +96,29 @@
             <list_id display_value="x_snc_slackerbot_parser" element="NULL" name="x_snc_slackerbot_parser" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7629d2a21b0a1d10d806dc23b24bcb54</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
-            <position>5</position>
+            <position>6</position>
             <sum>false</sum>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
-            <sys_id>b229d2a21b0a1d10d806dc23b24bcb56</sys_id>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>212997c5db565510791d8f8d13961972</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>earl.duque</sys_updated_by>
-            <sys_updated_on>2022-09-23 07:33:49</sys_updated_on>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_updated_on</element>
+            <list_id display_value="x_snc_slackerbot_parser" element="NULL" name="x_snc_slackerbot_parser" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7629d2a21b0a1d10d806dc23b24bcb54</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
+            <sys_id>a12997c5db565510791d8f8d13961972</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -102,15 +132,18 @@
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>earl.duque</sys_created_by>
-            <sys_created_on>2022-09-23 07:33:49</sys_created_on>
+            <sys_created_on>2022-10-01 06:38:10</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>7629d2a21b0a1d10d806dc23b24bcb54</sys_id>
+            <sys_mod_count>0</sys_mod_count>
             <sys_name>x_snc_slackerbot_parser</sys_name>
             <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
             <sys_policy/>
             <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
             <sys_update_name>sys_ui_list_x_snc_slackerbot_parser_null</sys_update_name>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:38:10</sys_updated_on>
             <sys_user/>
             <view display_value="Default view" name="NULL">Default view</view>
             <view_name/>

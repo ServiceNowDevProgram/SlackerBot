@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="ts" label="Timestamp" language="en" table="x_snc_slackerbot_payload">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>ts</element>
+            <help/>
+            <hint/>
+            <label>Timestamp</label>
+            <language>en</language>
+            <name>x_snc_slackerbot_payload</name>
+            <plural>Timestamps</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:58:00</sys_created_on>
+            <sys_id>c8bd97c9db565510791d8f8d13961934</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Timestamp</sys_name>
+            <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_slackerbot_payload_ts_en</sys_update_name>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:58:00</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

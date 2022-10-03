@@ -1,18 +1,17 @@
 /*
-activation_example:!trout Helming
+activation_example:!trout @username
 regex:(!trout)|(!slap) 
 flags:gmi
 */
 
-var term ='';
-var msg = '';
+//Determine which input was used
+var troutFlag = (current.text.indexOf('!trout') > -1);
 
-if(current.text.indexOf('!trout') > -1){
-    term = current.text.replace('!trout ', '');
-} else{
-    term = current.text.replace('!slap ', '');
-}
+//Try to find term from input
+var term = current.text.replace((troutFlag ? '!trout' : '!slap'), '').trim();
 
-msg = (term ? '<@'+current.user.user_id+'> slapped ' + term + ' with a large trout' : ':upside_down_face: !trout *something*');
+//Determine message to send
+var msg = (term ? '<@'+current.user.user_id+'> slapped ' + term + ' with a large trout' : ':upside_down_face: ' + (troutFlag ? '!trout' : '!slap') + ' *something*');
 
+//Send Slack message
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);

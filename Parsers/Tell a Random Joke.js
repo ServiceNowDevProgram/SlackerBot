@@ -2543,7 +2543,7 @@ if(jokes[random].punchline){
     //var response = JSON.parse(sendIt);
 
     //Send the response for testing
-    var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, sendIt.getBody(), false, sendIt.thread_ts);
+    var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, sendIt.getBody, false);
 
-    //var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(current, jokes[random].punchline, !sendIt.haveError());
+    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(sendIt.getBody().channel, jokes[random].punchline, !sendIt.haveError());
 }

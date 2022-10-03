@@ -2545,5 +2545,6 @@ if(jokes[random].punchline){
     //Send the response for testing
     var sendResponse = new x_snc_slackerbot.Slacker().send_chat(current, sendIt.getBody(), false);
 
-    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()).channel, jokes[random].punchline, !sendIt.haveError());
+    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat("1: " + JSON.parse("'" + sendIt.getBody() + "'").channel, jokes[random].punchline, !sendIt.haveError());
+    var sendItAgainAgain = new x_snc_slackerbot.Slacker().send_chat("2: " + JSON.parse("'" + sendIt.getBody() + "'"), jokes[random].punchline, !sendIt.haveError());
 }

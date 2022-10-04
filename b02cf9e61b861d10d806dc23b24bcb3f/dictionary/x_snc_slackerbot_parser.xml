@@ -5,7 +5,9 @@
         <element label="Description" max_length="128" name="description" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Emoji" max_length="128" name="emoji" type="string"/>
         <element label="Flags" max_length="40" name="flags" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
         <element label="Regex" max_length="128" name="regex" type="string"/>
         <element label="Script" max_length="8000" name="script" type="script"/>
+        <element label="Stop processing" max_length="40" name="stop_processing" type="boolean"/>
     </element>
 </database>

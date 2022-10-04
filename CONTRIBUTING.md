@@ -7,6 +7,7 @@
 - No updates should be made directly to the automatically generated ServiceNow folders. Updates to these files should be done via the [Regular method](#regular-method-adding-new-functionality-types) described below.
 - Parser additions/updates must follow the [Parser template](#required-parser-template) below.
 - Low effort/spam Pull Requests will be marked as spam accordingly.
+- Filenames should not have special characters that are not allowed on normal file systems (eg. do not put ! in the file name).
 
 ## Ideas
 

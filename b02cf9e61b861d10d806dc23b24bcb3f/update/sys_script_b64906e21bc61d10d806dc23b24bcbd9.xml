@@ -33,6 +33,9 @@
 	.where('active', true)
 	.whereNotNull('activation_example')
 	.select('description', 'order', 'activation_example', 'regex', 'flags', 'stop_processing', 'script')
+	//Only include parsers whose regex match
+	.filter(function(e) { return new RegExp(e.regex, (e.flags ? e.flags : "g")).test(current.text);})
+	//Convert parsers to Array to be sorted
 	.toArray(100)
 	//Sort Low -> High -> Empty Order
 	.sort(function(a,b){
@@ -45,12 +48,8 @@
 	//Loop through the parsers
 	for(var i = 0; i < parsers.length; i++){
 		
-		var parser = parsers[i];
-		var regex = new RegExp(parser.getValue('regex'), parser.getValue('flags') ? parser.getValue('flags') : "g");
-
-		if (regex.test(current.text)){
-			new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
-		}
+		//Run the parser
+		new GlideScopedEvaluator().evaluateScript(parsers[i], 'script', {'current': current});
 		
 		//Stop looping if Stop Processing is checked
 		if(parser.stop_processing) break;

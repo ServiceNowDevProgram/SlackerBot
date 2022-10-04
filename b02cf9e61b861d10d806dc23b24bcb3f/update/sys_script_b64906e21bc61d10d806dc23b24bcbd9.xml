@@ -29,23 +29,32 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	
-	var parser = new GlideRecord('x_snc_slackerbot_parser');
-	parser.addQuery('active', 'true');
-	//Loop in decreasing order
-	parser.orderByDesc('order');
-	parser.addEncodedQuery('activation_example!=NULL');
-	parser.query();
+	var parsers = new GlideQuery('x_snc_slackerbot_parser')
+	.where('active', true)
+	.whereNotNull('activation_example')
+	.select('description', 'order', 'activation_example', 'regex', 'flags', 'stop_processing', 'script')
+	.toArray(100)
+	//Sort Low -> High -> Empty Order
+	.sort(function(a,b){
+		if(a.order == b.order) return 0;
+		else if (a.order == null) return 1;
+		else if (b.order == null || a.order < b.order) return -1;
+		else return 1;
+	});
 	
-	while (parser.next()){
+	//Loop through the parsers
+	for(var i = 0; i < parsers.length; i++){
+		
+		var parser = parsers[i];
 		var regex = new RegExp(parser.getValue('regex'), parser.getValue('flags') ? parser.getValue('flags') : "g");
-		//new x_snc_slackerbot.Slacker().send_chat(current.channel, regex);
+
 		if (regex.test(current.text)){
 			new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
 		}
 		
-		//If stop processing is checked, 
+		//Stop looping if Stop Processing is checked
 		if(parser.stop_processing) break;
-	}
+	}	
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -54,15 +63,12 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b64906e21bc61d10d806dc23b24bcbd9</sys_id>
-        <sys_mod_count>3</sys_mod_count>
         <sys_name>Parse chat</sys_name>
         <sys_overrides/>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_b64906e21bc61d10d806dc23b24bcbd9</sys_update_name>
-        <sys_updated_by>earl.duque</sys_updated_by>
-        <sys_updated_on>2022-10-01 06:37:43</sys_updated_on>
         <template/>
         <when>async_always</when>
     </sys_script>

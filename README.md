@@ -48,7 +48,7 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 
 * Create a new app, select "From an app manifest"
 * Select the Slack Workspace into which you want to install this app
-* Copy and paste the manifest from either [App Manifest.json](https://github.com/ServiceNowDevProgram/SlackerBot/blob/main/Slack%20App%20Manifest/appmanifest.json) or [App Manifest.yaml](https://github.com/ServiceNowDevProgram/SlackerBot/blob/main/Slack%20App%20Manifest/appmanifest.yaml)
+* Copy and paste the manifest from either [App Manifest.json]("Slack App Manifest/appmanifest.json") or [App Manifest.yaml]("Slack App Manifest/appmanifest.yaml")
 * Create the app
 * Navigate to `Settings` > `Install App`
 * Click the `Install to Workspace` button

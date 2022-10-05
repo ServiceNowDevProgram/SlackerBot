@@ -28,40 +28,32 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-
-// 	var parsers = new global.GlideQuery('x_snc_slackerbot_parser')
-// 	.where('active', true)
-// 	.whereNotNull('activation_example')
-// 	.select('description', 'order', 'activation_example', 'regex', 'flags', 'stop_processing', 'script')
-// 	//Only include parsers whose regex match
-// 	.filter(function(e) { return new RegExp(e.regex, (e.flags ? e.flags : "g")).test(current.text);})
-// 	//Convert parsers to Array to be sorted
-// 	.toArray(100)
-// 	//Sort Low -> High -> Empty Order
-// 	.sort(function(a,b){
-// 		if(a.order == b.order) return 0;
-// 		else if (a.order == null) return 1;
-// 		else if (b.order == null || a.order < b.order) return -1;
-// 		else return 1;
-// 	})
-// 	.forEach(function (parser) {
-// 		new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
-
-// 		//Stop looping if Stop Processing is checked
-// 		if(parser.stop_processing) return;
-// 	});
-
-var parser = new GlideRecord('x_snc_slackerbot_parser');
-	parser.addQuery('active', 'true');
-	parser.query();
-	while (parser.next()){
-		if (!parser.getValue('regex')) continue;
-		var regex = new RegExp(parser.getValue('regex'), parser.getValue('flags'));
-		//new x_snc_slackerbot.Slacker().send_chat(current.channel, regex);
-		if (regex.test(current.text)){
-			new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
-		}
-	}
+	
+	var parsers = new GlideQuery('x_snc_slackerbot_parser')
+	.where('active', true)
+	.whereNotNull('activation_example')
+	.select('description', 'order', 'activation_example', 'regex', 'flags', 'stop_processing', 'script')
+	//Only include parsers whose regex match
+	.filter(function(e) { return new RegExp(e.regex, (e.flags ? e.flags : "g")).test(current.text);})
+	//Convert parsers to Array to be sorted
+	.toArray(100)
+	//Sort Low -> High -> Empty Order
+	.sort(function(a,b){
+		if(a.order == b.order) return 0;
+		else if (a.order == null) return 1;
+		else if (b.order == null || a.order < b.order) return -1;
+		else return 1;
+	});
+	
+	//Loop through the parsers
+	for(var i = 0; i < parsers.length; i++){
+		
+		//Run the parser
+		new GlideScopedEvaluator().evaluateScript(parsers[i], 'script', {'current': current});
+		
+		//Stop looping if Stop Processing is checked
+		if(parser.stop_processing) break;
+	}	
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -70,15 +62,12 @@ var parser = new GlideRecord('x_snc_slackerbot_parser');
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b64906e21bc61d10d806dc23b24bcbd9</sys_id>
-        <sys_mod_count>14</sys_mod_count>
         <sys_name>Parse chat</sys_name>
         <sys_overrides/>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_b64906e21bc61d10d806dc23b24bcbd9</sys_update_name>
-        <sys_updated_by>earl.duque</sys_updated_by>
-        <sys_updated_on>2022-10-05 16:35:00</sys_updated_on>
         <template/>
         <when>async_always</when>
     </sys_script>

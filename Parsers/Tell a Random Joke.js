@@ -2532,16 +2532,13 @@ var jokes = [
     }
 ];
 
-var selectedJoke;
 
-// Get a random joke from the array, and make sure it has both a joke and a punchline
-while (!selectedJoke){
-    selectedJoke = jokes[Math.floor(Math.random() * jokes.length)];
-    if(!selectedJoke.punchline || !selectedJoke.joke) selectedJoke = null;
-}
+var random = Math.floor(Math.random() * jokes.length);
 
 //Send the chat containing the joke, and store the resulting response
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, selectedJoke.joke, true);
 
-//Send the punchline
-var sendItTwoElectricBoogallo = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), selectedJoke.punchline, !sendIt.haveError());
+if(jokes[random].punchline){
+    //Send the punchline, as a thread reply if the TS existed, else, as a new message in the current channel
+    var sendItAgain = new x_snc_slackerbot.Slacker().send_chat(current, jokes[random].punchline, !sendIt.haveError());
+}

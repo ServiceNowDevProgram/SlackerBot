@@ -1,6 +1,6 @@
 /*
 activation_example:!lmgtfy or !google search term 
-regex: (!lmgtfy)||(!google)
+regex: (!lmgtfy)|(!google)
 flags:gmi
 */
 

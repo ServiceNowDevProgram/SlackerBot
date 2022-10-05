@@ -2541,7 +2541,7 @@ while (!selectedJoke){
 }
 
 //Send the chat containing the joke, and store the resulting response
-var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, selectedJoke.joke, false);
+var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, selectedJoke.joke, true);
 
 //Send the punchline
 var sendItTwoElectricBoogallo = new x_snc_slackerbot.Slacker().send_chat(JSON.parse(sendIt.getBody()), selectedJoke.punchline, !sendIt.haveError());

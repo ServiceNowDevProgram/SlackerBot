@@ -27,4 +27,4 @@ var responses = [
     "Very doubtful."
 ];
 var randMagic8 = responses[parseInt(Math.random() * responses.length)];
-var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, randMagic8, current.thread_ts);
+var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, randMagic8, true);

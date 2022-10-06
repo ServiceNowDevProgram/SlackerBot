@@ -7,6 +7,8 @@ flags:i
 (function( grChat ){
     var channel, messages, participant_slack_ids, text, thread_ts, user;
 
+    gs.info( 'Slacker: Starting the PointsParty parser.' );
+
     if( !grChat.thread_ts ){ // Do not throw party unless in a thread
         return null;
     }
@@ -17,6 +19,8 @@ flags:i
     text = grChat.getValue( 'text' );
     messages = [];
 
+    gs.info( 'Slacker: Gather thread participants.' );
+    
     participant_slack_ids = new global.GlideQuery( 'x_snc_slackerbot_chat' )
         .where( 'channel', channel )
         .where( 'thead_ts', thread_ts )
@@ -30,6 +34,9 @@ flags:i
             return arr.indexOf( rec ) == idx;
         } );
 
+    gs.info( 'Slacker: Participant IDs: ' + JSON.stringify( participant_slack_ids ) );
+    
+
     participant_slack_ids.forEach( function( slack_id ){
         updateUserTable( slack_id );
         updatePointsTable( user, slack_id, grChat.getUniqueValue(), text );
@@ -37,10 +44,14 @@ flags:i
         messages.push( getMessage( slack_id, rankAndPoints[1], rankAndPoints[0] ) );
     } );
 
+    gs.info( 'Slacker: Messages: ' + JSON.stringify( messages ) );
+    
     new Slacker().send_chat( grChat, messages.join('\n'), false );
 
 
     function updateUserTable( user ){
+        gs.info( 'Slacker: Starting to update the User table.' );
+    
         var grUser = new GlideRecord( 'x_snc_slackerbot_user' );
         grUser.addQuery( 'user_id', user );
         grUser.query();
@@ -58,6 +69,8 @@ flags:i
     }
 
     function updatePointsTable( giver, target, source_event, text ){
+        gs.info( 'Slacker: Starting to update the Points table.' );
+    
         var grPointRecord = new GlideRecord( 'x_snc_slack_points_point' );
         grPointRecord.initialize();
         grPointRecord.setValue( 'giver', giver );
@@ -68,6 +81,8 @@ flags:i
     }
 
     function calculateRankAndPoints( user ){
+        gs.info( 'Slacker: Starting to calculate rank and total points.' );
+    
         var last90days, points, rank, userPoints, users;
         
         users = [];
@@ -90,6 +105,8 @@ flags:i
     }
 
     function getMessage( user, points, rank ){
+        gs.info( 'Slacker: Starting to get the message.' );
+    
         var randomMessage = new x_snc_slack_points.RandomMessage();
         return randomMessage.getMessage( user, userPoints, userPoints, rank );
     }

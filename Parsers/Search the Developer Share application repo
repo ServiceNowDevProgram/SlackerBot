@@ -15,7 +15,7 @@ flags:i
             text
         ].join('');
 
-    new Slacker().send_chat( grPayload, message, true );
+    new Slacker().send_chat( grPayload, message, false );
 
 
 })( current );

@@ -34,6 +34,6 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
   if (response_body.user.name){
     var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, '```' + message_body + '```',true);
   } else {
-    var send_chat2 = new x_snc_slackerbot.Slacker().send_chat(current, 'i dunno');
+    var send_chat2 = new x_snc_slackerbot.Slacker().send_chat(current, 'i dunno', true);
   }
 }

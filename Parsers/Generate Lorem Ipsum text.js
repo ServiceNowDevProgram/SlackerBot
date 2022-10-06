@@ -14,10 +14,26 @@ var wordCount = current.text.replace('!lorem','').trim().split(' ');
 
 if (!wordCount[0] && !wordCount[1]) wordCount[0] = '1';
 
+var textAmount = wordCount[0];
+var textType = wordCount[1];
+
+// Add limits to the amount of text that can be requested
+var MAX_PARAS = 5;
+var MAX_WORDS = 500;
+var MAX_BYTES = 5000;
+
+if ((!textType || textType === 'paras') && textAmount > MAX_PARAS) {
+    textAmount = MAX_PARAS;
+} else if (textType === 'words' && textAmount > MAX_WORDS) {
+    textAmount = MAX_WORDS;
+} else if (textType === 'bytes' && textAmount > MAX_BYTES) {
+    textAmount = MAX_BYTES;
+}
+
 var rm = new sn_ws.RESTMessageV2();
 rm.setHttpMethod('GET');
 rm.setLogLevel('all');
-rm.setEndpoint('https://www.lipsum.com/feed/json?start=yes&amount=' + wordCount[0] + '&what=' +  wordCount[1]);
+rm.setEndpoint('https://www.lipsum.com/feed/json?start=yes&amount=' + textAmount + '&what=' +  textType);
 var response = rm.execute();
 var response_body = JSON.parse(response.getBody());
 var loremText = response_body.feed.lipsum;

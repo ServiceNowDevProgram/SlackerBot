@@ -28,11 +28,12 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-	
-	var parsers = new GlideQuery('x_snc_slackerbot_parser')
+
+	var stopProcessing = false;
+	var parsers = new global.GlideQuery('x_snc_slackerbot_parser')
 	.where('active', true)
 	.whereNotNull('activation_example')
-	.select('description', 'order', 'activation_example', 'regex', 'flags', 'stop_processing', 'script')
+	.select('sys_id', 'order', 'regex', 'flags')
 	//Only include parsers whose regex match
 	.filter(function(e) { return new RegExp(e.regex, (e.flags ? e.flags : "g")).test(current.text);})
 	//Convert parsers to Array to be sorted
@@ -43,17 +44,18 @@
 		else if (a.order == null) return 1;
 		else if (b.order == null || a.order < b.order) return -1;
 		else return 1;
+	})
+	.forEach(function(passedParser){
+
+		if(stopProcessing) return;
+
+		//Fresh load on the object
+		var parser = new GlideRecord('x_snc_slackerbot_parser');
+		parser.get(passedParser.sys_id);
+		new GlideScopedEvaluator().evaluateScript(parser, 'script', {'current': current});
+		//If "Stop Processing" is checked, stop further iterations
+		if(parser.stop_processing) stopProcessing = true;
 	});
-	
-	//Loop through the parsers
-	for(var i = 0; i < parsers.length; i++){
-		
-		//Run the parser
-		new GlideScopedEvaluator().evaluateScript(parsers[i], 'script', {'current': current});
-		
-		//Stop looping if Stop Processing is checked
-		if(parser.stop_processing) break;
-	}	
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>

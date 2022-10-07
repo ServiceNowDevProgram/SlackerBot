@@ -77,10 +77,10 @@
     }
 
 
-    var chat_gr = {
+    var message_details = {
         "channel": gs.getProperty('x_snc_slackerbot.SlackerBot.channel.emoji-alerts')
     };
-    var sendIt = new x_snc_slackerbot.Slacker().send_chat(chat_gr, text, false);
+    var sendIt = new x_snc_slackerbot.Slacker().send_chat(message_details, text, false);
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>

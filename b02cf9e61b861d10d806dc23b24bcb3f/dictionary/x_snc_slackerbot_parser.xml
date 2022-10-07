@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Parser" max_length="40" name="x_snc_slackerbot_parser" sizeclass="7" type="collection">
+    <element label="Parser" max_length="40" name="x_snc_slackerbot_parser" sizeclass="34" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Activation example" max_length="40" name="activation_example" type="string"/>
         <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
-        <element label="Description" max_length="128" name="description" type="string"/>
+        <element display="true" label="Description" max_length="128" name="description" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Emoji" max_length="128" name="emoji" type="string"/>
         <element label="Flags" max_length="40" name="flags" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>

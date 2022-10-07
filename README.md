@@ -122,4 +122,4 @@ The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/Servi
 * Follow the template in the [CONTRIBUTING.md](CONTRIBUTING.md) document
 * Commit the file
 * Check your ServiceNow instance on the Parsers `x_snc_slackerbot_parser` table and verify the file was uploaded
-* Trigger the parser on a slack channel that your bot is in
+* Trigger the parser on a slack channel that your bot is in.

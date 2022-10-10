@@ -33,10 +33,10 @@ Slacker.prototype = {
         rm.setHttpMethod('POST');
         rm.setEndpoint('https://slack.com/api/chat.postMessage');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
         //rm.setLogLevel('all');
 
         var bodyString = '';
-        bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
         bodyString += '&channel=' + gs.urlEncode(chat_gr.channel);
         if (chat_gr.thread_ts) {
             bodyString += '&thread_ts=' + gs.urlEncode(chat_gr.thread_ts);
@@ -58,10 +58,11 @@ Slacker.prototype = {
         rm.setHttpMethod('POST');
         rm.setEndpoint('https://slack.com/api/chat.delete');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.supertoken'));
+
         //rm.setLogLevel('all');
 
         var bodyString = '';
-        bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.supertoken'));
         bodyString += '&channel=' + gs.urlEncode(channel);
         bodyString += '&ts=' + gs.urlEncode(ts);
         bodyString += '&as_user=true';
@@ -73,10 +74,11 @@ Slacker.prototype = {
         var rm = new sn_ws.RESTMessageV2();
         rm.setHttpMethod('GET');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+
         //rm.setLogLevel('all');
 
         var bodyString = '';
-        bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
         bodyString += '&user=' + gs.urlEncode(slack_id);
 
         rm.setEndpoint('https://slack.com/api/users.info' + '?' + bodyString);
@@ -99,10 +101,11 @@ Slacker.prototype = {
         rm.setHttpMethod('POST');
         rm.setEndpoint('https://slack.com/api/reactions.add');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+
         //rm.setLogLevel('all');
 
         var bodyString = '';
-        bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
         bodyString += '&channel=' + gs.urlEncode(gr.channel);
         bodyString += '&name=' + gs.urlEncode(reaction);
         bodyString += '&timestamp=' + gs.urlEncode(gr.ts);
@@ -115,10 +118,11 @@ Slacker.prototype = {
         rm.setHttpMethod('POST');
         rm.setEndpoint('https://slack.com/api/chat.postMessage');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+
         //rm.setLogLevel('all');
 
         var bodyString = '';
-        bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
         bodyString += '&channel=' + gs.urlEncode(channel);
         if (thread) {
             bodyString += '&thread_ts=' + gs.urlEncode(thread);

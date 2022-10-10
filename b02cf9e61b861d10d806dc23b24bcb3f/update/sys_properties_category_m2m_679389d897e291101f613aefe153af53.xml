@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="SlackerBot Properties">23c2c59897e291101f613aefe153afd6</category>
+        <order>100</order>
+        <property display_value="x_snc_slackerbot.Parsers_Sync_Repo" name="x_snc_slackerbot.Parsers_Sync_Repo">75bd6fe81b1a9510d806dc23b24bcb63</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-10 22:05:06</sys_created_on>
+        <sys_id>679389d897e291101f613aefe153af53</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_slackerbot.Parsers_Sync_Repo.SlackerBot Properties</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_679389d897e291101f613aefe153af53</sys_update_name>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-10 22:05:06</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

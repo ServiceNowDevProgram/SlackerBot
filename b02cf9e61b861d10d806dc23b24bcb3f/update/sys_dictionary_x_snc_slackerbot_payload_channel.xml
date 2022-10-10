@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="description" table="x_snc_slackerbot_parser">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="channel" table="x_snc_slackerbot_payload">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
+        <calculation/>
+        <choice>0</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>Description</column_label>
+        <column_label>Channel</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -22,20 +17,20 @@
         <delete_roles/>
         <dependent/>
         <dependent_on_field/>
-        <display>true</display>
+        <display>false</display>
         <dynamic_creation>false</dynamic_creation>
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>description</element>
+        <element>channel</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <function_definition/>
         <function_field>false</function_field>
         <internal_type display_value="String">string</internal_type>
         <mandatory>false</mandatory>
-        <max_length>128</max_length>
-        <name>x_snc_slackerbot_parser</name>
+        <max_length>40</max_length>
+        <name>x_snc_slackerbot_payload</name>
         <next_element/>
         <primary>false</primary>
         <read_only>false</read_only>
@@ -52,16 +47,16 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
-        <sys_created_on>2022-09-23 05:55:48</sys_created_on>
-        <sys_id>20dcabe547d699506eaffa37536d43a7</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>Description</sys_name>
+        <sys_created_on>2022-10-01 06:58:00</sys_created_on>
+        <sys_id>48bd97c9db565510791d8f8d1396192e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Channel</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>sys_dictionary_x_snc_slackerbot_parser_description</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-07 03:32:51</sys_updated_on>
+        <sys_update_name>sys_dictionary_x_snc_slackerbot_payload_channel</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-01 06:58:00</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

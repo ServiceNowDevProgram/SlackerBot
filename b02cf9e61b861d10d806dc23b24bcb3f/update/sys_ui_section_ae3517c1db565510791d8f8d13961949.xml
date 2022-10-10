@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="ae3517c1db565510791d8f8d13961949" sys_domain="global" table="x_snc_slackerbot_payload" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>payload</element>
+            <position>0</position>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:58:01</sys_created_on>
+            <sys_id>10bd97c9db565510791d8f8d1396194a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_payload" sys_domain="global" view="Default view">ae3517c1db565510791d8f8d13961949</sys_ui_section>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:58:01</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>channel</element>
+            <position>1</position>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:58:01</sys_created_on>
+            <sys_id>94bd97c9db565510791d8f8d1396194a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_payload" sys_domain="global" view="Default view">ae3517c1db565510791d8f8d13961949</sys_ui_section>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:58:01</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>ts</element>
+            <position>2</position>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:58:01</sys_created_on>
+            <sys_id>18bd97c9db565510791d8f8d1396194a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_slackerbot_payload" sys_domain="global" view="Default view">ae3517c1db565510791d8f8d13961949</sys_ui_section>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:58:01</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_snc_slackerbot_payload</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>earl.duque</sys_created_by>
+            <sys_created_on>2022-10-01 06:21:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ae3517c1db565510791d8f8d13961949</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_snc_slackerbot_payload</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+            <sys_update_name>sys_ui_section_ae3517c1db565510791d8f8d13961949</sys_update_name>
+            <sys_updated_by>earl.duque</sys_updated_by>
+            <sys_updated_on>2022-10-01 06:21:01</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

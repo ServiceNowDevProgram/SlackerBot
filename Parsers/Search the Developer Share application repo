@@ -1,0 +1,21 @@
+/*
+activation_example:!share xplore
+regex:^!share
+flags:i
+*/
+
+(function( grPayload ){
+
+    var text = grPayload.getValue( 'text' ).split(' ').slice(1).join(' ');
+
+    var message = [
+            'https://developer.servicenow.com/connect.do#!/share/contents',
+            '?page=1',
+            '&keyword=',
+            text
+        ].join('');
+
+    new Slacker().send_chat( grPayload, message, false );
+
+
+})( current );

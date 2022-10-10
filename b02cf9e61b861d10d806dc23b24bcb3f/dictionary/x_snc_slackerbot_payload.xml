@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="683e3d6a1b861d10d806dc23b24bcb93" label="Payload" max_length="40" name="x_snc_slackerbot_payload" type="collection">
+    <element label="Payload" max_length="40" name="x_snc_slackerbot_payload" sizeclass="2383" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Channel" max_length="40" name="channel" type="string"/>
         <element label="Payload" max_length="4000" name="payload" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Timestamp" max_length="40" name="ts" type="string"/>
     </element>
 </database>

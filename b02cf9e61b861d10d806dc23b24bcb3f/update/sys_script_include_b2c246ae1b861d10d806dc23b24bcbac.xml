@@ -5,7 +5,7 @@
         <api_name>x_snc_slackerbot.Slacker</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description/>
+        <description>Main API for interacting with SlackerBot</description>
         <name>Slacker</name>
         <script><![CDATA[var Slacker = Class.create();
 Slacker.prototype = {
@@ -43,7 +43,12 @@ Slacker.prototype = {
         } else if (force_thread) {
             bodyString += '&thread_ts=' + gs.urlEncode(chat_gr.ts);
         }
-        bodyString += '&text=' + gs.urlEncode(message);
+        if (typeof message == 'object' && message.blocks) {
+            bodyString += '&text=' + gs.urlEncode(message.text);
+            bodyString += '&blocks=' + gs.urlEncode(message.blocks);
+        } else {
+            bodyString += '&text=' + gs.urlEncode(message);
+        }
         rm.setRequestBody(bodyString);
         return rm.execute();
     },

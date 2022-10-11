@@ -9,7 +9,7 @@ flags:gmi
   // Slack user IDs and post a point message for each.
   var grChat, message, recipients, thread_ts, user_id, user_sysid;
   var si = new Slacker();
-  
+  // ¯\_(ツ)_/¯ 
   thread_ts = current.getValue( 'thread_ts' );
   user_id = current.user.getRefRecord().getValue( 'user_id' );
   user_sysid = current.getValue( 'user' );

@@ -1,6 +1,6 @@
 /*
-activation_example:!8ball or !magic8
-regex:(!8ball)|(!magic8)
+activation_example:!8ball or !magic8 or :8ball:
+regex:(!8ball)|(!magic8)|(:8ball:)
 flags:gmi
 */
 

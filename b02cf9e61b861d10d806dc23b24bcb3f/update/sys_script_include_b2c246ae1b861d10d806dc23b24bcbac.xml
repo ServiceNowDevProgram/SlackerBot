@@ -5,139 +5,144 @@
         <api_name>x_snc_slackerbot.Slacker</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description/>
+        <description>Main API for interacting with SlackerBot</description>
         <name>Slacker</name>
         <script><![CDATA[var Slacker = Class.create();
 Slacker.prototype = {
-	initialize: function() {
-	},
+    initialize: function() {},
 
-	establish_user: function(payload_user){
-		var userSysID = '';
-		var slackoff_user = new GlideRecord('x_snc_slackerbot_user');
-		slackoff_user.addQuery('user_id', payload_user);
-		slackoff_user.query();
-		if (slackoff_user.next()){
-			userSysID = slackoff_user.sys_id;
-		} else {
-			if (payload_user){
-				slackoff_user.initialize();
-				slackoff_user.setValue('user_id', payload_user);
-				userSysID = slackoff_user.insert();
-			}
-		}
-		return userSysID;
-	},
+    establish_user: function(payload_user) {
+        var userSysID = '';
+        var slackoff_user = new GlideRecord('x_snc_slackerbot_user');
+        slackoff_user.addQuery('user_id', payload_user);
+        slackoff_user.query();
+        if (slackoff_user.next()) {
+            userSysID = slackoff_user.sys_id;
+        } else {
+            if (payload_user) {
+                slackoff_user.initialize();
+                slackoff_user.setValue('user_id', payload_user);
+                userSysID = slackoff_user.insert();
+            }
+        }
+        return userSysID;
+    },
 
-	send_chat: function (chat_gr, message, force_thread){
-		var rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod('POST');
-		rm.setEndpoint('https://slack.com/api/chat.postMessage');
-		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//rm.setLogLevel('all');
-		
-		var bodyString = '';
-		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-		bodyString += '&channel=' + gs.urlEncode(chat_gr.channel);
-		if (chat_gr.thread_ts){
-			bodyString += '&thread_ts='+gs.urlEncode(chat_gr.thread_ts);
-		} else if (force_thread){
-			bodyString += '&thread_ts='+gs.urlEncode(chat_gr.ts);
-		}
-		bodyString += '&text=' + gs.urlEncode(message);
-		rm.setRequestBody(bodyString);
-		return rm.execute();
-	},
+    send_chat: function(chat_gr, message, force_thread) {
+        var rm = new sn_ws.RESTMessageV2();
+        rm.setHttpMethod('POST');
+        rm.setEndpoint('https://slack.com/api/chat.postMessage');
+        rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+        //rm.setLogLevel('all');
 
-	send_delete: function(channel, ts){
-		var rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod('POST');
-		rm.setEndpoint('https://slack.com/api/chat.delete');
-		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//rm.setLogLevel('all');
+        var bodyString = '';
+        bodyString += '&channel=' + gs.urlEncode(chat_gr.channel);
+        if (chat_gr.thread_ts) {
+            bodyString += '&thread_ts=' + gs.urlEncode(chat_gr.thread_ts);
+        } else if (force_thread) {
+            bodyString += '&thread_ts=' + gs.urlEncode(chat_gr.ts);
+        }
+        if (typeof message == 'object' && message.blocks) {
+            bodyString += '&text=' + gs.urlEncode(message.text);
+            bodyString += '&blocks=' + gs.urlEncode(message.blocks);
+        } else {
+            bodyString += '&text=' + gs.urlEncode(message);
+        }
+        rm.setRequestBody(bodyString);
+        return rm.execute();
+    },
 
-		var bodyString = '';
-		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.supertoken'));
-		bodyString += '&channel=' + gs.urlEncode(channel);
-		bodyString += '&ts=' + gs.urlEncode(ts);
-		bodyString += '&as_user=true';
-		rm.setRequestBody(bodyString);
-		return rm.execute();
-	},
+    send_delete: function(channel, ts) {
+        var rm = new sn_ws.RESTMessageV2();
+        rm.setHttpMethod('POST');
+        rm.setEndpoint('https://slack.com/api/chat.delete');
+        rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.supertoken'));
 
-	get_user_info: function(slack_id, record_id) {
-		var rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod('GET');
-		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//rm.setLogLevel('all');
+        //rm.setLogLevel('all');
 
-		var bodyString = '';
-		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-		bodyString += '&user=' + gs.urlEncode(slack_id);
-		
-		rm.setEndpoint('https://slack.com/api/users.info'+'?'+bodyString);
-		var response = rm.execute();
-		var response_body = JSON.parse(response.getBody());
+        var bodyString = '';
+        bodyString += '&channel=' + gs.urlEncode(channel);
+        bodyString += '&ts=' + gs.urlEncode(ts);
+        bodyString += '&as_user=true';
+        rm.setRequestBody(bodyString);
+        return rm.execute();
+    },
 
-		if (response_body.user.name){
-			var grupdate = new GlideRecord('x_snc_slackerbot_user');
-			grupdate.get(record_id);
-			grupdate.setValue('name', response_body.user.real_name);
-			grupdate.update();
-			return true;
-		} else {
-			return false;
-		}
-	},
+    get_user_info: function(slack_id, record_id) {
+        var rm = new sn_ws.RESTMessageV2();
+        rm.setHttpMethod('GET');
+        rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
 
-	send_reaction: function(gr, reaction){
-		var rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod('POST');
-		rm.setEndpoint('https://slack.com/api/reactions.add');
-		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//rm.setLogLevel('all');
+        //rm.setLogLevel('all');
 
-		var bodyString = '';
-		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-		bodyString += '&channel=' + gs.urlEncode(gr.channel);
-		bodyString += '&name=' + gs.urlEncode(reaction);
-		bodyString += '&timestamp='+gs.urlEncode(gr.ts);
-		rm.setRequestBody(bodyString);
-		return rm.execute();
-	},
+        var bodyString = '';
+        bodyString += '&user=' + gs.urlEncode(slack_id);
 
-	send_attachment: function(channel, message, image, thread, pretext){
-		var rm = new sn_ws.RESTMessageV2();
-		rm.setHttpMethod('POST');
-		rm.setEndpoint('https://slack.com/api/chat.postMessage');
-		rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//rm.setLogLevel('all');
+        rm.setEndpoint('https://slack.com/api/users.info' + '?' + bodyString);
+        var response = rm.execute();
+        var response_body = JSON.parse(response.getBody());
 
-		var bodyString = '';
-		bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-		bodyString += '&channel=' + gs.urlEncode(channel);
-		if (thread){
-			bodyString += '&thread_ts='+gs.urlEncode(thread);
-		}
-		if (pretext == true) bodyString += '&attachments=' + gs.urlEncode('[{"pretext": "' + message + '", "image_url": "' + image + '"}]');
-		else bodyString += '&attachments=' + gs.urlEncode('[{"text": "' + message + '", "image_url": "' + image + '"}]');
-		rm.setRequestBody(bodyString);
-		return rm.execute();		
-	},
+        if (response_body.user.name) {
+            var grupdate = new GlideRecord('x_snc_slackerbot_user');
+            grupdate.get(record_id);
+            grupdate.setValue('name', response_body.user.real_name);
+            grupdate.update();
+            return true;
+        } else {
+            return false;
+        }
+    },
 
-	type: 'Slacker'
+    send_reaction: function(gr, reaction) {
+        var rm = new sn_ws.RESTMessageV2();
+        rm.setHttpMethod('POST');
+        rm.setEndpoint('https://slack.com/api/reactions.add');
+        rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+
+        //rm.setLogLevel('all');
+
+        var bodyString = '';
+        bodyString += '&channel=' + gs.urlEncode(gr.channel);
+        bodyString += '&name=' + gs.urlEncode(reaction);
+        bodyString += '&timestamp=' + gs.urlEncode(gr.ts);
+        rm.setRequestBody(bodyString);
+        return rm.execute();
+    },
+
+    send_attachment: function(channel, message, image, thread, pretext) {
+        var rm = new sn_ws.RESTMessageV2();
+        rm.setHttpMethod('POST');
+        rm.setEndpoint('https://slack.com/api/chat.postMessage');
+        rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
+
+        //rm.setLogLevel('all');
+
+        var bodyString = '';
+        bodyString += '&channel=' + gs.urlEncode(channel);
+        if (thread) {
+            bodyString += '&thread_ts=' + gs.urlEncode(thread);
+        }
+        if (pretext == true) bodyString += '&attachments=' + gs.urlEncode('[{"pretext": "' + message + '", "image_url": "' + image + '"}]');
+        else bodyString += '&attachments=' + gs.urlEncode('[{"text": "' + message + '", "image_url": "' + image + '"}]');
+        rm.setRequestBody(bodyString);
+        return rm.execute();
+    },
+
+    type: 'Slacker'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:06:00</sys_created_on>
         <sys_id>b2c246ae1b861d10d806dc23b24bcbac</sys_id>
-        <sys_mod_count>2</sys_mod_count>
         <sys_name>Slacker</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_include_b2c246ae1b861d10d806dc23b24bcbac</sys_update_name>
-        <sys_updated_by>earl.duque</sys_updated_by>
-        <sys_updated_on>2022-09-29 18:34:48</sys_updated_on>
     </sys_script_include>
 </record_update>

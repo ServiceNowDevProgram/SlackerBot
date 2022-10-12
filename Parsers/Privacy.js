@@ -1,6 +1,5 @@
 /*
-// activation_example:!1984
-// 
+activation_example:!1984
 regex:^(!1984|!privacy)
 flags:gi
 */

@@ -1,6 +1,5 @@
 /*
-// activation_example:!gulash
-// 
+activation_example:!gulash
 regex:^(!gulash|!gu)
 flags:gi
 */

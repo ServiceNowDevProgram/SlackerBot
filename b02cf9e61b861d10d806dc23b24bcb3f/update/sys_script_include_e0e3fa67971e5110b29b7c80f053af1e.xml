@@ -87,17 +87,19 @@ Privacy.prototype = {
     },
 
     _getLog: function() {
+		var message = [];
         var Slacker = new x_snc_slackerbot.Slacker();
-		Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot Privacy Report incoming...', true);
+		message.push(':eye: 1984 : SlackerBot Privacy Report incoming...');
         var numCount = this._getCount();
-        Slacker.send_chat(this.grChat, 'Total chat files: ' + numCount, true);
+        message.push('Total chat files: ' + numCount);
         var strDateMin = this._getDateMin();
-        Slacker.send_chat(this.grChat, ':rotating_light: First flagged up on the radar: ' + strDateMin, true);
+        message.push(':rotating_light: First flagged up on the radar: ' + strDateMin);
         var strCountWords = this._getCountWords();
-        Slacker.send_chat(this.grChat, 'Top 3 Words in your vocab: ' + strCountWords, true);	
+        message.push('Top 3 Words in your vocab: ' + strCountWords);	
+		Slacker.send_chat(this.grChat, message.join("\n"), true);
 		
 		// Sign Out
-		Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot - Remember I am always watching...', true);
+		// Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot - Remember I am always watching...', true);
     },
 
     _parse: function() {
@@ -126,10 +128,13 @@ Privacy.prototype = {
         <sys_created_by>w.geek6</sys_created_by>
         <sys_created_on>2022-10-08 22:23:00</sys_created_on>
         <sys_id>e0e3fa67971e5110b29b7c80f053af1e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Privacy</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_include_e0e3fa67971e5110b29b7c80f053af1e</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-11 18:55:22</sys_updated_on>
     </sys_script_include>
 </record_update>

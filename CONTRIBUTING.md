@@ -8,6 +8,7 @@
 - Parser additions/updates must follow the [Parser template](#required-parser-template) below.
 - Low effort/spam Pull Requests will be marked as spam accordingly.
 - Filenames should not have special characters that are not allowed on normal file systems (eg. do not put ! in the file name).
+- Parsers should not be spammy or activated unintentionally by a user in a way that would be deemed spammy. For example, a parser that is activated by a common word would likely be rejected. Instead, use a `!` notation as this is widely accepted as an activation character (eg. `!question` instead of just `question` as an activation phrase)
 
 ## Ideas
 

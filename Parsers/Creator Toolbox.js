@@ -3,7 +3,6 @@ activation_example:!ctb
 regex:(!ctb)|(!creatortoolbox)|(!toolbox) 
 flags:gmi
 */
-var sentence = current.text;
 
 
 var sentence = current.text;

@@ -10,4 +10,4 @@ var sentence = current.text;
 
 var message = "The latest episode of Creator Toolbox " + '<https://www.youtube.com/watch?v=fDvEqAQIHzQ&list=PL3rNcyAiDYK08_Xjuvu6IFEK8pqFT99WQ>';
 
-var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, message, true);
+var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, message, false);

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_slackerbot.Privacy</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Privacy API</description>
+        <name>Privacy</name>
+        <script><![CDATA[var Privacy = Class.create();
+Privacy.prototype = {
+    initialize: function(grChat) {
+        this._init(grChat);
+    },
+    parse: function() {
+        return this._parse();
+    },
+
+    _init: function(grChat) {
+        this.grChat = grChat;
+        var regex = /^(!1984|!privacy)/;
+        this.objChat = {
+            'channel': grChat.getValue('channel') || '',
+            'text': grChat.getValue('text').replace(regex, '').trim() || '',
+            'thread_ts': grChat.getValue('thread_ts') || '',
+            'ts': grChat.getValue('ts') || '',
+            'user': grChat.getValue('user') || '',
+        };
+        this.grUser = grChat.user.getRefRecord();
+    },
+
+    _getCount: function() {
+        var gaChat = new GlideAggregate('x_snc_slackerbot_chat');
+        gaChat.addQuery('user', this.grUser.getUniqueValue());
+        gaChat.addAggregate('COUNT');
+        gaChat.query();
+        gaChat.next();
+        var numCount = gaChat.getAggregate('COUNT') || 0;
+        return numCount;
+    },
+    _getCountWords: function() {
+		var strResult = '';
+        var grChat = new GlideRecord('x_snc_slackerbot_chat');
+        grChat.addQuery('user', this.grUser.getUniqueValue());
+        grChat.query();
+        while(grChat.next()) {
+			strResult = strResult.concat(' ', grChat.getValue('text'));
+		}
+		var arrWords = strResult.split(' ');
+		var objWords = {};
+		for (var iWord = 0; iWord < arrWords.length; iWord++ ) {
+			var strWord = arrWords[iWord];
+			objWords[strWord] = objWords[strWord] || 0;
+			objWords[strWord]++;
+		}
+		arrWords = Object.keys(objWords);
+		var strResult1 = '', strResult2 = '', strResult3 = '';
+		var numScore1 = 0, numScore2 = 0, numScore3 = 0;
+		var numScore = 0;
+		for (iWord = 0; iWord < arrWords.length; iWord++ ) {
+			strWord = arrWords[iWord] || '';
+			numScore = objWords[strWord] || 0;
+			if (numScore > numScore3 && numScore < numScore2) {
+				numScore3 = numScore;
+				strResult3 = strWord;
+			}
+			if (numScore > numScore2 && numScore < numScore1) {
+				numScore2 = numScore;
+				strResult2 = strWord;
+			}
+			if (numScore > numScore1) {
+				numScore1 = numScore;
+				strResult1 = strWord;
+			}			
+		}
+		strResult = ':first_place_medal: ' + strResult1 + ' (' + numScore1 + '), :second_place_medal: ' + strResult2 + ' (' + numScore2 + '), :third_place_medal: ' + strResult3 + ' (' + numScore3 + ')';
+		return strResult;
+    },
+    _getDateMin: function() {
+        var gaChat = new GlideAggregate('x_snc_slackerbot_chat');
+        gaChat.addQuery('user', this.grUser.getUniqueValue());
+        gaChat.addAggregate('MIN', 'sys_created_on');
+        gaChat.query();
+        gaChat.next();
+        var strDate = gaChat.getAggregate('MIN', 'sys_created_on') || '<N/A>';
+        return strDate;
+    },
+
+    _getLog: function() {
+		var message = [];
+        var Slacker = new x_snc_slackerbot.Slacker();
+		message.push(':eye: 1984 : SlackerBot Privacy Report incoming...');
+        var numCount = this._getCount();
+        message.push('Total chat files: ' + numCount);
+        var strDateMin = this._getDateMin();
+        message.push(':rotating_light: First flagged up on the radar: ' + strDateMin);
+        var strCountWords = this._getCountWords();
+        message.push('Top 3 Words in your vocab: ' + strCountWords);	
+		Slacker.send_chat(this.grChat, message.join("\n"), true);
+		
+		// Sign Out
+		// Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot - Remember I am always watching...', true);
+    },
+
+    _parse: function() {
+        try {
+            /*
+			var strMessage = this.objChat.text; // utterance
+            this.arrArguments = strMessage.split(' ');
+            var strTypeObject = this.arrArguments[0] || '';
+            switch (strTypeObject) {
+                case 'log':
+                    return this._getLog();
+                default:
+                return 'Thanks for using 1984! :thumbsup:\nUse: `!1984 log` to return a summary of your personal data that has been collected, processed and stored SlackerBot.';
+            }
+			*/
+			return this._getLog();
+        } catch (e) {
+            gs.error("An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message);
+        }
+    },
+
+
+    type: 'Privacy'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>w.geek6</sys_created_by>
+        <sys_created_on>2022-10-08 22:23:00</sys_created_on>
+        <sys_id>e0e3fa67971e5110b29b7c80f053af1e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Privacy</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_script_include_e0e3fa67971e5110b29b7c80f053af1e</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-11 18:55:22</sys_updated_on>
+    </sys_script_include>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>52d8d33ddbe12c9c0ae3ac44d4961902</instance_id>
+        <instance_name>stockdemo</instance_name>
+        <name>sys_script_include_e0e3fa67971e5110b29b7c80f053af1e</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;
+    &lt;sys_script_include action="INSERT_OR_UPDATE"&gt;
+        &lt;access&gt;package_private&lt;/access&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;api_name&gt;x_snc_slackerbot.Privacy&lt;/api_name&gt;
+        &lt;caller_access/&gt;
+        &lt;client_callable&gt;false&lt;/client_callable&gt;
+        &lt;description&gt;Privacy API&lt;/description&gt;
+        &lt;name&gt;Privacy&lt;/name&gt;
+        &lt;script&gt;&lt;![CDATA[var Privacy = Class.create();
+Privacy.prototype = {
+    initialize: function(grChat) {
+        this._init(grChat);
+    },
+    parse: function() {
+        return this._parse();
+    },
+
+    _init: function(grChat) {
+        this.grChat = grChat;
+        var regex = /^(!1984|!privacy)/;
+        this.objChat = {
+            'channel': grChat.getValue('channel') || '',
+            'text': grChat.getValue('text').replace(regex, '').trim() || '',
+            'thread_ts': grChat.getValue('thread_ts') || '',
+            'ts': grChat.getValue('ts') || '',
+            'user': grChat.getValue('user') || '',
+        };
+        this.grUser = grChat.user.getRefRecord();
+    },
+
+    _getCount: function() {
+        var gaChat = new GlideAggregate('x_snc_slackerbot_chat');
+        gaChat.addQuery('user', this.grUser.getUniqueValue());
+        gaChat.addAggregate('COUNT');
+        gaChat.query();
+        gaChat.next();
+        var numCount = gaChat.getAggregate('COUNT') || 0;
+        return numCount;
+    },
+    _getCountWords: function() {
+		var strResult = '';
+        var grChat = new GlideRecord('x_snc_slackerbot_chat');
+        grChat.addQuery('user', this.grUser.getUniqueValue());
+        grChat.query();
+        while(grChat.next()) {
+			strResult = strResult.concat(' ', grChat.getValue('text'));
+		}
+		var arrWords = strResult.split(' ');
+		var objWords = {};
+		for (var iWord = 0; iWord &lt; arrWords.length; iWord++ ) {
+			var strWord = arrWords[iWord];
+			objWords[strWord] = objWords[strWord] || 0;
+			objWords[strWord]++;
+		}
+		arrWords = Object.keys(objWords);
+		var strResult1 = '', strResult2 = '', strResult3 = '';
+		var numScore1 = 0, numScore2 = 0, numScore3 = 0;
+		var numScore = 0;
+		for (iWord = 0; iWord &lt; arrWords.length; iWord++ ) {
+			strWord = arrWords[iWord] || '';
+			numScore = objWords[strWord] || 0;
+			if (numScore &gt; numScore3 &amp;&amp; numScore &lt; numScore2) {
+				numScore3 = numScore;
+				strResult3 = strWord;
+			}
+			if (numScore &gt; numScore2 &amp;&amp; numScore &lt; numScore1) {
+				numScore2 = numScore;
+				strResult2 = strWord;
+			}
+			if (numScore &gt; numScore1) {
+				numScore1 = numScore;
+				strResult1 = strWord;
+			}			
+		}
+		strResult = ':first_place_medal: ' + strResult1 + ' (' + numScore1 + '), :second_place_medal: ' + strResult2 + ' (' + numScore2 + '), :third_place_medal: ' + strResult3 + ' (' + numScore3 + ')';
+		return strResult;
+    },
+    _getDateMin: function() {
+        var gaChat = new GlideAggregate('x_snc_slackerbot_chat');
+        gaChat.addQuery('user', this.grUser.getUniqueValue());
+        gaChat.addAggregate('MIN', 'sys_created_on');
+        gaChat.query();
+        gaChat.next();
+        var strDate = gaChat.getAggregate('MIN', 'sys_created_on') || '&lt;N/A&gt;';
+        return strDate;
+    },
+
+    _getLog: function() {
+		var message = [];
+        var Slacker = new x_snc_slackerbot.Slacker();
+		message.push(':eye: 1984 : SlackerBot Privacy Report incoming...');
+        var numCount = this._getCount();
+        message.push('Total chat files: ' + numCount);
+        var strDateMin = this._getDateMin();
+        message.push(':rotating_light: First flagged up on the radar: ' + strDateMin);
+        var strCountWords = this._getCountWords();
+        message.push('Top 3 Words in your vocab: ' + strCountWords);	
+		Slacker.send_chat(this.grChat, message.join("\n"), true);
+		
+		// Sign Out
+		// Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot - Remember I am always watching...', true);
+    },
+
+    _parse: function() {
+        try {
+            /*
+			var strMessage = this.objChat.text; // utterance
+            this.arrArguments = strMessage.split(' ');
+            var strTypeObject = this.arrArguments[0] || '';
+            switch (strTypeObject) {
+                case 'log':
+                    return this._getLog();
+                default:
+                return 'Thanks for using 1984! :thumbsup:\nUse: `!1984 log` to return a summary of your personal data that has been collected, processed and stored SlackerBot.';
+            }
+			*/
+			return this._getLog();
+        } catch (e) {
+            gs.error("An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message);
+        }
+    },
+
+
+    type: 'Privacy'
+};]]&gt;&lt;/script&gt;
+        &lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;w.geek6&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-08 22:23:00&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;e0e3fa67971e5110b29b7c80f053af1e&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;
+        &lt;sys_name&gt;Privacy&lt;/sys_name&gt;
+        &lt;sys_package display_value="SlackerBot" source="x_snc_slackerbot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_package&gt;
+        &lt;sys_policy&gt;read&lt;/sys_policy&gt;
+        &lt;sys_scope display_value="SlackerBot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_scope&gt;
+        &lt;sys_update_name&gt;sys_script_include_e0e3fa67971e5110b29b7c80f053af1e&lt;/sys_update_name&gt;
+        &lt;sys_updated_by&gt;earl.duque&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-11 18:55:22&lt;/sys_updated_on&gt;
+    &lt;/sys_script_include&gt;
+&lt;/record_update&gt;</payload>
+        <payload_hash>-255875841</payload_hash>
+        <record_name>Privacy</record_name>
+        <reverted_from/>
+        <source>aa3553cd97a695101f613aefe153afc6</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-13 16:36:55</sys_created_on>
+        <sys_id>ed4597cd97a695101f613aefe153af5e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183d234bec20000001</sys_recorded_at>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-13 16:36:55</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>2d4597cdc7a69510f91bb6cda74ba95e</update_guid>
+        <update_guid_history>2d4597cdc7a69510f91bb6cda74ba95e:0,1523970dc0a695108b4a3b68e045b59d:98099821,0103d30db5a695109508beba7e091205:-1483298996,48129789e1a69510afd4b9722dd3c1ee:0,c5d1db096aa695101a9e26eb9460abcc:-173515587,6611df09bfa69510ed69f68cab3daed8:-1483298996,714e474536a69510e3e49fc7148d4b6c:0,9d1b381023e29110120ab71c98a0d8f8:1503900774</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-13 16:44:07</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>7012be551b984ed4ac44d13efc8e25a4</sys_id>
+        <sys_metadata>e0e3fa67971e5110b29b7c80f053af1e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Privacy</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_script_include_e0e3fa67971e5110b29b7c80f053af1e</sys_update_name>
+        <sys_update_version display_value="sys_script_include_e0e3fa67971e5110b29b7c80f053af1e">ed4597cd97a695101f613aefe153af5e</sys_update_version>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-13 16:44:07</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

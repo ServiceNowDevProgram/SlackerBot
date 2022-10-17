@@ -39,7 +39,19 @@ If approved, your new parser automatically goes live for the bot's immediate use
 - `current.user.name` the chat's sender's display name
 - `new x_snc_slackerbot.Slacker().send_chat(`**param 1**, **param 2**, **param 3**`)` How to send chats back to Slack after parsing.
   - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
-  - `param 2` Required string. The chat message to be sent. Can be an expression, eg. `originalNumber + ' is the result.`
+  - `param 2` Required `string` or `object`
+  	- Required `string`. The chat message to be sent as plaintext. Can be an expression, eg. `originalNumber + ' is the result.`
+  	- Required `object`. The chat content to be sent, as per the Slack Block Kit API format. Object requires `text` and `blocks` properties. See [Slack Block Kit API Reference](https://api.slack.com/reference/block-kit/blocks)
+  		- Example Object:
+```json
+{
+	"text": "",
+	"blocks": [
+		{ "type": "header", "text": { "type": "plain_text", "text": "Exemplar" } }
+	]
+}
+```
+
   - `param 3` Optional boolean. If set to true, will always push chat to the thread instead of to the main channel chat. Useful if param 2 is expected to be long and you don't want to flood chat.
 - `new x_snc_slackerbot.Slacker().send_reaction(`**param 1**, **param 2**`)` How to send reactions back to Slack after parsing.
   - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`

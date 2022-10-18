@@ -8,7 +8,7 @@ features:
     always_online: true
   slash_commands:
     - command: /codesnippets
-      url: https://devprogramresources.service-now.com/api/x_snc_code_snippet/code_snippets/username
+      url: https://YOURINSTANCE.service-now.com/api/x_snc_code_snippet/code_snippets/username
       description: Associates your GitHub Username to your slack ID
       usage_hint: githubname
       should_escape: false
@@ -49,7 +49,7 @@ oauth_config:
       - commands
 settings:
   event_subscriptions:
-    request_url: https://devprogramresources.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
+    request_url: https://YOURINSTANCE.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
     bot_events:
       - message.channels
       - message.groups
@@ -57,7 +57,7 @@ settings:
       - team_join
   interactivity:
     is_enabled: true
-    request_url: https://devprogramresources.service-now.com/api/x_snc_code_snippet/code_snippets/assign
+    request_url: https://YOURINSTANCE.service-now.com/api/x_snc_code_snippet/code_snippets/assign
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false

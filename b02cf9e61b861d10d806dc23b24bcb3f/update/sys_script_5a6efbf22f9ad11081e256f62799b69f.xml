@@ -64,7 +64,7 @@
                 slackMessageBlocks.push(message);
 				text = {
 					text: text,
-					blocks: JSON.stringify(slackMessageBlocks)
+					blocks: slackMessageBlocks
 				};
             }
             break;

@@ -28,13 +28,28 @@ Slacker.prototype = {
         return userSysID;
     },
 
+
+
+    /**
+     * Posts a message to Slack API in one of two formats
+     * @example
+     * // Called from a parser
+     * new x_snc_slackerbot.Slacker().send_chat(current, "Some message here for " + current.channel, false);
+     * @example
+     * // Called from a parser, with a Block API Object
+     * var msgObj = JSON.parse('{"text":"Exemplar","blocks": [{"type": "header", "text": {"type": "plain_text", "text": "Exemplar"}}]}');
+     * new x_snc_slackerbot.Slacker().send_chat(current, msgObj, false);
+     * @param {object|GlideRecord} chat_gr Object with 1-3 properties, - can be a Chat GlideRecord (i.e. current)
+     * @param {string|object} message Either a string containing a plaintext message, or a JS Object adhering to the Slack Block API format
+     * @param {boolean} force_thread Attribute requiring the provision of a (valid) thread_ts value 
+     * @returns {RESTResponseV2} RESTResponseV2 object containing response payload, and headers
+     */
     send_chat: function(chat_gr, message, force_thread) {
         var rm = new sn_ws.RESTMessageV2();
         rm.setHttpMethod('POST');
         rm.setEndpoint('https://slack.com/api/chat.postMessage');
         rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         rm.setRequestHeader("Authorization", "Bearer " + gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-        //rm.setLogLevel('all');
 
         var bodyString = '';
         bodyString += '&channel=' + gs.urlEncode(chat_gr.channel);
@@ -45,7 +60,7 @@ Slacker.prototype = {
         }
         if (typeof message == 'object' && message.blocks) {
             bodyString += '&text=' + gs.urlEncode(message.text);
-            bodyString += '&blocks=' + gs.urlEncode(message.blocks);
+            bodyString += '&blocks=' + gs.urlEncode(JSON.stringify(message.blocks));
         } else {
             bodyString += '&text=' + gs.urlEncode(message);
         }

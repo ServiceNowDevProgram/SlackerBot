@@ -6,6 +6,18 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 ***CONTRIBUTORS must follow all guidelines in [CONTRIBUTING.md](CONTRIBUTING.md)*** or run the risk of having your Pull Requests labeled as spam.<br>
 🔔🔔🔔
 
+## Contents
+
+- [Ways to contribut](#two-ways-to-contribute)
+- [Installing this bot on your slack server](#installing-this-bot-on-your-own-slack-server)
+- [GitHub to ServiceNow Integrations](#github-to-servicenow-integrations)
+- [Notes for setting this app up in Studio](#notes-for-setting-this-app-up-in-studio)
+- [Available APIs/variables in parsers](#available-apisvariables-in-parsers)
+
+## Ideas
+
+See the Issues tab for parser ideas. Make sure to leave a comment on an issue if you're working on it.
+
 ## Two ways to contribute
 
 [Easy](#easy-method-adding-new-parser) or [Hard](#hard-method-adding-new-functionality-types)
@@ -98,7 +110,9 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 * Check the Payload `x_snc_slackerbot_payload` table to make sure SN is receiving Slack messages
 * Check 'Outbound HTTP Requests' to make sure the bot is replying to the channel
 
-## Auto populate your Parsers table
+## GitHub to ServiceNow Integrations
+
+### Auto populate your Parsers table
 
 To fill your Parsers `x_snc_slackerbot_parser` table with all the parsers that exist on this repo:
 
@@ -107,7 +121,7 @@ To fill your Parsers `x_snc_slackerbot_parser` table with all the parsers that e
 
 This syncs your table to *this* repo, if you rather sync it to another repo, change the value of your `x_snc_slackerbot.Parsers_Sync_Repo` system property.
 
-## Setting up the GitHub to ServiceNow integration
+### Setting up the GitHub to ServiceNow integration
 
 The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/ServiceNowDevProgram/SlackerBot/) is set up to send changes to the ServiceNow instance that @Slacker is hosted on (automatically, on every commit). To do this for your own fork and ServiceNow instance:
 
@@ -126,3 +140,46 @@ The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/Servi
 * Commit the file
 * Check your ServiceNow instance on the Parsers `x_snc_slackerbot_parser` table and verify the file was uploaded
 * Trigger the parser on a slack channel that your bot is in
+
+## Notes for setting this app up in Studio
+
+***Never commit your tokens to GitHub***
+
+System Properties
+
+- `x_snc_slackerbot.SlackerBot.token` is your Slack bot's user token. Required to send messages back to your Slack server
+- `x_snc_slackerbot.SlackerBot.supertoken` is any admin token for your Slack server. Used for deleting messages (see in-app SRAPI).
+- `x_snc_slackerbot.maps.token` is your Google Maps token (if you wish to use the !iss parser)
+
+Scripted Rest APIs (SRAPIs)
+
+- `SlackerBot Event Handler` is used to validate to the Slack Events handler and to convert incoming chats to the x_snc_slackerbot_payload table
+- `SlackerBotGitHub` is used to automate the creation of parsers from ServiceNowDevProgram/SlackerBot/Parsers
+
+## Available APIs/variables in parsers
+
+- `current.text` the entire text of the chat that is being parsed
+- `current.ts` the timestamp of the chat
+- `current.thread_ts` if the chat was in a thread, the original message's timestamp
+- `current.channel` the channel's unique Slack ID that the chat was sent in
+- `current.user.user_id` the chat's sender's unique Slack ID
+- `current.user.name` the chat's sender's display name
+- `new x_snc_slackerbot.Slacker().send_chat(`**param 1**, **param 2**, **param 3**`)` How to send chats back to Slack after parsing.
+  - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
+  - `param 2` Required `string` or `object`
+  	- Required `string`. The chat message to be sent as plaintext. Can be an expression, eg. `originalNumber + ' is the result.`
+  	- Required `object`. The chat content to be sent, as per the Slack Block Kit API format. Object requires `text` and `blocks` properties. See [Slack Block Kit API Reference](https://api.slack.com/reference/block-kit/blocks)
+  		- Example Object:
+```json
+{
+	"text": "",
+	"blocks": [
+		{ "type": "header", "text": { "type": "plain_text", "text": "Exemplar" } }
+	]
+}
+```
+
+  - `param 3` Optional boolean. If set to true, will always push chat to the thread instead of to the main channel chat. Useful if param 2 is expected to be long and you don't want to flood chat.
+- `new x_snc_slackerbot.Slacker().send_reaction(`**param 1**, **param 2**`)` How to send reactions back to Slack after parsing.
+  - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
+  - `param 2` Required string. The name of the emoji to send. Do not include surrounding `:`. Eg. `joy` and *not* `:joy:`

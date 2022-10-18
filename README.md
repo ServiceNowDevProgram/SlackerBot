@@ -50,6 +50,9 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 * Select the Slack Workspace into which you want to install this app
 * Copy and paste the manifest from either [appmanifest.json](Slack%20App%20Manifest/appmanifest.json) or [appmanifest.yaml](Slack%20App%20Manifest/appmanifest.yaml)
 * Create the app
+* Navigate to `Features` > `Event Subscriptions`
+* Populate the `Request URL` with: https://YOURDEVINSTANCE.service-now.com/api/x_snc_pointsthing/points_thing
+> `When you tab out of the field, make sure the URL is "Verified" before you proceed.`
 * Navigate to `Settings` > `Install App`
 * Click the `Install to Workspace` button
 * Verify the `view` and `do` permissions

@@ -8,7 +8,7 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 
 ## Contents
 
-- [Ways to contribut](#two-ways-to-contribute)
+- [Ways to contribute](#two-ways-to-contribute)
 - [Installing this bot on your slack server](#installing-this-bot-on-your-own-slack-server)
 - [GitHub to ServiceNow Integrations](#github-to-servicenow-integrations)
 - [Notes for setting this app up in Studio](#notes-for-setting-this-app-up-in-studio)
@@ -63,7 +63,7 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 * Copy and paste the manifest from either [appmanifest.json](Slack%20App%20Manifest/appmanifest.json) or [appmanifest.yaml](Slack%20App%20Manifest/appmanifest.yaml)
 * Create the app
 * Navigate to `Features` > `Event Subscriptions`
-* Populate the `Request URL` with: https://YOURDEVINSTANCE.service-now.com/api/x_snc_pointsthing/points_thing
+* Populate the `Request URL` with: https://YOURDEVINSTANCE.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
 > `When you tab out of the field, make sure the URL is "Verified" before you proceed.`
 * Navigate to `Settings` > `Install App`
 * Click the `Install to Workspace` button

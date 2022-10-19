@@ -28,10 +28,13 @@ whether we do automated decision-making or profiling.</description>
         <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
         <type>string</type>
         <value>*SlackerBot Privacy Notice*&#13;
-We currently collect and process the following information under a single payload record for every message you post to this channel:&#13;
+This privacy notice relates to the information being processed when interacting with SlackerBot. You can also review the Slack general privacy at https://slack.com/trust/privacy/privacy-policy&#13;
+&#13;
+*SlackerBot* currently collects and processes the following information for every message you post to this channel, including replies to threads and reactions:&#13;
 :point_right: Slack Team ID&#13;
 :point_right: Slack Channel ID&#13;
 :point_right: Slack User ID&#13;
+:point_right: Slack User Name&#13;
 :point_right: Message timestamp&#13;
 :point_right: Message text &#13;
 :point_right: Reaction(s)&#13;
@@ -41,15 +44,15 @@ Most of the personal information we process is provided to us directly by you fo
 :point_right: You posted a message or replied to a message within any channel where SlackerBot is installed&#13;
 &#13;
 *We use the information that you have given us in order to*&#13;
-:point_right: Parse the message and respond according to the SlackerBot desired process&#13;
+:point_right: Parse the message and respond according to the SlackerBot desired process (known as Parsers). Use `!help` for more information on Parsers&#13;
 &#13;
-*We may share this information with ServiceNow*&#13;
+*We may share the information we collect with ServiceNow*&#13;
 &#13;
 *Under the UK &amp; EU General Data Protection Regulation (UK/EU GDPR), the lawful bases we rely on for processing this information are:*&#13;
  :point_right:  We need it to perform a public task.&#13;
 &#13;
 *How we store your personal information*&#13;
-:point_right: Your information is securely stored on ServiceNow.&#13;
+:point_right: Your information is securely stored on ServiceNow in US Data Centres.&#13;
 :point_right: We keep each chat record for 7 days. We will then dispose your information automatically.&#13;
 &#13;
 *Your data protection rights*&#13;

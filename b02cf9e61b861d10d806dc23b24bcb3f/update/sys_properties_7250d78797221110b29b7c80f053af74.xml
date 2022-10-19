@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
     <sys_properties action="INSERT_OR_UPDATE">
         <choices/>
-        <description>This privacy notice tells you what to expect us to do with your personal information, because SlackerBot is installed into this channel.&#13;
+        <description>This privacy notice tells the users what to expect us to do with their personal information, when SlackerBot is installed into any channel.&#13;
 &#13;
 We’ll tell you:&#13;
 &#13;
@@ -28,7 +28,7 @@ whether we do automated decision-making or profiling.</description>
         <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
         <type>string</type>
         <value>*SlackerBot Privacy Notice*&#13;
-We currently collect and process the following information under a single payload record for every message you post to any channel:&#13;
+We currently collect and process the following information under a single payload record for every message you post to this channel:&#13;
 :point_right: Slack Team ID&#13;
 :point_right: Slack Channel ID&#13;
 :point_right: Slack User ID&#13;

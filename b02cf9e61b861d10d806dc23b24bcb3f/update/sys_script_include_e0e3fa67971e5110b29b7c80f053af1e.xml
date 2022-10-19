@@ -99,21 +99,16 @@ Privacy.prototype = {
 		// Sign Out
 		Slacker.send_chat(this.grChat, ':eye: 1984 : SlackerBot - Remember I am always watching...', true);
     },
+    _getNotice: function() {
+        var Slacker = new x_snc_slackerbot.Slacker();
+		var strPrivacyNotice = gs.getProperty('x_snc_slackerbot.privacy.notice', 'TBC');
+		Slacker.send_chat(this.grChat, strPrivacyNotice, true);
+    },	
+	// 
 
     _parse: function() {
         try {
-            /*
-			var strMessage = this.objChat.text; // utterance
-            this.arrArguments = strMessage.split(' ');
-            var strTypeObject = this.arrArguments[0] || '';
-            switch (strTypeObject) {
-                case 'log':
-                    return this._getLog();
-                default:
-                return 'Thanks for using 1984! :thumbsup:\nUse: `!1984 log` to return a summary of your personal data that has been collected, processed and stored SlackerBot.';
-            }
-			*/
-			return this._getLog();
+			return this._getNotice();
         } catch (e) {
             gs.error("An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message);
         }

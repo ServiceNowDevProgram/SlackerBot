@@ -4,6 +4,37 @@ regex:!xkcd
 flags:g
 */
 
+function buildComicOutput(xkcdPayload){
+    var blockArr = [];
+    var block = {};
+    block.type = "header";
+    block.text = {};
+    block.text.type = "plain_text";
+    block.text.text = xkcdPayload.safe_title + "";
+    blockArr.push(block);
+
+    block = {};
+    block.type = "image";
+    block.image_url = xkcdPayload.img + "";
+    block.alt_text = xkcdPayload.alt + "";
+    blockArr.push(block);
+
+    block = {};
+    block.type = "context";
+    block.elements = [];
+    var contextElement = {};
+    contextElement.type = "mrkdwn";
+    contextElement.text = "*Alt-text:* " + xkcdPayload.alt;
+    block.elements.push(contextElement);
+    blockArr.push(block);
+
+    block = {};
+    block.text = xkcdPayload.safe_title + "";
+    block.blocks = blockArr;
+
+    return block;
+}
+
 var search = gs.urlEncode(current.text.replace(/!xkcd/g, '').trim());
 
 var rm = new sn_ws.RESTMessageV2();
@@ -13,7 +44,7 @@ rm.setRequestHeader('User-Agent', 'servicenow');
 var response = rm.execute();
 var body = response.getBody();
 var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
-var msg = '';
+var msg;
 if (parseInt(result)) {
     var rm2 = new sn_ws.RESTMessageV2();
     rm2.setHttpMethod('GET');
@@ -22,7 +53,7 @@ if (parseInt(result)) {
     var response2 = rm2.execute();
     var body2 = JSON.parse(response2.getBody());
 
-    msg = body2.safe_title + '\n' + body2.img + '\nAlt: ' + body2.alt;
+    msg = buildComicOutput(body2);
 } else {
     msg = 'No relevant XKCD found for `' + search + '`';
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
     <sys_properties action="INSERT_OR_UPDATE">
         <choices/>
-        <description>This privacy notice tells you what to expect us to do with your personal information when SlackerBot is installed into any channel. &#13;
+        <description>This privacy notice tells you what to expect us to do with your personal information, because SlackerBot is installed into this channel.&#13;
 &#13;
 We’ll tell you:&#13;
 &#13;

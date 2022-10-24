@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>false</active>
+        <api_name>x_snc_slackerbot.ISS</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ISS</name>
+        <script><![CDATA[var ISS = Class.create();
+ISS.prototype = {
+    initialize: function() {
+    },
+	
+	get_coords: function(){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setEndpoint('http://api.open-notify.org/iss-now.json');
+		//rm.setLogLevel('all');
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_location: function(iss_lat,iss_long){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setLogLevel('all');
+		rm.setEndpoint('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + iss_lat + ',' + iss_long + '&key=' + gs.getProperty('x_snc_slackerbot.maps.token'));
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_image: function(iss_lat,iss_long){
+		return 'https://maps.googleapis.com/maps/api/staticmap?center=' + iss_lat + ',' + iss_long + '&zoom=3&size=200x200&markers=color:blue|' + iss_lat + ',' + iss_long + '&key=' + gs.getProperty('x_snc_slackerbot.maps.token');
+	},
+
+    type: 'ISS'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-09-23 06:12:22</sys_created_on>
+        <sys_id>dd3682621bc61d10d806dc23b24bcbc0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ISS</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_script_include_dd3682621bc61d10d806dc23b24bcbc0</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-12 16:28:21</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>313436a1dbe4a7080e785d00cf961917</instance_id>
+        <instance_name>devprogramresources</instance_name>
+        <name>sys_script_include_dd3682621bc61d10d806dc23b24bcbc0</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;false&lt;/active&gt;&lt;api_name&gt;x_snc_slackerbot.ISS&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;ISS&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var ISS = Class.create();
+ISS.prototype = {
+    initialize: function() {
+    },
+	
+	get_coords: function(){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setEndpoint('http://api.open-notify.org/iss-now.json');
+		//rm.setLogLevel('all');
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_location: function(iss_lat,iss_long){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setLogLevel('all');
+		rm.setEndpoint('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + iss_lat + ',' + iss_long + '&amp;key=' + gs.getProperty('x_snc_slackerbot.maps.token'));
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_image: function(iss_lat,iss_long){
+		return 'https://maps.googleapis.com/maps/api/staticmap?center=' + iss_lat + ',' + iss_long + '&amp;zoom=3&amp;size=200x200&amp;markers=color:blue|' + iss_lat + ',' + iss_long + '&amp;key=' + gs.getProperty('x_snc_slackerbot.maps.token');
+	},
+
+    type: 'ISS'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;earl.duque&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-23 06:12:22&lt;/sys_created_on&gt;&lt;sys_id&gt;dd3682621bc61d10d806dc23b24bcbc0&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;ISS&lt;/sys_name&gt;&lt;sys_package display_value="SlackerBot" source="x_snc_slackerbot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="SlackerBot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_dd3682621bc61d10d806dc23b24bcbc0&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;earl.duque&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-10-12 16:28:21&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-833906402</payload_hash>
+        <record_name>ISS</record_name>
+        <reverted_from/>
+        <source>ddda0410db929110791d8f8d13961989</source>
+        <source_table>sys_update_set</source_table>
+        <state>current</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-12 16:28:21</sys_created_on>
+        <sys_id>9ab90e70476ed150248ddf37436d4365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183cd0689960000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-12 16:28:21</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>d2b90e70bd6ed15097a8b6d204ab5665</update_guid>
+        <update_guid_history>d2b90e70bd6ed15097a8b6d204ab5665:-833906402,d6ca80101f929110b803abb46e22a902:2030261799</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-12 16:29:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>cacc2c009b834d3a8591b0771a734e59</sys_id>
+        <sys_metadata>dd3682621bc61d10d806dc23b24bcbc0</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ISS</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_script_include_dd3682621bc61d10d806dc23b24bcbc0</sys_update_name>
+        <sys_update_version display_value="sys_script_include_dd3682621bc61d10d806dc23b24bcbc0">9ab90e70476ed150248ddf37436d4365</sys_update_version>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-12 16:29:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

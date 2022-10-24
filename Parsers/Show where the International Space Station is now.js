@@ -4,6 +4,40 @@ regex:!iss
 flags:gmi
 */
 
+var ISS = Class.create();
+ISS.prototype = {
+    initialize: function() {
+    },
+	
+	get_coords: function(){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setEndpoint('http://api.open-notify.org/iss-now.json');
+		//rm.setLogLevel('all');
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_location: function(iss_lat,iss_long){
+		var rm = new sn_ws.RESTMessageV2();
+		rm.setHttpMethod('GET');
+		rm.setLogLevel('all');
+		rm.setEndpoint('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + iss_lat + ',' + iss_long + '&key=' + gs.getProperty('x_snc_slackerbot.maps.token'));
+		
+		var response = rm.execute();
+		var response_body = JSON.parse(response.getBody());
+		return response_body;
+	},
+	
+	get_image: function(iss_lat,iss_long){
+		return 'https://maps.googleapis.com/maps/api/staticmap?center=' + iss_lat + ',' + iss_long + '&zoom=3&size=200x200&markers=color:blue|' + iss_lat + ',' + iss_long + '&key=' + gs.getProperty('x_snc_slackerbot.maps.token');
+	},
+
+    type: 'ISS'
+};
+
 var get_coords = new x_snc_slackerbot.ISS().get_coords();
 var iss_lat = get_coords.iss_position.latitude;
 var iss_long = get_coords.iss_position.longitude;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="SlackerBot Properties">23c2c59897e291101f613aefe153afd6</category>
+        <order>400</order>
+        <property display_value="x_snc_slackerbot.SlackerBot.channel.emoji-alerts" name="x_snc_slackerbot.SlackerBot.channel.emoji-alerts">dd0048032f9ad11081e256f62799b6b3</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-10 22:05:00</sys_created_on>
+        <sys_id>129349d897e291101f613aefe153afbe</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_snc_slackerbot.SlackerBot.channel.emoji-alerts.SlackerBot Properties</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_129349d897e291101f613aefe153afbe</sys_update_name>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-10 22:07:34</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

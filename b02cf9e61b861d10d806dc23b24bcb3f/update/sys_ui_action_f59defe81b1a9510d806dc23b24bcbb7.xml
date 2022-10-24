@@ -39,22 +39,29 @@ var files = JSON.parse(r.getBody());
 
 var x_parsers = new GlideRecord('x_snc_slackerbot_parser');
 x_parsers.query();
-x_parsers.setValue('active');
+x_parsers.setValue('active', 'false');
 x_parsers.updateMultiple();
 
 var parsers = new GlideRecord('x_snc_slackerbot_parser');
+
 for (var i in files){
-	if (parsers.get('description', files[i].name.split(".")[0])){
-		parsers.setValue('description', files[i].name.split(".")[0]);
-		parsers.setValue('active', 'true');
-		parserUpdate(parsers, files[i].download_url, 'update');
-	} else {
-		parsers.newRecord();
-		parsers.setValue('description', files[i].name.split(".")[0]);
-		parsers.setValue('active', 'true');
-		parserUpdate(parsers, files[i].download_url, 'added');
+	try {
+		if (parsers.get('description', files[i].name.split(".")[0])){
+			parsers.setValue('description', files[i].name.split(".")[0]);
+			parsers.setValue('active', 'true');
+			parserUpdate(parsers, files[i].download_url, 'update');
+		} else {
+			parsers.newRecord();
+			parsers.setValue('description', files[i].name.split(".")[0]);
+			parsers.setValue('active', 'true');
+			parserUpdate(parsers, files[i].download_url, 'added');
+		}
+	} catch (em){
+		gs.info(JSON.stringify(em));
 	}
 }
+
+
 
 function parserUpdate(gr, raw_url, record_action){
 	var rm2 = new sn_ws.RESTMessageV2();

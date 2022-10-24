@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_slackerbot.Gulash</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Gulash API: Hungarian Notation</description>
+        <name>Gulash</name>
+        <script><![CDATA[var Gulash = Class.create();
+Gulash.prototype = {
+    initialize: function(grChat) {
+        this._init(grChat);
+    },
+    // !gulash var gr incident
+    // !gu var gr incident
+
+    parse: function() {
+        return this._parse();
+    },
+
+    // PRIVATE FUNCTIONS
+    _init: function(grChat) {
+        this.grChat = grChat;
+        var regex = /^(!gulash|!gu)/;
+        this.objChat = {
+            'channel': grChat.getValue('channel') || '',
+            'text': grChat.getValue('text').replace(regex, '').trim() || '',
+            'thread_ts': grChat.getValue('thread_ts') || '',
+            'ts': grChat.getValue('ts') || '',
+            'user': grChat.getValue('user') || '',
+        };
+    },
+    _getCamelCase: function(strDisplayName) {
+        strDisplayName = strDisplayName || '';
+        strDisplayName = strDisplayName.toLowerCase();
+        var arrNames = strDisplayName.split(' ');
+        for (var iName = 0; iName < arrNames.length; iName++) {
+            var strName = arrNames[iName];
+            arrNames[iName] = strName.charAt(0).toUpperCase() + strName.slice(1);
+        }
+        return arrNames.join('');
+    },
+    _getVariableName: function() {
+        var arrArguments = this.arrArguments || [];
+        var strTypeVariable = arrArguments[1] || '';
+        var str = '';
+        switch (strTypeVariable.toLowerCase()) {
+            case 'gr':
+            case 'gliderecord':
+            case 'glide record':
+                str = '`' + this._getVariableTable() + ' = new GlideRecord(\'' + arrArguments[2] + '\');`';
+                return str;
+            case 'arr':
+            case 'array':
+            case 'list':
+                var arr = [];
+                str = '`' + this._getVariableArray() + ' = [];`';
+                return str;
+            case 'str':
+            case 'string':
+            case 'text':
+            case 'word':
+            case 'words':
+                str = '`' + this._getVariableString() + ' = \'\';`';
+                return str;
+            case 'num':
+            case 'number':
+            case 'integer':
+            case 'int':
+            case 'decimal':
+                str = '`' + this._getVariableNumber() + ' = \'\';`';
+                return str;
+            case 'id':
+            case 'sys id':
+            case 'sys_id':
+                str = '`' + this._getVariableIdName() + ' = \'\';`';
+                return str;
+            default:
+                return '`Invalid inputs. Do not be afraid to try {} , we will catch {} you.`';
+        }
+    },
+    _getVariableArray: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var arr' + this._getCamelCase(strName);
+    },
+    _getVariableId: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var id' + this._getCamelCase(strName);
+    },
+    _getVariableNumber: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var num' + this._getCamelCase(strName);
+    },
+    _getVariableString: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var str' + this._getCamelCase(strName);
+    },
+    _getVariableTable: function() {
+        var arrArguments = this.arrArguments || [];
+        var strTableName = arrArguments[2] || ''; // incident, sn_compliance_control, etc
+        var grTableName = new GlideRecord(strTableName);
+        if (grTableName.isValid())
+            strTableName = grTableName.getClassDisplayValue();
+        return 'var gr' + this._getCamelCase(strTableName);
+    },
+    _getWordsFromArguments: function(numStart /* optional */ ) {
+        var arrArguments = this.arrArguments || [];
+        numStart = numStart || 2;
+        var strName = '';
+        for (var iArg = numStart; iArg < arrArguments.length; iArg++) {
+            strName += ' ' + arrArguments[iArg];
+        }
+        return strName;
+    },
+    _parse: function() {
+        var strMessage = this.objChat.text; // var gr sn_compliance_control
+        this.arrArguments = strMessage.split(' ');
+        var strTypeObject = this.arrArguments[0] || '';
+
+        switch (strTypeObject) {
+            case 'fun':
+                return '`Functions are fun.`';
+            case 'function':
+                return '`Function functionality to follow.`';
+            case 'let':
+            case 'const':
+                return '`You need to upgrade to Tokyo and enable ES2021 for your Scoped Application if you want to use ES6+`';
+            case 'var':
+            case 'variable':
+                return this._getVariableName();
+            default:
+                return ':stew: Welcome to Gulash :stew:\nHere you can cook up some Hungarian Notation for ServiceNow JavaScript with a few simple ingredients :thumbsup:\nUse: `!gu [var|function] [gr|arr|str] [tablename|list of words to describe the variable or function]` \nSuch as: \n`!gu var gr incident` will return \n`var grIncident = new GlideRecord(\'incident\'); // TODO: only works well, when table exists.` \nThanks for using :stew: Gulash, to cook up your variable names. Standardised practices such as strong naming conventions, especially in loosely typed languages like JavaScript, can help make for more maintainable code.';
+        }
+
+    },
+
+    type: 'Gulash'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>w.geek6</sys_created_by>
+        <sys_created_on>2022-10-08 22:00:22</sys_created_on>
+        <sys_id>8e6de2a3971e5110b29b7c80f053af5d</sys_id>
+        <sys_name>Gulash</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_script_include_8e6de2a3971e5110b29b7c80f053af5d</sys_update_name>
+    </sys_script_include>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>671830c5dbbdbc1049eac597059619c5</instance_id>
+        <instance_name>earl</instance_name>
+        <name>sys_script_include_8e6de2a3971e5110b29b7c80f053af5d</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;
+    &lt;sys_script_include action="INSERT_OR_UPDATE"&gt;
+        &lt;access&gt;package_private&lt;/access&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;api_name&gt;x_snc_slackerbot.Gulash&lt;/api_name&gt;
+        &lt;caller_access/&gt;
+        &lt;client_callable&gt;false&lt;/client_callable&gt;
+        &lt;description&gt;Gulash API: Hungarian Notation&lt;/description&gt;
+        &lt;name&gt;Gulash&lt;/name&gt;
+        &lt;script&gt;&lt;![CDATA[var Gulash = Class.create();
+Gulash.prototype = {
+    initialize: function(grChat) {
+        this._init(grChat);
+    },
+    // !gulash var gr incident
+    // !gu var gr incident
+
+    parse: function() {
+        return this._parse();
+    },
+
+    // PRIVATE FUNCTIONS
+    _init: function(grChat) {
+        this.grChat = grChat;
+        var regex = /^(!gulash|!gu)/;
+        this.objChat = {
+            'channel': grChat.getValue('channel') || '',
+            'text': grChat.getValue('text').replace(regex, '').trim() || '',
+            'thread_ts': grChat.getValue('thread_ts') || '',
+            'ts': grChat.getValue('ts') || '',
+            'user': grChat.getValue('user') || '',
+        };
+    },
+    _getCamelCase: function(strDisplayName) {
+        strDisplayName = strDisplayName || '';
+        strDisplayName = strDisplayName.toLowerCase();
+        var arrNames = strDisplayName.split(' ');
+        for (var iName = 0; iName &lt; arrNames.length; iName++) {
+            var strName = arrNames[iName];
+            arrNames[iName] = strName.charAt(0).toUpperCase() + strName.slice(1);
+        }
+        return arrNames.join('');
+    },
+    _getVariableName: function() {
+        var arrArguments = this.arrArguments || [];
+        var strTypeVariable = arrArguments[1] || '';
+        var str = '';
+        switch (strTypeVariable.toLowerCase()) {
+            case 'gr':
+            case 'gliderecord':
+            case 'glide record':
+                str = '`' + this._getVariableTable() + ' = new GlideRecord(\'' + arrArguments[2] + '\');`';
+                return str;
+            case 'arr':
+            case 'array':
+            case 'list':
+                var arr = [];
+                str = '`' + this._getVariableArray() + ' = [];`';
+                return str;
+            case 'str':
+            case 'string':
+            case 'text':
+            case 'word':
+            case 'words':
+                str = '`' + this._getVariableString() + ' = \'\';`';
+                return str;
+            case 'num':
+            case 'number':
+            case 'integer':
+            case 'int':
+            case 'decimal':
+                str = '`' + this._getVariableNumber() + ' = \'\';`';
+                return str;
+            case 'id':
+            case 'sys id':
+            case 'sys_id':
+                str = '`' + this._getVariableIdName() + ' = \'\';`';
+                return str;
+            default:
+                return '`Invalid inputs. Do not be afraid to try {} , we will catch {} you.`';
+        }
+    },
+    _getVariableArray: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var arr' + this._getCamelCase(strName);
+    },
+    _getVariableId: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var id' + this._getCamelCase(strName);
+    },
+    _getVariableNumber: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var num' + this._getCamelCase(strName);
+    },
+    _getVariableString: function() {
+        var arrArguments = this.arrArguments || [];
+        var strName = this._getWordsFromArguments(2);
+        return 'var str' + this._getCamelCase(strName);
+    },
+    _getVariableTable: function() {
+        var arrArguments = this.arrArguments || [];
+        var strTableName = arrArguments[2] || ''; // incident, sn_compliance_control, etc
+        var grTableName = new GlideRecord(strTableName);
+        if (grTableName.isValid())
+            strTableName = grTableName.getClassDisplayValue();
+        return 'var gr' + this._getCamelCase(strTableName);
+    },
+    _getWordsFromArguments: function(numStart /* optional */ ) {
+        var arrArguments = this.arrArguments || [];
+        numStart = numStart || 2;
+        var strName = '';
+        for (var iArg = numStart; iArg &lt; arrArguments.length; iArg++) {
+            strName += ' ' + arrArguments[iArg];
+        }
+        return strName;
+    },
+    _parse: function() {
+        var strMessage = this.objChat.text; // var gr sn_compliance_control
+        this.arrArguments = strMessage.split(' ');
+        var strTypeObject = this.arrArguments[0] || '';
+
+        switch (strTypeObject) {
+            case 'fun':
+                return '`Functions are fun.`';
+            case 'function':
+                return '`Function functionality to follow.`';
+            case 'let':
+            case 'const':
+                return '`You need to upgrade to Tokyo and enable ES2021 for your Scoped Application if you want to use ES6+`';
+            case 'var':
+            case 'variable':
+                return this._getVariableName();
+            default:
+                return ':stew: Welcome to Gulash :stew:\nHere you can cook up some Hungarian Notation for ServiceNow JavaScript with a few simple ingredients :thumbsup:\nUse: `!gu [var|function] [gr|arr|str] [tablename|list of words to describe the variable or function]` \nSuch as: \n`!gu var gr incident` will return \n`var grIncident = new GlideRecord(\'incident\'); // TODO: only works well, when table exists.` \nThanks for using :stew: Gulash, to cook up your variable names. Standardised practices such as strong naming conventions, especially in loosely typed languages like JavaScript, can help make for more maintainable code.';
+        }
+
+    },
+
+    type: 'Gulash'
+};]]&gt;&lt;/script&gt;
+        &lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;w.geek6&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-08 22:00:22&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;8e6de2a3971e5110b29b7c80f053af5d&lt;/sys_id&gt;
+        &lt;sys_name&gt;Gulash&lt;/sys_name&gt;
+        &lt;sys_package display_value="SlackerBot" source="x_snc_slackerbot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_package&gt;
+        &lt;sys_policy&gt;read&lt;/sys_policy&gt;
+        &lt;sys_scope display_value="SlackerBot"&gt;b02cf9e61b861d10d806dc23b24bcb3f&lt;/sys_scope&gt;
+        &lt;sys_update_name&gt;sys_script_include_8e6de2a3971e5110b29b7c80f053af5d&lt;/sys_update_name&gt;
+    &lt;/sys_script_include&gt;
+&lt;/record_update&gt;</payload>
+        <payload_hash>-1315737225</payload_hash>
+        <record_name>Gulash</record_name>
+        <reverted_from/>
+        <source>1592a9ac1bf61110cba18485604bcbf9</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>current</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:14:50</sys_created_on>
+        <sys_id>d5a2edac1bf61110cba18485604bcb04</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>184086a3ab10000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-24 05:14:50</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>15a2edacc6f6111093109406cb0bf204</update_guid>
+        <update_guid_history>15a2edacc6f6111093109406cb0bf204:0,948c51d8a02e1550948447285d2c719c:-1904017734</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:39:30</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>3ac0ee00a8584700a969fcd4db4f6d04</sys_id>
+        <sys_metadata>8e6de2a3971e5110b29b7c80f053af5d</sys_metadata>
+        <sys_name>Gulash</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_script_include_8e6de2a3971e5110b29b7c80f053af5d</sys_update_name>
+        <sys_update_version display_value="sys_script_include_8e6de2a3971e5110b29b7c80f053af5d">d5a2edac1bf61110cba18485604bcb04</sys_update_version>
+    </sys_metadata_delete>
+</record_update>

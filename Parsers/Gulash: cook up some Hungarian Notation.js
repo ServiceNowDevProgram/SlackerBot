@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
-    <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
-        <active>true</active>
-        <api_name>x_snc_slackerbot.Gulash</api_name>
-        <caller_access/>
-        <client_callable>false</client_callable>
-        <description>Gulash API: Hungarian Notation</description>
-        <name>Gulash</name>
-        <script><![CDATA[var Gulash = Class.create();
+/*
+activation_example:!gulash
+regex:^(!gulash|!gu)
+flags:gi
+*/
+var Gulash = Class.create();
 Gulash.prototype = {
     initialize: function(grChat) {
         this._init(grChat);
@@ -140,15 +136,12 @@ Gulash.prototype = {
     },
 
     type: 'Gulash'
-};]]></script>
-        <sys_class_name>sys_script_include</sys_class_name>
-        <sys_created_by>w.geek6</sys_created_by>
-        <sys_created_on>2022-10-08 22:00:22</sys_created_on>
-        <sys_id>8e6de2a3971e5110b29b7c80f053af5d</sys_id>
-        <sys_name>Gulash</sys_name>
-        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
-        <sys_policy>read</sys_policy>
-        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>sys_script_include_8e6de2a3971e5110b29b7c80f053af5d</sys_update_name>
-    </sys_script_include>
-</record_update>
+};
+
+var strResponse = new x_snc_slackerbot.Gulash(current).parse() || '';
+try{
+    new x_snc_slackerbot.Slacker().send_chat( current, strResponse, true );
+}
+catch( e ){
+    gs.error( "An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message );
+}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description>This privacy notice tells the users what to expect us to do with their personal information, when SlackerBot is installed into any channel.&#13;
+&#13;
+We’ll tell you:&#13;
+&#13;
+why we are able to process your information;&#13;
+what purpose we are processing it for;&#13;
+whether you have to provide it to us;&#13;
+how long we store it for;&#13;
+whether there are other recipients of your personal information;&#13;
+whether we intend to transfer it to another country; and&#13;
+whether we do automated decision-making or profiling.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_snc_slackerbot.privacy.notice</name>
+        <read_roles/>
+        <suffix>privacy.notice</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 21:38:43</sys_created_on>
+        <sys_id>7250d78797221110b29b7c80f053af74</sys_id>
+        <sys_name>x_snc_slackerbot.privacy.notice</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
+        <type>string</type>
+        <value>*SlackerBot Privacy Notice*&#13;
+This privacy notice relates to the information being processed when interacting with SlackerBot. You can also review the Slack general privacy at https://slack.com/trust/privacy/privacy-policy&#13;
+&#13;
+*SlackerBot* currently collects and processes the following information for every message you post to this channel, including replies to threads and reactions:&#13;
+:point_right: Slack Team ID&#13;
+:point_right: Slack Channel ID&#13;
+:point_right: Slack User ID&#13;
+:point_right: Slack User Name&#13;
+:point_right: Message timestamp&#13;
+:point_right: Message text &#13;
+:point_right: Reaction(s)&#13;
+&#13;
+*How we get the personal information and why we have it*&#13;
+Most of the personal information we process is provided to us directly by you for one of the following reasons:&#13;
+:point_right: You posted a message or replied to a message within any channel where SlackerBot is installed&#13;
+&#13;
+*We use the information that you have given us in order to*&#13;
+:point_right: Parse the message and respond according to the SlackerBot desired process (known as Parsers). Use `!help` for more information on Parsers&#13;
+&#13;
+*We may share the information we collect with ServiceNow*&#13;
+&#13;
+*Under the UK &amp; EU General Data Protection Regulation (UK/EU GDPR), the lawful bases we rely on for processing this information are:*&#13;
+ :point_right:  We need it to perform a public task.&#13;
+&#13;
+*How we store your personal information*&#13;
+:point_right: Your information is securely stored on ServiceNow in US Data Centres.&#13;
+:point_right: We keep each chat record for 7 days. We will then dispose your information automatically.&#13;
+&#13;
+*Your data protection rights*&#13;
+Under data protection law, you have rights including:&#13;
+:point_right: Your right of access - You have the right to ask us for copies of your personal information.&#13;
+:point_right: Your right to rectification - You have the right to ask us to rectify personal information you think is inaccurate. You also have the right to ask us to complete information you think is incomplete.&#13;
+:point_right: Your right to erasure - You have the right to ask us to erase your personal information in certain circumstances.&#13;
+:point_right: Your right to restriction of processing - You have the right to ask us to restrict the processing of your personal information in certain circumstances.&#13;
+:point_right: Your right to object to processing - You have the the right to object to the processing of your personal information in certain circumstances.&#13;
+:point_right: Your right to data portability - You have the right to ask that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances.&#13;
+:point_right: You are not required to pay any charge for exercising your rights. If you make a request, we have one month to respond to you.&#13;
+:point_right: Please contact us if you wish to make a request.</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=7250d78797221110b29b7c80f053af74"/>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>671830c5dbbdbc1049eac597059619c5</instance_id>
+        <instance_name>earl</instance_name>
+        <name>sys_properties_7250d78797221110b29b7c80f053af74</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>This privacy notice tells the users what to expect us to do with their personal information, when SlackerBot is installed into any channel.&#13;
+&#13;
+We’ll tell you:&#13;
+&#13;
+why we are able to process your information;&#13;
+what purpose we are processing it for;&#13;
+whether you have to provide it to us;&#13;
+how long we store it for;&#13;
+whether there are other recipients of your personal information;&#13;
+whether we intend to transfer it to another country; and&#13;
+whether we do automated decision-making or profiling.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_snc_slackerbot.privacy.notice</name>
+        <read_roles/>
+        <suffix>privacy.notice</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 21:38:43</sys_created_on>
+        <sys_id>7250d78797221110b29b7c80f053af74</sys_id>
+        <sys_name>x_snc_slackerbot.privacy.notice</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
+        <type>string</type>
+        <value>*SlackerBot Privacy Notice*&#13;
+This privacy notice relates to the information being processed when interacting with SlackerBot. You can also review the Slack general privacy at https://slack.com/trust/privacy/privacy-policy&#13;
+&#13;
+*SlackerBot* currently collects and processes the following information for every message you post to this channel, including replies to threads and reactions:&#13;
+:point_right: Slack Team ID&#13;
+:point_right: Slack Channel ID&#13;
+:point_right: Slack User ID&#13;
+:point_right: Slack User Name&#13;
+:point_right: Message timestamp&#13;
+:point_right: Message text &#13;
+:point_right: Reaction(s)&#13;
+&#13;
+*How we get the personal information and why we have it*&#13;
+Most of the personal information we process is provided to us directly by you for one of the following reasons:&#13;
+:point_right: You posted a message or replied to a message within any channel where SlackerBot is installed&#13;
+&#13;
+*We use the information that you have given us in order to*&#13;
+:point_right: Parse the message and respond according to the SlackerBot desired process (known as Parsers). Use `!help` for more information on Parsers&#13;
+&#13;
+*We may share the information we collect with ServiceNow*&#13;
+&#13;
+*Under the UK &amp; EU General Data Protection Regulation (UK/EU GDPR), the lawful bases we rely on for processing this information are:*&#13;
+ :point_right:  We need it to perform a public task.&#13;
+&#13;
+*How we store your personal information*&#13;
+:point_right: Your information is securely stored on ServiceNow in US Data Centres.&#13;
+:point_right: We keep each chat record for 7 days. We will then dispose your information automatically.&#13;
+&#13;
+*Your data protection rights*&#13;
+Under data protection law, you have rights including:&#13;
+:point_right: Your right of access - You have the right to ask us for copies of your personal information.&#13;
+:point_right: Your right to rectification - You have the right to ask us to rectify personal information you think is inaccurate. You also have the right to ask us to complete information you think is incomplete.&#13;
+:point_right: Your right to erasure - You have the right to ask us to erase your personal information in certain circumstances.&#13;
+:point_right: Your right to restriction of processing - You have the right to ask us to restrict the processing of your personal information in certain circumstances.&#13;
+:point_right: Your right to object to processing - You have the the right to object to the processing of your personal information in certain circumstances.&#13;
+:point_right: Your right to data portability - You have the right to ask that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances.&#13;
+:point_right: You are not required to pay any charge for exercising your rights. If you make a request, we have one month to respond to you.&#13;
+:point_right: Please contact us if you wish to make a request.</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=7250d78797221110b29b7c80f053af74"/>
+</record_update>]]></payload>
+        <payload_hash>72126168</payload_hash>
+        <record_name>x_snc_slackerbot.privacy.notice</record_name>
+        <reverted_from/>
+        <source>1592a9ac1bf61110cba18485604bcbf9</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>current</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:14:48</sys_created_on>
+        <sys_id>01a2adac1bf61110cba18485604bcb6a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>184086a351d0000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-24 05:14:48</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>cda2adac4cf61110b0fc668b09e0a469</update_guid>
+        <update_guid_history>cda2adac4cf61110b0fc668b09e0a469:72126168</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:37:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>152fa7d83b4e4ec6acca2441891a3664</sys_id>
+        <sys_metadata>7250d78797221110b29b7c80f053af74</sys_metadata>
+        <sys_name>x_snc_slackerbot.privacy.notice</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
+        <sys_update_version display_value="sys_properties_7250d78797221110b29b7c80f053af74">01a2adac1bf61110cba18485604bcb6a</sys_update_version>
+    </sys_metadata_delete>
+</record_update>

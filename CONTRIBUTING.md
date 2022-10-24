@@ -10,6 +10,7 @@
 - Low effort/spam Pull Requests will be marked as spam accordingly.
 - Filenames should not have special characters that are not allowed on normal file systems (eg. do not put ! in the file name).
 - Parsers should not be spammy or activated unintentionally by a user in a way that would be deemed spammy. For example, a parser that is activated by a common word would likely be rejected. Instead, use a `!` notation as this is widely accepted as an activation character (eg. `!question` instead of just `question` as an activation phrase)
+- We want the SlackerBot to be as close to base functionality as possible. The app (in ServiceNow) should not be updated with script includes that pertain to individual parsers, and such functionality should be entirely within a parser file so that users can choose which parsers they want to use without having extra script includes included. The only script includes that should be added to the app is if it's adding direct functionality to the bot itself (eg. the ability for the bot to parse emojis, or to send ephemeral messages, or accept blocks messages, etc.).
 
 ## Required Parser Template
 

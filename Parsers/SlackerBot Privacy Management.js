@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
-    <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
-        <active>true</active>
-        <api_name>x_snc_slackerbot.Privacy</api_name>
-        <caller_access/>
-        <client_callable>false</client_callable>
-        <description>Privacy API</description>
-        <name>Privacy</name>
-        <script><![CDATA[var Privacy = Class.create();
+/*
+activation_example:!privacy
+regex:^(!privacy|!1984)
+flags:gi
+*/
+
+var Privacy = Class.create();
 Privacy.prototype = {
     initialize: function(grChat) {
         this._init(grChat);
+		this.privacyNotice = "*SlackerBot Privacy Notice*\nThis privacy notice relates to the information being processed when interacting with SlackerBot. You can also review the Slack general privacy at https://slack.com/trust/privacy/privacy-policy\n\n*SlackerBot* currently collects and processes the following information for every message you post to this channel, including replies to threads and reactions:\n:point_right: Slack Team ID\n:point_right: Slack Channel ID\n:point_right: Slack User ID\n:point_right: Slack User Name\n:point_right: Message timestamp\n:point_right: Message text \n:point_right: Reaction(s)\n\n*How we get the personal information and why we have it*\nMost of the personal information we process is provided to us directly by you for one of the following reasons:\n:point_right: You posted a message or replied to a message within any channel where SlackerBot is installed\n\n*We use the information that you have given us in order to*\n:point_right: Parse the message and respond according to the SlackerBot desired process (known as Parsers). Use `!help` for more information on Parsers\n\n*We may share the information we collect with ServiceNow*\n\n*Under the UK & EU General Data Protection Regulation (UK/EU GDPR), the lawful bases we rely on for processing this information are:*\n :point_right:  We need it to perform a public task.\n\n*How we store your personal information*\n:point_right: Your information is securely stored on ServiceNow in US Data Centres.\n:point_right: We keep each chat record for 7 days. We will then dispose your information automatically.\n\n*Your data protection rights*\nUnder data protection law, you have rights including:\n:point_right: Your right of access - You have the right to ask us for copies of your personal information.\n:point_right: Your right to rectification - You have the right to ask us to rectify personal information you think is inaccurate. You also have the right to ask us to complete information you think is incomplete.\n:point_right: Your right to erasure - You have the right to ask us to erase your personal information in certain circumstances.\n:point_right: Your right to restriction of processing - You have the right to ask us to restrict the processing of your personal information in certain circumstances.\n:point_right: Your right to object to processing - You have the the right to object to the processing of your personal information in certain circumstances.\n:point_right: Your right to data portability - You have the right to ask that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances.\n:point_right: You are not required to pay any charge for exercising your rights. If you make a request, we have one month to respond to you.\n:point_right: Please contact us if you wish to make a request.";
     },
     parse: function() {
         return this._parse();
@@ -101,7 +99,7 @@ Privacy.prototype = {
     },
     _getNotice: function() {
         var Slacker = new x_snc_slackerbot.Slacker();
-		var strPrivacyNotice = gs.getProperty('x_snc_slackerbot.privacy.notice', 'TBC');
+		var strPrivacyNotice = this.privacyNotice;
 		Slacker.send_chat(this.grChat, strPrivacyNotice, true);
     },	
 	// 
@@ -116,15 +114,6 @@ Privacy.prototype = {
 
 
     type: 'Privacy'
-};]]></script>
-        <sys_class_name>sys_script_include</sys_class_name>
-        <sys_created_by>w.geek6</sys_created_by>
-        <sys_created_on>2022-10-08 22:23:00</sys_created_on>
-        <sys_id>e0e3fa67971e5110b29b7c80f053af1e</sys_id>
-        <sys_name>Privacy</sys_name>
-        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
-        <sys_policy>read</sys_policy>
-        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>sys_script_include_e0e3fa67971e5110b29b7c80f053af1e</sys_update_name>
-    </sys_script_include>
-</record_update>
+};
+
+new x_snc_slackerbot.Privacy(current).parse() || '';

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>4f853ae7971e5110b29b7c80f053af36</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!privacy&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;SlackerBot Privacy Management&lt;/description&gt;
+        &lt;emoji&gt;:eye:&lt;/emoji&gt;
+        &lt;flags&gt;gi&lt;/flags&gt;
+        &lt;order/&gt;
+        &lt;regex&gt;^(!privacy|!1984)&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[/*
+activation_example:!privacy
+regex: ^(!privacy|!1984)
+flags:gi
+*/
+new x_snc_slackerbot.Privacy(current).parse() || '';
+]]&gt;&lt;/script&gt;
+        &lt;stop_processing&gt;false&lt;/stop_processing&gt;
+        &lt;sys_created_by&gt;w.geek6&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-08 22:27:25&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;4f853ae7971e5110b29b7c80f053af36&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-19 23:12:50&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 23:43:35</sys_created_on>
+        <sys_id>8e70b30797a21110b29b7c80f053afe1</sys_id>
+        <sys_name>SlackerBot Privacy Management</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_8e70b30797a21110b29b7c80f053afe1</sys_update_name>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+</record_update>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_metadata_link action="DELETE">
+        <directory>update</directory>
+        <documentkey>a6324df9479e99506eaffa37536d43e8</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!lorem 10 words||para&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Lorem Ipsum Text Generator&lt;/description&gt;
+        &lt;emoji/&gt;
+        &lt;flags&gt;gmi&lt;/flags&gt;
+        &lt;regex&gt;!lorem&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[	/**
+	* Use the lipsum generator to generate Lorem Ipsum dummy paragraphs / words / bytes.	
+	* @param what in ['paras','words','bytes'], default: 'paras'
+	* @param amount of paras/words/bytes, default: 2 (for words minimum is 5, for bytes it is 27)
+	* @param start always start with 'Lorem Ipsum', default = true
+	* activation_example: !lorem 10 words||paras||bytes	
+     **/
+
+
+   var wordCount = current.text.replace('!lorem','').trim().split(' ');
+    
+	var rm = new sn_ws.RESTMessageV2();
+	rm.setHttpMethod('GET');
+	rm.setLogLevel('all');
+	rm.setEndpoint('https://www.lipsum.com/feed/json?start=yes&amp;amount=' + wordCount[0] + '&amp;what=' +  wordCount[1]);
+	var response = rm.execute();
+	var response_body = JSON.parse(response.getBody());
+	var loremText = response_body.feed.lipsum;
+
+
+	new x_snc_slackerbot.Slacker().send_chat(current, loremText);]]&gt;&lt;/script&gt;
+        &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-03 03:35:15&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;a6324df9479e99506eaffa37536d43e8&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;25&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-03 21:31:38&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-03 04:08:01</sys_created_on>
+        <sys_id>71f9c17147de99506eaffa37536d4312</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Created 2022-10-02 20:35:15</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_71f9c17147de99506eaffa37536d4312</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-03 21:32:43</sys_updated_on>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>671830c5dbbdbc1049eac597059619c5</instance_id>
+        <instance_name>earl</instance_name>
+        <name>sys_metadata_link_71f9c17147de99506eaffa37536d4312</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>a6324df9479e99506eaffa37536d43e8</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!lorem 10 words||para&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Lorem Ipsum Text Generator&lt;/description&gt;
+        &lt;emoji/&gt;
+        &lt;flags&gt;gmi&lt;/flags&gt;
+        &lt;regex&gt;!lorem&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[	/**
+	* Use the lipsum generator to generate Lorem Ipsum dummy paragraphs / words / bytes.	
+	* @param what in ['paras','words','bytes'], default: 'paras'
+	* @param amount of paras/words/bytes, default: 2 (for words minimum is 5, for bytes it is 27)
+	* @param start always start with 'Lorem Ipsum', default = true
+	* activation_example: !lorem 10 words||paras||bytes	
+     **/
+
+
+   var wordCount = current.text.replace('!lorem','').trim().split(' ');
+    
+	var rm = new sn_ws.RESTMessageV2();
+	rm.setHttpMethod('GET');
+	rm.setLogLevel('all');
+	rm.setEndpoint('https://www.lipsum.com/feed/json?start=yes&amp;amount=' + wordCount[0] + '&amp;what=' +  wordCount[1]);
+	var response = rm.execute();
+	var response_body = JSON.parse(response.getBody());
+	var loremText = response_body.feed.lipsum;
+
+
+	new x_snc_slackerbot.Slacker().send_chat(current, loremText);]]&gt;&lt;/script&gt;
+        &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-03 03:35:15&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;a6324df9479e99506eaffa37536d43e8&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;25&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-03 21:31:38&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-03 04:08:01</sys_created_on>
+        <sys_id>71f9c17147de99506eaffa37536d4312</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Created 2022-10-02 20:35:15</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_71f9c17147de99506eaffa37536d4312</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-03 21:32:43</sys_updated_on>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link></record_update>]]></payload>
+        <payload_hash>2091698924</payload_hash>
+        <record_name>Created 2022-10-02 20:35:15</record_name>
+        <reverted_from/>
+        <source>93c225ec1bf61110cba18485604bcb7b</source>
+        <source_table>sys_update_set</source_table>
+        <state>current</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:15:31</sys_created_on>
+        <sys_id>dbc225ec1bf61110cba18485604bcbd9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>184086adbbf0000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-24 05:15:31</sys_updated_on>
+        <type>Metadata Snapshot</type>
+        <update_guid>cef7924ae25a1d10cb9cf36e979c7748</update_guid>
+        <update_guid_history>cef7924ae25a1d10cb9cf36e979c7748:2091698924,1f922dac87f6111039e485213e804819:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,ad98ca34f56e9550a37ff2c5d42cb55a:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,6720edac25ea5550522b45cbc7e1fb8e:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,f1df91ace1ea555043804ea16da64b5c:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,267c9d98102e155037854e3f13cadfe0:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,d530c0d0a9e61550d1d533606461a7c2:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,4b3fff40fae61550b0f5df883e61da61:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,114fdbb2939e5d100dc3538a42074688:940132063,cef7924ae25a1d10cb9cf36e979c7748:2091698924,7d979a0a1e5a1d1014f6782a2e01089b:940132063,0217dec6455a1d102c06dd703f710717:0,3b46de86065a1d107c010b2153aea3d4:2091698924</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:44:43</sys_created_on>
+        <sys_db_object display_value="" name="sys_metadata_link">sys_metadata_link</sys_db_object>
+        <sys_id>733868f3506d4400992a1edf89e40000</sys_id>
+        <sys_metadata>71f9c17147de99506eaffa37536d4312</sys_metadata>
+        <sys_name>Created 2022-10-02 20:35:15</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_metadata_link_71f9c17147de99506eaffa37536d4312</sys_update_name>
+        <sys_update_version display_value="sys_metadata_link_71f9c17147de99506eaffa37536d4312">dbc225ec1bf61110cba18485604bcbd9</sys_update_version>
+    </sys_metadata_delete>
+</record_update>

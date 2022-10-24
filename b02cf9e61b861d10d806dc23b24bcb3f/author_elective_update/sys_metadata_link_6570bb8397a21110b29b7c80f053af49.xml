@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="DELETE">
+        <directory>update</directory>
+        <documentkey>163bee6f97da5110b29b7c80f053af80</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!gu&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Gulash: cook up some Hungarian Notation&lt;/description&gt;
+        &lt;emoji&gt;:P&lt;/emoji&gt;
+        &lt;flags&gt;gi&lt;/flags&gt;
+        &lt;order/&gt;
+        &lt;regex&gt;^(!gulash|!gu)&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[/*
+activation_example:!gulash
+regex:^(!gulash|!gu)
+flags:gi
+*/
+var strResponse = new x_snc_slackerbot.Gulash(current).parse() || '';
+try{
+    new x_snc_slackerbot.Slacker().send_chat( current, strResponse, true );
+}
+catch( e ){
+    gs.error( "An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message );
+}
+]]&gt;&lt;/script&gt;
+        &lt;stop_processing&gt;false&lt;/stop_processing&gt;
+        &lt;sys_created_by&gt;w.geek6&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-08 21:42:19&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;163bee6f97da5110b29b7c80f053af80&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;8&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-19 23:28:34&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 23:43:34</sys_created_on>
+        <sys_id>6570bb8397a21110b29b7c80f053af49</sys_id>
+        <sys_name>Gulash: cook up some Hungarian Notation</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_6570bb8397a21110b29b7c80f053af49</sys_update_name>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>671830c5dbbdbc1049eac597059619c5</instance_id>
+        <instance_name>earl</instance_name>
+        <name>sys_metadata_link_6570bb8397a21110b29b7c80f053af49</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>163bee6f97da5110b29b7c80f053af80</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!gu&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Gulash: cook up some Hungarian Notation&lt;/description&gt;
+        &lt;emoji&gt;:P&lt;/emoji&gt;
+        &lt;flags&gt;gi&lt;/flags&gt;
+        &lt;order/&gt;
+        &lt;regex&gt;^(!gulash|!gu)&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[/*
+activation_example:!gulash
+regex:^(!gulash|!gu)
+flags:gi
+*/
+var strResponse = new x_snc_slackerbot.Gulash(current).parse() || '';
+try{
+    new x_snc_slackerbot.Slacker().send_chat( current, strResponse, true );
+}
+catch( e ){
+    gs.error( "An error occured when SlackerBot tried to send a response back to Slack.\nError: " + e.name + ": " + e.message );
+}
+]]&gt;&lt;/script&gt;
+        &lt;stop_processing&gt;false&lt;/stop_processing&gt;
+        &lt;sys_created_by&gt;w.geek6&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-10-08 21:42:19&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;163bee6f97da5110b29b7c80f053af80&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;8&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-10-19 23:28:34&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 23:43:34</sys_created_on>
+        <sys_id>6570bb8397a21110b29b7c80f053af49</sys_id>
+        <sys_name>Gulash: cook up some Hungarian Notation</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_6570bb8397a21110b29b7c80f053af49</sys_update_name>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+</record_update>]]></payload>
+        <payload_hash>633057290</payload_hash>
+        <record_name>Gulash: cook up some Hungarian Notation</record_name>
+        <reverted_from/>
+        <source>1592a9ac1bf61110cba18485604bcbf9</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>current</state>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:14:48</sys_created_on>
+        <sys_id>f8a2adac1bf61110cba18485604bcb52</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>184086a33f60000001</sys_recorded_at>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-10-24 05:14:48</sys_updated_on>
+        <type>Metadata Snapshot</type>
+        <update_guid>b8a2adacd0f61110eeaebaf3dd4eda52</update_guid>
+        <update_guid_history>b8a2adacd0f61110eeaebaf3dd4eda52:633057290</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>earl.duque</sys_created_by>
+        <sys_created_on>2022-10-24 05:44:21</sys_created_on>
+        <sys_db_object display_value="" name="sys_metadata_link">sys_metadata_link</sys_db_object>
+        <sys_id>619a05d832b448fbb3840bcc3f577f11</sys_id>
+        <sys_metadata>6570bb8397a21110b29b7c80f053af49</sys_metadata>
+        <sys_name>Gulash: cook up some Hungarian Notation</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_metadata_link_6570bb8397a21110b29b7c80f053af49</sys_update_name>
+        <sys_update_version display_value="sys_metadata_link_6570bb8397a21110b29b7c80f053af49">f8a2adac1bf61110cba18485604bcb52</sys_update_version>
+    </sys_metadata_delete>
+</record_update>

@@ -3,8 +3,8 @@ activation_example:!send !random !hey
 regex:!send !.+!.+
 flags:gi
 */
-
-if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.channel == "G7M4AP6U8") { //admin channels on sndevs
+var channels = current.channel;
+if (channels == "GD51HTR46" || channels == "G9LAJG7G8" || channels == "G7M4AP6U8") { //admin channels on sndevs
   var parsing = current.text.split('!');
   var channel = parsing[2].trim();
   var build_message = parsing;

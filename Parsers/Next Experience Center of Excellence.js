@@ -4,8 +4,9 @@ regex:(!nextcoe)|(!nextexperience)
 flags:gmi
 */
 
-var t = current.text;
+(function(){
 
-var message = '<nxtxp.link/coe|Next Experience Center of Excellence>';
-var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, message, false);
-
+  var strMessage = 'Click `https://nxtxp.link/coe` to navigate to Next Experience Center of Excellence & info about next experience.'
+  var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, strMessage, false);
+  
+})();

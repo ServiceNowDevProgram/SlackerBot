@@ -1,6 +1,6 @@
 /*
-activation_example:!meetups
-regex:^!meetups
+activation_example:!devmeetups
+regex:^!devmeetups
 flags:gmi
 */
 

@@ -1,6 +1,6 @@
 /*
 activation_example:!devlink utah
-regex:(!devlink)|(!shortlink) 
+regex:!devlink
 flags:gmi
 */
 

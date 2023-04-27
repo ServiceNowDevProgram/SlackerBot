@@ -14,7 +14,7 @@ chatReq.setRequestHeader("Accept", "*/*");
 var body = {
   "model": "gpt-3.5-turbo",
   "messages": [{"role": "user", "content": prompt}],
-  "max_tokens": 100
+  "max_tokens": 250
 };
 chatReq.setRequestBody(JSON.stringify(body));
 var chatResponse = chatReq.execute();

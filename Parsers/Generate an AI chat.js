@@ -13,11 +13,12 @@ chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 var body = {
   "model": "gpt-3.5-turbo",
-  "messages": [{"role": "user", "content": prompt}],
+  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses"}],
   "max_tokens": 250
 };
 chatReq.setRequestBody(JSON.stringify(body));
 var chatResponse = chatReq.execute();
+gs.info(chatResponse.getBody());
 var chatResponseBody = JSON.parse(chatResponse.getBody());
 
-new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n\n" + chatResponseBody.choices[0].message.content);
+new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002) + ")\n\n" + chatResponseBody.choices[0].message.content, false);

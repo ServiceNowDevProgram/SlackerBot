@@ -21,4 +21,4 @@ var chatResponse = chatReq.execute();
 gs.info(chatResponse.getBody());
 var chatResponseBody = JSON.parse(chatResponse.getBody());
 
-new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002) + ")\n\n" + chatResponseBody.choices[0].message.content, false);
+new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002).toFixed(6) + ")\n\n" + chatResponseBody.choices[0].message.content, false);

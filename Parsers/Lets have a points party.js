@@ -40,6 +40,6 @@ flags:gmi
     message.push( '<@' + recipient + '> ++ \n' );
   } );
   
-  si.send_chat( current, message.join(''), false );
+  //si.send_chat( current, message.join(''), false );
 
 } )( current );

@@ -19,7 +19,7 @@ var names = [
   }
 ];
 
-var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall"];
+var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Workspace", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall"];
 for (var i in buzzwords){
   var buzzword = {
     text: buzzwords[i],
@@ -41,7 +41,7 @@ for (var j in suffices){
   names.push(suffix);
 }
 
-var enders = ["2.0", "Pro", "V2", "Enterprise", "Lite", "Premium", "Plus", "Advanced", "Deluxe", "Professional", "Ultimate", "Classic", "Standard", "Express", "Turbo", "Gold", "Silver", "Bronze", "V1", "V3", "V5", "V10", "3.0", "4.0", "5.0", "X", "XL", "XXL", "LE", "SE", "Ultra", "Mega", "Giga", "Tera", "Peta", "Max", "Prime", "Alpha", "Beta", "Gamma", "Omega", "NextGen", "Future", "2023", "2024", "2025"];
+var enders = ["2.0", "Pro", "V2", "Enterprise", "Lite", "Workspace", "Premium", "Plus", "Advanced", "Deluxe", "Professional", "Ultimate", "Classic", "Standard", "Express", "Turbo", "Gold", "Silver", "Bronze", "V1", "V3", "V5", "V10", "3.0", "4.0", "5.0", "X", "XL", "XXL", "LE", "SE", "Ultra", "Mega", "Giga", "Tera", "Peta", "Max", "Prime", "Alpha", "Beta", "Gamma", "Omega", "NextGen", "Future", "2023", "2024", "2025"];
 
 var currentOrder = 0;
 var results = [];

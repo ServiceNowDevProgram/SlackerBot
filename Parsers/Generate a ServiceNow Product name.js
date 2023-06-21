@@ -19,7 +19,7 @@ var names = [
   }
 ];
 
-var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Management", "Workspace", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall"];
+var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Management", "Workspace", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall", "Next", "MoreNext", "NextNext", "SoNext", "NEXT", "AreYouThereGod?It'sMe,NextExperience"];
 for (var i in buzzwords){
   var buzzword = {
     text: buzzwords[i],

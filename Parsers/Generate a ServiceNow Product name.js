@@ -19,7 +19,7 @@ var names = [
   }
 ];
 
-var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Management", "Workspace", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall", "Next", "MoreNext", "NextNext", "SoNext", "NEXT", "AreYouThereGod?It'sMe,NextExperience"];
+var buzzwords = ["Blockchain", "AI", "IoT", "BigData", "Management", "Workspace", "Cloud", "Quantum", "VR", "AR", "Cybersecurity", "Analytics", "MachineLearning", "DeepLearning", "NLP", "Cryptocurrency", "Bitcoin", "Agile", "DevOps", "Containers", "Microservices", "Fintech", "Insurtech", "Edtech", "SaaS", "PaaS", "IaaS", "5G", "AR", "VR", "Autonomous", "Drones", "EdgeComputing", "Robotics", "SmartHome", "DataScience", "DataMining", "Chatbot", "Wearable", "GenAI", "Integration", "Admin", "Reports", "SEO", "UI", "UX", "GrowthHacking", "DataBreach", "DDoS", "Ransomware", "Firewall", "Next", "MoreNext", "NextNext", "SoNext", "NEXT", "AreYouThereGod?It'sMe,NextExperience", "PolarisTRUE", "Polaris", "Solaris"];
 for (var i in buzzwords){
   var buzzword = {
     text: buzzwords[i],
@@ -30,7 +30,7 @@ for (var i in buzzwords){
   names.push(buzzword);
 }
 
-var suffices = ["Experience", "UI", "Framework", "Workspace", "Environment", "Center", "Builder", "Platform", "Suite", "Engine", "System", "Network", "Cloud", "Hub", "Interface", "Kit", "Tool", "Pro", "Plus", "Max", "X", "Matrix", "Box", "Gate", "Base", "Dome", "Sphere", "Realm", "Vista", "Horizon", "Nexus", "Oasis", "Solutions", "Point", "Link", "Connect", "Verse", "Infinity", "Edge", "Prime", "Core", "Zone", "Lab", "Fusion", "Rise", "Boost", "Wave", "Dynamo", "Pulse", "Bolt", "Vault", "Rush", "Expanse", "Grid"];
+var suffices = ["Experience", "UI", "Framework", "Workspace", "Environment", "Center", "Builder", "Platform", "Suite", "Engine", "System", "Network", "Cloud", "Hub", "Interface", "Kit", "Tool", "Pro", "Plus", "Max", "X", "Matrix", "Box", "Gate", "Base", "Dome", "Sphere", "Realm", "Vista", "Horizon", "Nexus", "Oasis", "Solutions", "Point", "Link", "Connect", "Verse", "Infinity", "Edge", "Prime", "Core", "Zone", "Lab", "Fusion", "Rise", "Boost", "Wave", "Dynamo", "Pulse", "Bolt", "Vault", "Rush", "Expanse", "Grid", "Next", "Developer", "Dev", "Hub", "Hubby", "Hubbers", "Huborama", "Hubbalubbadingdong", "IneedaHub"];
 for (var j in suffices){
   var suffix = {
     text: suffices[j],

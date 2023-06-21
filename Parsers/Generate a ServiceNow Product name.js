@@ -65,5 +65,5 @@ while (currentOrder < 2) {
 
 if (Math.random() < 0.5) results.push(" " + enders[Math.floor(Math.random()*enders.length)]);
 
-var message = "`Introducing ServiceNow's newest product:`\n:star: *" + results.join("") + "* :star";
+var message = "`Introducing ServiceNow's newest product:`\n:star: *" + results.join("") + "* :star:";
 var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, message, false);

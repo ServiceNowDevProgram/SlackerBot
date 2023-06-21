@@ -41,7 +41,7 @@ for (var j in suffices){
   names.push(suffix);
 }
 
-var enders = ["2.0", "Pro", "V2", "Enterprise", "Lite", "Workspace", "Premium", "Plus", "Advanced", "Deluxe", "Professional", "Ultimate", "Classic", "Standard", "Express", "Turbo", "Gold", "Silver", "Bronze", "V1", "V3", "V5", "V10", "3.0", "4.0", "5.0", "X", "XL", "XXL", "LE", "SE", "Ultra", "Mega", "Giga", "Tera", "Peta", "Max", "Prime", "Alpha", "Beta", "Gamma", "Omega", "NextGen", "Future", "2023", "2024", "2025"];
+var enders = ["2.0", "Pro", "V2", "Enterprise", "Lite", "Workspace", "Premium", "Plus", "Advanced", "Deluxe", "Professional", "Ultimate", "Classic", "Standard", "Express", "Turbo", "Gold", "Silver", "Bronze", "V1", "V3", "V5", "V10", "3.0", "4.0", "5.0", "X", "XL", "XXL", "LE", "SE", "Ultra", "Mega", "Giga", "Tera", "Peta", "Max", "Prime", "Alpha", "Beta", "Gamma", "Omega", "NextGen", "Future", "2023", "2024", "2025", "(a ServiceNow Product), (a ServiceNow Product by ServiceNow)", "(a ServiceNow Product by ServiceNow for Servicenow, ServiceNow) v2", "Next", "Nexter", "Nextest", "NextMaximum", "2Next2Furious"];
 
 var currentOrder = 0;
 var results = [];

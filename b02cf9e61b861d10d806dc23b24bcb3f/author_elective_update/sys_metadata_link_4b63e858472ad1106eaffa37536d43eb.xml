@@ -135,6 +135,7 @@ if (wordCount[0] != '') {
         <sys_db_object display_value="" name="sys_metadata_link">sys_metadata_link</sys_db_object>
         <sys_id>1c1f7ad1600646849cb1223ff13df3a4</sys_id>
         <sys_metadata>4b63e858472ad1106eaffa37536d43eb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Weather Report Generator</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_parent/>
@@ -143,5 +144,7 @@ if (wordCount[0] != '') {
         <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
         <sys_update_name>sys_metadata_link_4b63e858472ad1106eaffa37536d43eb</sys_update_name>
         <sys_update_version display_value="sys_metadata_link_4b63e858472ad1106eaffa37536d43eb">c53061ec1bea5550cba18485604bcbda</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-01-24 15:37:33</sys_updated_on>
     </sys_metadata_delete>
 </record_update>

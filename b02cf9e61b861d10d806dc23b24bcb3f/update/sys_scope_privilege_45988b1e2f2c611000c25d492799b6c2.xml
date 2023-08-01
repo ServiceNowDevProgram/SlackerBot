@@ -7,11 +7,14 @@
         <sys_created_by>dxcrcc</sys_created_by>
         <sys_created_on>2023-01-24 22:59:26</sys_created_on>
         <sys_id>45988b1e2f2c611000c25d492799b6c2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Glide API: user roles and groups</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_scope_privilege_45988b1e2f2c611000c25d492799b6c2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-04-28 14:53:27</sys_updated_on>
         <target_name>Glide API: user roles and groups</target_name>
         <target_scope display_value="Global">global</target_scope>
         <target_type>scriptable</target_type>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Parser" max_length="40" name="x_snc_slackerbot_parser" sizeclass="34" type="collection">
+    <element db_object_id="d163611a47602110e628d855d36d43d7" label="Parser" max_length="40" name="x_snc_slackerbot_parser" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Activation example" max_length="40" name="activation_example" type="string"/>
         <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
         <element display="true" label="Description" max_length="128" name="description" type="string"/>

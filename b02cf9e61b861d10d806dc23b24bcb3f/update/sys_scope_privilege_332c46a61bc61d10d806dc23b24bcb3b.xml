@@ -7,11 +7,14 @@
         <sys_created_by>guest</sys_created_by>
         <sys_created_on>2022-09-23 06:37:05</sys_created_on>
         <sys_id>332c46a61bc61d10d806dc23b24bcb3b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>ScriptableServiceResultBuilder.setStatus</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_scope_privilege_332c46a61bc61d10d806dc23b24bcb3b</sys_update_name>
+        <sys_updated_by>earl.duque</sys_updated_by>
+        <sys_updated_on>2022-09-23 07:52:28</sys_updated_on>
         <target_name>ScriptableServiceResultBuilder.setStatus</target_name>
         <target_scope display_value="Global">global</target_scope>
         <target_type>scriptable</target_type>

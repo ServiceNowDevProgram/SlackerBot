@@ -42,13 +42,14 @@
         <update_guid_history>7a5e71aa16861d100d3a1a36e8745300:-820339628</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="x_snc_slackerbot_payload.x_snc_slackerbot.payload_user">516ef1aa1b861d10d806dc23b24bcb0d</sys_audit_delete>
+        <sys_audit_delete display_value="">516ef1aa1b861d10d806dc23b24bcb0d</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 05:36:51</sys_created_on>
         <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
         <sys_id>a7fdcb6618794506b8dcd0201fa42679</sys_id>
         <sys_metadata>7e5e31aa1b861d10d806dc23b24bcbfe</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>x_snc_slackerbot_payload.x_snc_slackerbot.payload_user</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_parent display_value="x_snc_slackerbot_payload">365e31aa1b861d10d806dc23b24bcbfc</sys_parent>
@@ -57,5 +58,7 @@
         <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
         <sys_update_name>sys_security_acl_role_7e5e31aa1b861d10d806dc23b24bcbfe</sys_update_name>
         <sys_update_version display_value="sys_security_acl_role_7e5e31aa1b861d10d806dc23b24bcbfe">325e71aa1b861d10d806dc23b24bcb01</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-01-24 15:37:34</sys_updated_on>
     </sys_metadata_delete>
 </record_update>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="fd5e8bf447183950e628d855d36d4397" label="GPT Model" max_length="40" name="x_snc_slackerbot_gpt_model" type="collection">
+        <element label="Model Name" max_length="250" name="model_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Prompt cost per token" max_length="20" name="prompt_cost_per_token" type="currency"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Response cost per token" max_length="20" name="response_cost_per_token" type="currency"/>
+    </element>
+</database>

@@ -171,6 +171,7 @@ Under data protection law, you have rights including:&#13;
         <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
         <sys_id>152fa7d83b4e4ec6acca2441891a3664</sys_id>
         <sys_metadata>7250d78797221110b29b7c80f053af74</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>x_snc_slackerbot.privacy.notice</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_parent/>
@@ -179,5 +180,7 @@ Under data protection law, you have rights including:&#13;
         <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
         <sys_update_name>sys_properties_7250d78797221110b29b7c80f053af74</sys_update_name>
         <sys_update_version display_value="sys_properties_7250d78797221110b29b7c80f053af74">01a2adac1bf61110cba18485604bcb6a</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-01-24 15:37:33</sys_updated_on>
     </sys_metadata_delete>
 </record_update>

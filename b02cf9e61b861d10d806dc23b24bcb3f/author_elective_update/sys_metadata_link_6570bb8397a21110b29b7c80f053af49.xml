@@ -125,6 +125,7 @@ catch( e ){
         <sys_db_object display_value="" name="sys_metadata_link">sys_metadata_link</sys_db_object>
         <sys_id>619a05d832b448fbb3840bcc3f577f11</sys_id>
         <sys_metadata>6570bb8397a21110b29b7c80f053af49</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Gulash: cook up some Hungarian Notation</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_parent/>
@@ -133,5 +134,7 @@ catch( e ){
         <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
         <sys_update_name>sys_metadata_link_6570bb8397a21110b29b7c80f053af49</sys_update_name>
         <sys_update_version display_value="sys_metadata_link_6570bb8397a21110b29b7c80f053af49">f8a2adac1bf61110cba18485604bcb52</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-01-24 15:37:33</sys_updated_on>
     </sys_metadata_delete>
 </record_update>

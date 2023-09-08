@@ -18,7 +18,7 @@ flags:gmi
 		var match = str.match(/--\s*(\w+)/);
 		return match ? " in the style of " + match[1] : "";
 	}
-	var style = findWordAfterDashDash(message);
+	var style = findWordAfterDashDash(current.text);
 	
 	var chats = [];
 	var chatGr = new GlideRecord('x_snc_pointsthing_chat');

@@ -13,6 +13,12 @@ flags:gmi
 		si.send_chat( current, message, false );
 		return null;
 	}
+
+	function findWordAfterDashDash(str) {
+		var match = str.match(/--\s*(\w+)/);
+		return match ? " in the style of " + match[1] : "";
+	}
+	var style = findWordAfterDashDash(message);
 	
 	var chats = [];
 	var chatGr = new GlideRecord('x_snc_pointsthing_chat');
@@ -34,7 +40,7 @@ flags:gmi
 	chatReq.setRequestHeader("Accept", "*/*");
 	var body = {
 		"model": "gpt-3.5-turbo",
-		"messages": [{"role": "user", "content": "summarize the following conversation. You cannot ask for follow-up responses. Ignore the user named Slackbot.\n\n" + chats.join("\n")}],
+		"messages": [{"role": "user", "content": "summarize the following conversation" + style + ". You cannot ask for follow-up responses. Ignore the user named Slackbot.\n\n" + chats.join("\n")}],
 		//  "max_tokens": 250
 	};
 	chatReq.setRequestBody(JSON.stringify(body));

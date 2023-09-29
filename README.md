@@ -1,4 +1,4 @@
-![SlackerBot Banner](https://github.com/ServiceNowDevProgram/SlackerBot/assets/31702109/9defb6db-9525-49e6-9732-c69213ceb3b5)
+![SlackerBot Banner](https://github.com/ServiceNowDevProgram/SlackerBot/assets/31702109/adee2bb5-bc84-4e19-8b5d-8b427573e4c3)
 
 This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.com/) workspace.
 

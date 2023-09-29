@@ -1,6 +1,6 @@
 # SlackerBot
 
-This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.com/) slack workspace.
+This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.com/) workspace.
 
 🔔🔔🔔<br>
 ***CONTRIBUTORS must follow all guidelines in [CONTRIBUTING.md](CONTRIBUTING.md)*** or run the risk of having your Pull Requests labeled as spam.<br>
@@ -52,14 +52,14 @@ This method requires more setup, but is the preferred method for more complex pa
 
 An accepted Pull Request and merge does not necessarily mean the functionality will go live immediately, as an admin for the host instance will need to pull the application into ServiceNow.
 
-## Installing this bot on your own Slack server
+## Installing this bot on your own workspace
 
-### Create Slack App, Install into Slack
+### Create App and Install it
 
 #### Via a Manifest
 
 * Create a new app, select "From an app manifest"
-* Select the Slack Workspace into which you want to install this app
+* Select the workspace into which you want to install this app
 * Copy and paste the manifest from either [appmanifest.json](Slack%20App%20Manifest/appmanifest.json) or [appmanifest.yaml](Slack%20App%20Manifest/appmanifest.yaml)
 * Create the app
 * Navigate to `Features` > `Event Subscriptions`
@@ -74,7 +74,7 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 #### Manually
 
 * Create a new app, select "From scratch"
-* Select the Slack Workspace into which you want to install this app
+* Select the workspace into which you want to install this app
 * Navigate to `Features` > `Event Subscriptions`
 * Turn on `Enable Events`
 * Populate the `Request URL` with: https://YOURDEVINSTANCE.service-now.com/api/x_snc_slackerbot/slackerbot_event_handler
@@ -97,17 +97,17 @@ An accepted Pull Request and merge does not necessarily mean the functionality w
 ### Connect them together
 
 * Place token into the ServiceNow system property 'x_snc_slackerbot.SlackerBot.token' 
-  * REMINDER: When you commit your changes, always delete the value of this property before you commit. If you forget to do this, Slack will automatically disable your token when it does a scan of GitHub and sees that you accidentally placed your private token online. If this happens, go into your Slack app and issue a new token.
+  * REMINDER: When you commit your changes, always delete the value of this property before you commit. If you forget to do this, the token will automatically be disabled GitHub sees that you accidentally placed your private token online. If this happens, go into your app and issue a new token.
 
 ### Testing
 
-* Invite your bot to a Slack channel
+* Invite your bot to a channel
 * Create a parser on the `x_snc_slackerbot_parser` table
-* Activate the parser in the Slack channel
+* Trigger the parser in the channel
 
 ### Troubleshooting
 
-* Check the Payload `x_snc_slackerbot_payload` table to make sure SN is receiving Slack messages
+* Check the Payload `x_snc_slackerbot_payload` table to make sure SN is receiving messages
 * Check 'Outbound HTTP Requests' to make sure the bot is replying to the channel
 
 ## GitHub to ServiceNow Integrations
@@ -139,21 +139,21 @@ The Parsers folder on [ServiceNowDevProgram/SlackerBot](https://github.com/Servi
 * Follow the template in the [CONTRIBUTING.md](CONTRIBUTING.md) document
 * Commit the file
 * Check your ServiceNow instance on the Parsers `x_snc_slackerbot_parser` table and verify the file was uploaded
-* Trigger the parser on a slack channel that your bot is in
+* Trigger the parser on a channel that your bot is in
 
-## Notes for setting this app up in Studio
+## Notes for setting this app up in ServiceNow Studio
 
 ***Never commit your tokens to GitHub***
 
 System Properties
 
-- `x_snc_slackerbot.SlackerBot.token` is your Slack bot's user token. Required to send messages back to your Slack server
-- `x_snc_slackerbot.SlackerBot.supertoken` is any admin token for your Slack server. Used for deleting messages (see in-app SRAPI).
+- `x_snc_slackerbot.SlackerBot.token` is your bot's user token. Required to send messages back to your workspace
+- `x_snc_slackerbot.SlackerBot.supertoken` is any admin token for your server. Used for deleting messages (see in-app SRAPI).
 - `x_snc_slackerbot.maps.token` is your Google Maps token (if you wish to use the !iss parser)
 
 Scripted Rest APIs (SRAPIs)
 
-- `SlackerBot Event Handler` is used to validate to the Slack Events handler and to convert incoming chats to the x_snc_slackerbot_payload table
+- `SlackerBot Event Handler` is used to validate to the Events handler and to convert incoming chats to the x_snc_slackerbot_payload table
 - `SlackerBotGitHub` is used to automate the creation of parsers from ServiceNowDevProgram/SlackerBot/Parsers
 
 ## Available APIs/variables in parsers
@@ -161,14 +161,15 @@ Scripted Rest APIs (SRAPIs)
 - `current.text` the entire text of the chat that is being parsed
 - `current.ts` the timestamp of the chat
 - `current.thread_ts` if the chat was in a thread, the original message's timestamp
-- `current.channel` the channel's unique Slack ID that the chat was sent in
-- `current.user.user_id` the chat's sender's unique Slack ID
+- `current.channel` the channel's unique ID that the chat was sent in
+- `current.user.user_id` the chat's sender's unique ID
 - `current.user.name` the chat's sender's display name
-- `new x_snc_slackerbot.Slacker().send_chat(`**param 1**, **param 2**, **param 3**`)` How to send chats back to Slack after parsing.
+- `new x_snc_slackerbot.Slacker().send_chat(`**param 1**, **param 2**, **param 3**`)` How to send chats back to your workspace after parsing.
   - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
+  	- If you do not have a gliderecord, this can be faked by providing a JSON object. The only key that is required is a channel, eg. `{"channel":"ABC123"}`
   - `param 2` Required `string` or `object`
   	- Required `string`. The chat message to be sent as plaintext. Can be an expression, eg. `originalNumber + ' is the result.`
-  	- Required `object`. The chat content to be sent, as per the Slack Block Kit API format. Object requires `text` and `blocks` properties. See [Slack Block Kit API Reference](https://api.slack.com/reference/block-kit/blocks)
+  	- Required `object`. The chat content to be sent, as per the Block Kit API format. Object requires `text` and `blocks` properties. See [Block Kit API Reference](https://api.slack.com/reference/block-kit/blocks)
   		- Example Object:
 ```json
 {
@@ -179,7 +180,8 @@ Scripted Rest APIs (SRAPIs)
 }
 ```
 
-  - `param 3` Optional boolean. If set to true, will always push chat to the thread instead of to the main channel chat. Useful if param 2 is expected to be long and you don't want to flood chat.
-- `new x_snc_slackerbot.Slacker().send_reaction(`**param 1**, **param 2**`)` How to send reactions back to Slack after parsing.
+  - `param 3` Optional boolean. If set to true, will always push chat to the thread instead of to the main channel chat. Useful if param 2 is expected to be long and you don't want to flood chat. Defaults to false if not provided.
+- `new x_snc_slackerbot.Slacker().send_reaction(`**param 1**, **param 2**`)` How to send reactions back to a specific chat after parsing.
   - `param 1` Required reference object. The gliderecord that contains the channel and timestamps. *Should almost always be* `current`
+  	- If you do not have a gliderecord, this can be faked by providing a JSON object. Both the channel and ts keys are required. `{"channel":"ABC123","ts":"0123456789"}`
   - `param 2` Required string. The name of the emoji to send. Do not include surrounding `:`. Eg. `joy` and *not* `:joy:`

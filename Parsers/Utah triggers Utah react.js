@@ -1,7 +1,7 @@
 /*
-activation_example: Please check the #utah channel
-regex: #utah
-flags: gmi
+activation_example:Please check the #utah channel
+regex:#utah
+flags:gmi
 order:200
 stop_processing:false
 */

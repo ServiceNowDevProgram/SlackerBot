@@ -5,7 +5,7 @@
 - API usage should follow the information found in the [readme](README.md#available-apisvariables-in-parsers)
 - Pull request descriptions must be explicit and descriptive to what is being changed.
   - Changes that are not within the scope of the description will result in the entire PR being rejected
-- No updates should be made directly to the automatically generated ServiceNow folders. Updates to these files should be done via the [Regular method](#regular-method-adding-new-functionality-types) described below.
+- No updates should be made directly to the automatically generated ServiceNow folders. Updates to these files should directly to the app after being imported into a ServiceNow instance.
 - Parser additions/updates must follow the [Parser template](#required-parser-template) below.
 - Low effort/spam Pull Requests will be marked as spam accordingly.
 - Filenames should not have special characters that are not allowed on normal file systems (eg. do not put ! in the file name).

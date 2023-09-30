@@ -1,7 +1,7 @@
 /*
 activation_example: Please check the utah channel
-regex: \butah\b
-flags: gmi
+regex:\butah\b
+flags:gmi
 order:200
 stop_processing:false
 */

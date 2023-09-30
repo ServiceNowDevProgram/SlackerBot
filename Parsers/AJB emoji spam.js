@@ -18,6 +18,8 @@ var choices = [
     ':ajbheadswillroll:'
 ];
 
+//test
+
 //Store the numerical value of the second split
 var split = parseInt((current.text.split(' ')[1]), 10);
 var text;

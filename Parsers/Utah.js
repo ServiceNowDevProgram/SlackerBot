@@ -1,5 +1,5 @@
 /*
-activation_example: Please check the #utah channel
+activation_example: Please check the utah channel
 regex: \butah\b
 flags: gmi
 order:200

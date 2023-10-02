@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="include_in_help" label="Include in !help" language="en" table="x_snc_slackerbot_parser">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>include_in_help</element>
+            <help/>
+            <hint/>
+            <label>Include in !help</label>
+            <language>en</language>
+            <name>x_snc_slackerbot_parser</name>
+            <plural>Include in !helps</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-02 15:46:08</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Include in !help</sys_name>
+            <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_slackerbot_parser_include_in_help_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-02 15:46:08</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

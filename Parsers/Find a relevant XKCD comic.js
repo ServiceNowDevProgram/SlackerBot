@@ -24,7 +24,9 @@ function buildComicOutput(xkcdPayload) {
     block.elements = [];
     var contextElement = {};
     contextElement.type = "mrkdwn";
-    contextElement.text = "*Alt-text:* " + xkcdPayload.alt;
+    contextElement.text = "*Alt-text:* " + xkcdPayload.alt + "\n"; 
+	contextElement.text += "*Link:* https://xkcd.com/" + xkcdPayload.num + "/";
+	
     block.elements.push(contextElement);
     blockArr.push(block);
 

@@ -1,6 +1,6 @@
 /*
 activation_example:vancouver
-regex:vancouver
+regex:\bvancouver\b
 flags:gmi
 order:200
 stop_processing:false

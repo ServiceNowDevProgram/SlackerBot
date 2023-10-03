@@ -1,0 +1,21 @@
+/*
+activation_example:!binary Hello my name is
+regex:!binary
+flags:g
+*/
+
+
+var term = current.text.split('!binary')[1].trim();
+var msg = term+' in binary is: '+ binary(term);
+
+new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
+new x_snc_slackerbot.Slacker().send_reaction(current,'robot_face');
+
+
+function caesarString(term) {
+    var result = "";
+    for (var i = 0; i <= term; i++) {
+        result += string.charCodeAt(i).toString(2);
+        }
+    return result;
+}

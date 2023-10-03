@@ -12,7 +12,7 @@ new x_snc_slackerbot.Slacker().send_chat(current, msg, false);
 new x_snc_slackerbot.Slacker().send_reaction(current,'robot_face');
 
 
-function caesarString(term) {
+function binary(term) {
     var result = "";
     for (var i = 0; i <= term; i++) {
         result += string.charCodeAt(i).toString(2);

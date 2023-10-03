@@ -4,9 +4,18 @@ regex:!xkcd
 flags:g
 */
 
-function buildComicOutput(xkcdPayload) {
+function buildComicOutput(xkcdPayload, foundComic) {
     var blockArr = [];
     var block = {};
+	if(!foundComic) { //if search didn't find a relevant comic add a message that this is a random one.
+		block = {};
+    	block.type = "section";
+	    block.text = {};
+    	block.text.type = "plain_text";
+    	block.text.text = 'No relevant XKCD found, here is a random one';
+    	blockArr.push(block);
+	}
+	block = {};
     block.type = "header";
     block.text = {};
     block.text.type = "plain_text";
@@ -37,6 +46,17 @@ function buildComicOutput(xkcdPayload) {
     return block;
 }
 
+function getRandomComic() {
+var recent = new sn_ws.RESTMessageV2();
+		recent.setHttpMethod('GET');
+		recent.setEndpoint('https://xkcd.com/info.0.json');
+		recent.setRequestHeader('User-Agent', 'servicenow');
+		var recentResponse = recent.execute();
+		var recentJson = JSON.parse(recentResponse.getBody());
+	return = Math.floor(Math.random() * parseInt(recentJson.num));
+
+}
+
 var search = gs.urlEncode(current.text.replace(/!xkcd/g, '').trim());
 
 var rm = new sn_ws.RESTMessageV2();
@@ -47,11 +67,18 @@ var response = rm.execute();
 var body = response.getBody();
 
 var msg;
+var result;
+var foundComic;
 
 // Check if we got an empty search result, as the result regex will match the page even if no result
 var checkResponse = body.match(/<p class="mw-search-nonefound">/g);
 if (checkResponse === null){
-	var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
+	foundComic = true;
+	result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
+} else {
+	foundcomic = false;
+	result = getRandomComic();
+}
 	if (parseInt(result)) {
 		var rm2 = new sn_ws.RESTMessageV2();
 		rm2.setHttpMethod('GET');
@@ -60,13 +87,10 @@ if (checkResponse === null){
 		var response2 = rm2.execute();
 		var body2 = JSON.parse(response2.getBody());
 
-		msg = buildComicOutput(body2);
-	} else {
+		msg = buildComicOutput(body2, foundcomic);
+	} else { //This should not happen, if the search fails a random comic should be returned.
     msg = 'No relevant XKCD found for `' + search + '`';
 	}
-}
-else {
-	msg = 'No relevant XKCD found for `' + search + '`';
-}
+
 
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);

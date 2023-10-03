@@ -37,11 +37,18 @@ function buildComicOutput(xkcdPayload) {
     return block;
 }
 
-var search = gs.urlEncode(current.text.replace(/!xkcd/g, '').trim());
+var terms = current.text.replace(/!xkcd/g, '').trim();
+var search = gs.urlEncode(terms);
+var endpoint;
+if (terms === '-random' || terms === '') {
+	endpoint = 'https://www.explainxkcd.com/wiki/index.php/Special:Random';
+} else {
+	endpoint = 'https://www.explainxkcd.com/wiki/index.php?&title=Special%3ASearch&go=Go&fulltext=1&search=' + search;
+}
 
 var rm = new sn_ws.RESTMessageV2();
 rm.setHttpMethod('GET');
-rm.setEndpoint('https://www.explainxkcd.com/wiki/index.php?&title=Special%3ASearch&go=Go&fulltext=1&search=' + search);
+rm.setEndpoint(endpoint);
 rm.setRequestHeader('User-Agent', 'servicenow');
 var response = rm.execute();
 var body = response.getBody();
@@ -51,7 +58,7 @@ var msg;
 // Check if we got an empty search result, as the result regex will match the page even if no result
 var checkResponse = body.match(/<p class="mw-search-nonefound">/g);
 if (checkResponse === null){
-	var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
+	var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+(?!" class="mw-redirect")/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
 	if (parseInt(result)) {
 		var rm2 = new sn_ws.RESTMessageV2();
 		rm2.setHttpMethod('GET');

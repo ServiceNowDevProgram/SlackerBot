@@ -1,9 +1,8 @@
 /*
 activation_example:!affirm
-regex:!affirm, !affirm @user
+regex:!affirm
 flags:g
 */
-
 
 var rm = new sn_ws.RESTMessageV2();
 rm.setHttpMethod('GET');

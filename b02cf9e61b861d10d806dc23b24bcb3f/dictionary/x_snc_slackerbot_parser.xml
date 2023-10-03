@@ -5,9 +5,7 @@
         <element display="true" label="Description" max_length="128" name="description" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Emoji" max_length="128" name="emoji" type="string"/>
         <element label="Flags" max_length="40" name="flags" type="string"/>
-        <element choice="3" default="true" label="Include in !help" max_length="40" name="include_in_help" type="boolean">
-            <choice/>
-        </element>
+        <element default="true" label="Include in !help" max_length="40" name="include_in_help" type="boolean"/>
         <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
         <element label="Regex" max_length="128" name="regex" type="string"/>
         <element label="Script" max_length="8000" name="script" type="script"/>

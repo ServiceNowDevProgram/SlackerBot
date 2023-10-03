@@ -9,9 +9,9 @@ This bot is what controls the @Slacker bot on the [sndevs.com](https://sndevs.co
 ## Contents
 
 - [Ways to contribute](#two-ways-to-contribute)
-- [Installing this bot on your slack server](#installing-this-bot-on-your-own-slack-server)
+- [Installing this bot on your own workspace](#installing-this-bot-on-your-own-workspace)
 - [GitHub to ServiceNow Integrations](#github-to-servicenow-integrations)
-- [Notes for setting this app up in Studio](#notes-for-setting-this-app-up-in-studio)
+- [Notes for setting this app up in ServiceNow Studio](#notes-for-setting-this-app-up-in-servicenow-studio)
 - [Available APIs/variables in parsers](#available-apisvariables-in-parsers)
 
 ## Ideas

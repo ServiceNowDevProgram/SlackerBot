@@ -5,48 +5,48 @@ flags:g
 */
 
 function buildComicOutput(xkcdPayload, foundComic) {
-    var blockArr = [];
-    var block = {};
-	if(!foundComic) { //if search didn't find a relevant comic add a message that this is a random one.
- 		block = {};
-     	block.type = "section";
- 	    block.text = {};
-     	block.text.type = "plain_text";
-     	block.text.text = 'No relevant XKCD found, here is a random one';
-     	blockArr.push(block);
- 	}
- 	block = {};
-    block.type = "header";
-    block.text = {};
-    block.text.type = "plain_text";
-    block.text.text = xkcdPayload.safe_title + "";
-    blockArr.push(block);
+	var blockArr = [];
+	var block = {};
+	if (!foundComic) { //if search didn't find a relevant comic add a message that this is a random one.
+		block = {};
+		block.type = "section";
+		block.text = {};
+		block.text.type = "plain_text";
+		block.text.text = 'No relevant XKCD found, here is a random one';
+		blockArr.push(block);
+	}
+	block = {};
+	block.type = "header";
+	block.text = {};
+	block.text.type = "plain_text";
+	block.text.text = xkcdPayload.safe_title + "";
+	blockArr.push(block);
 
-    block = {};
-    block.type = "image";
-    block.image_url = xkcdPayload.img + "";
-    block.alt_text = xkcdPayload.alt + "";
-    blockArr.push(block);
+	block = {};
+	block.type = "image";
+	block.image_url = xkcdPayload.img + "";
+	block.alt_text = xkcdPayload.alt + "";
+	blockArr.push(block);
 
-    block = {};
-    block.type = "context";
-    block.elements = [];
-    var contextElement = {};
-    contextElement.type = "mrkdwn";
-    contextElement.text = "*Alt-text:* " + xkcdPayload.alt + "\n"; 
+	block = {};
+	block.type = "context";
+	block.elements = [];
+	var contextElement = {};
+	contextElement.type = "mrkdwn";
+	contextElement.text = "*Alt-text:* " + xkcdPayload.alt + "\n";
 	contextElement.text += "*Link:* https://xkcd.com/" + xkcdPayload.num + "/";
-	
-    block.elements.push(contextElement);
-    blockArr.push(block);
 
-    block = {};
-    block.text = xkcdPayload.safe_title + "";
-    block.blocks = blockArr;
+	block.elements.push(contextElement);
+	blockArr.push(block);
 
-    return block;
+	block = {};
+	block.text = xkcdPayload.safe_title + "";
+	block.blocks = blockArr;
+
+	return block;
 }
 
-function getComic(endpoint) {
+function lookupComic(endpoint) {
 	var rm = new sn_ws.RESTMessageV2();
 	rm.setHttpMethod('GET');
 	rm.setEndpoint(endpoint);
@@ -58,33 +58,50 @@ function getComic(endpoint) {
 	if (checkResponse === null) {
 		var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+(?!" class="mw-redirect")/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
 		if (parseInt(result)) {
-			var rm2 = new sn_ws.RESTMessageV2();
-			rm2.setHttpMethod('GET');
-			rm2.setEndpoint('https://xkcd.com/' + result + '/info.0.json');
-			rm2.setRequestHeader('User-Agent', 'servicenow');
-			var response2 = rm2.execute();
-			var body2 = JSON.parse(response2.getBody());
-			return body2;
+			return getComic(result);
 		} else {
 			return false;
 		}
+	} else {
+		return false;
 	}
 }
 
+function getComic(result) {
+	var rm2 = new sn_ws.RESTMessageV2();
+	rm2.setHttpMethod('GET');
+	rm2.setEndpoint('https://xkcd.com/' + result + '/info.0.json');
+	rm2.setRequestHeader('User-Agent', 'servicenow');
+	var response2 = rm2.execute();
+	var body2 = JSON.parse(response2.getBody());
+	if(response.getStatusCode() == '200'){
+		return body2;
+	} else {
+		return false;
+	}
+}
+
+
 var terms = current.text.replace(/!xkcd/g, '').trim();
+
+var intRegEx = /^(0|[1-9][0-9]*)$/;
 var search = gs.urlEncode(terms);
-var endpoint;
-if (terms === '-random' || terms === '') {
+var endpoint = 'false';
+var comic;
+if (intRegEx.test(terms)) {
+	comic = buildComicOutput(getComic(terms), foundComic);
+} else if (terms === '-random' || terms === '') {
 	endpoint = 'https://www.explainxkcd.com/wiki/index.php/Special:Random';
 } else {
 	endpoint = 'https://www.explainxkcd.com/wiki/index.php?&title=Special%3ASearch&go=Go&fulltext=1&search=' + search;
 }
-var foundComic = true;
-var comic = getComic(endpoint);
-if (comic = false){
+if (endpoint == 'false') {
+	comic = lookupComic(endpoint);
+}
+if (comic = false) {
 	foundComic = false;
 	endpoint = 'https://www.explainxkcd.com/wiki/index.php/Special:Random';
-	comic = getComic(endpoint);
+	comic = lookupComic(endpoint);
 }
 buildComicOutput(comic, foundComic);
 

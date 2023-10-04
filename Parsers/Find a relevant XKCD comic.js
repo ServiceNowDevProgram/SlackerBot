@@ -80,16 +80,20 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 } else if (terms != "") {
     // assume it's a search, so use the search facility of 
     var regex = /title="([0-9]+): [\w\s]+"/gm;
-    var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + terms;
+   var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + encodeURI(terms) + "&title=Special%3ASearch&profile=default&fulltext=1";
     var searchMsg = new sn_ws.RESTMessageV2();
     searchMsg.setHttpMethod('GET');
     searchMsg.setEndpoint(searchEndPoint);
     searchMsg.setRequestHeader('User-Agent', 'servicenow');
     var response = searchMsg.execute();
+    var body = response.getBody();
+
+    // only need the page title matches so grab all html up to the page text match section
+    body = body.substr(0, body.indexOf('Page text matches'));
 
     var matches;
     var comicNumbers = []; // store the search results, just the cominc number
-    while ((matches = regex.exec(response.getBody())) !== null) {
+    while ((matches = regex.exec(body)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
         if (matches.index === regex.lastIndex) {
             regex.lastIndex++;

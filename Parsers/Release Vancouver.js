@@ -1,6 +1,6 @@
 /*
 activation_example:vancouver
-regex:\bvancouver\b
+regex:(?i)(?<![:\/\w])vancouver(?![\/\w])
 flags:gmi
 order:200
 stop_processing:false

@@ -4,88 +4,114 @@ regex:!xkcd
 flags:g
 */
 
-function buildComicOutput(xkcdPayload, foundComic) {
+function buildComicOutput(xkcdPayload, comicFound) {
     var blockArr = [];
-    var block = {};
-	if(!foundComic) { //if search didn't find a relevant comic add a message that this is a random one.
- 		block = {};
-     	block.type = "section";
- 	    block.text = {};
-     	block.text.type = "plain_text";
-     	block.text.text = 'No relevant XKCD found, here is a random one';
-     	blockArr.push(block);
- 	}
- 	block = {};
-    block.type = "header";
-    block.text = {};
-    block.text.type = "plain_text";
-    block.text.text = xkcdPayload.safe_title + "";
-    blockArr.push(block);
+    
+    if (!comicFound) {
+        blockArr.push({
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": gs.getMessage("No relevant XKCD found, here is a random one")
+            }
+        });
+    }
 
-    block = {};
-    block.type = "image";
-    block.image_url = xkcdPayload.img + "";
-    block.alt_text = xkcdPayload.alt + "";
-    blockArr.push(block);
+    blockArr.push({
+        "type": "header",
+        "text": {
+            "type": "plain_text",
+            "text": xkcdPayload.safe_title + ""
+        }
+    });
 
-    block = {};
-    block.type = "context";
-    block.elements = [];
-    var contextElement = {};
-    contextElement.type = "mrkdwn";
-    contextElement.text = "*Alt-text:* " + xkcdPayload.alt + "\n"; 
-	contextElement.text += "*Link:* https://xkcd.com/" + xkcdPayload.num + "/";
-	
-    block.elements.push(contextElement);
-    blockArr.push(block);
+    blockArr.push({
+        "type": "image",
+        "image_url" : xkcdPayload.img,
+        "alt_text" : xkcdPayload.alt
+    });
 
-    block = {};
-    block.text = xkcdPayload.safe_title + "";
-    block.blocks = blockArr;
+    blockArr.push({
+        "type" : "context",
+        "elements" : [
+            {
+                "type" : "mrkdwn",
+                "text" : "*Alt-text:* " + xkcdPayload.alt + "\n*Link:* https://xkcd.com/" + xkcdPayload.num + "/"
+            }
+        ]
+    })
 
-    return block;
+    return {
+        "text" : xkcdPayload.safe_title,
+        "blocks" : blockArr
+    };
+    
 }
 
-function getComic(endpoint) {
-	var rm = new sn_ws.RESTMessageV2();
-	rm.setHttpMethod('GET');
-	rm.setEndpoint(endpoint);
-	rm.setRequestHeader('User-Agent', 'servicenow');
-	var response = rm.execute();
-	var body = response.getBody();
-	// Check if we got an empty search result, as the result regex will match the page even if no result
-	var checkResponse = body.match(/<p class="mw-search-nonefound">/g);
-	if (checkResponse === null) {
-		var result = body.match(/(?:<a href="\/wiki\/index.php\/)[0-9]+(?!" class="mw-redirect")/gm)[0].replace(/<a href="\/wiki\/index.php\//g, '');
-		if (parseInt(result)) {
-			var rm2 = new sn_ws.RESTMessageV2();
-			rm2.setHttpMethod('GET');
-			rm2.setEndpoint('https://xkcd.com/' + result + '/info.0.json');
-			rm2.setRequestHeader('User-Agent', 'servicenow');
-			var response2 = rm2.execute();
-			var body2 = JSON.parse(response2.getBody());
-			return body2;
-		} else {
-			return false;
-		}
-	}
-}
+// if no parameters, display latest
+// if number, display that number if valid otherwise random
+// if -random then find a random
+// anything else, do a search and return one of the search results
 
 var terms = current.text.replace(/!xkcd/g, '').trim();
-var search = gs.urlEncode(terms);
-var endpoint;
-if (terms === '-random' || terms === '') {
-	endpoint = 'https://www.explainxkcd.com/wiki/index.php/Special:Random';
-} else {
-	endpoint = 'https://www.explainxkcd.com/wiki/index.php?&title=Special%3ASearch&go=Go&fulltext=1&search=' + search;
+var comicNumProvided = /^-?\d+$/.test(terms);
+var endPoint = 'https://xkcd.com/info.0.json';
+var comicFound = (terms == "");
+
+if (terms != "" && (terms == "-random" || comicNumProvided)) {
+    // random or a number specified, so we need the number of comics to be able to check either
+    var restMsg = new sn_ws.RESTMessageV2();
+    restMsg.setHttpMethod('GET');
+    restMsg.setEndpoint(endPoint);
+    restMsg.setRequestHeader('User-Agent', 'servicenow');
+    var response = restMsg.execute();
+    var jsonBody = JSON.parse(response.getBody());
+
+    if (comicNumProvided && parseInt(terms) <= jsonBody.num) {
+        // a comic number was provided and it's within the range of available comics
+        endPoint = "https://xkcd.com/" + terms + "/info.0.json";
+        comicFound = true;
+    } else {
+        // otherwise just work out 
+        var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num));
+        endPoint = "https://xkcd.com/" + randomComic + "/info.0.json";
+        comicFound = !comicNumProvided; // set comic found to true only if a random one was selected on purpose
+    }
+} else if (terms != "") {
+    // assume it's a search, so use the search facility of 
+    var regex = /title="([0-9]+): [\w\s]+"/gm;
+    var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + terms;
+    var searchMsg = new sn_ws.RESTMessageV2();
+    searchMsg.setHttpMethod('GET');
+    searchMsg.setEndpoint(searchEndPoint);
+    searchMsg.setRequestHeader('User-Agent', 'servicenow');
+    var response = searchMsg.execute();
+
+    var matches;
+    var comicNumbers = []; // store the search results, just the cominc number
+    while ((matches = regex.exec(response.getBody())) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (matches.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+        // push the actual match to the array
+        comicNumbers.push(matches[1]);
+    }
+    if (comicNumbers.length > 0) {
+        // we have some comics so get a random one
+        var randomComic = Math.floor(Math.random() * comicNumbers.length);
+        endPoint = "https://xkcd.com/" + comicNumbers[randomComic] + "/info.0.json";
+        comicFound = true;
+    }
 }
-var foundComic = true;
-var comic = getComic(endpoint);
-if (comic = false){
-	foundComic = false;
-	endpoint = 'https://www.explainxkcd.com/wiki/index.php/Special:Random';
-	comic = getComic(endpoint);
-}
-buildComicOutput(comic, foundComic);
+
+var comicDataMsg = new sn_ws.RESTMessageV2();
+comicDataMsg.setHttpMethod('GET');
+comicDataMsg.setEndpoint(endPoint);
+comicDataMsg.setRequestHeader('User-Agent', 'servicenow');
+var response = comicDataMsg.execute();
+var body = JSON.parse(response.getBody());
+
+var msg = buildComicOutput(body, comicFound)
 
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);

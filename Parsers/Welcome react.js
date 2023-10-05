@@ -90,7 +90,6 @@ var message = {
 var previousMessage = new global.GlideQuery('x_snc_slackerbot_payload')
 	.where('payload', 'CONTAINS', '"type": "reaction_added"')
 	.where('payload', 'CONTAINS', '"reaction": "welcome"')
-	.where('payload', 'CONTAINS', '"is_bot": true')
 	.where('payload', 'CONTAINS', '"thread_ts": ' + current.thread_ts)
 	.selectOne()
 	.isPresent();

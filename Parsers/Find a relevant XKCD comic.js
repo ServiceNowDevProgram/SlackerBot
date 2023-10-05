@@ -48,6 +48,24 @@ function buildComicOutput(xkcdPayload, comicFound) {
     
 }
 
+// scan the provided text and return the comic numbers from the title
+function getComicNumbers(body) {
+    var regex = /title="([0-9]+): .+"/gm;
+    var matches;
+    var comicNumbers = []; // store the search results, just the comic number
+    while ((matches = regex.exec(body)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (matches.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+
+        // push the actual match to the array
+        comicNumbers.push(matches[1]);
+    }
+
+    return comicNumbers;
+}
+
 // if no parameters, display latest
 // if number, display that number if valid otherwise random
 // if -random then find a random
@@ -73,30 +91,35 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
         comicFound = true;
     } else {
         // otherwise just work out 
-        var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num));
+        var randomComic = Math.ceil(Math.random() * parseInt(jsonBody.num));
         endPoint = "https://xkcd.com/" + randomComic + "/info.0.json";
         comicFound = !comicNumProvided; // set comic found to true only if a random one was selected on purpose
     }
 } else if (terms != "") {
-    // assume it's a search, so use the search facility of 
-    var regex = /title="([0-9]+): [\w\s]+"/gm;
-    var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + terms;
+    // assume it's a search, so use the search facility of explainxkcd
+    // the search results don't give us an indication of relevance, so to clean the results
+    // up we'll remove punctuation and insignificant words
+    var littleWords = ['of', 'the', "in", "on", "at", "to", "a", "is"];
+    terms = terms.split(' ')
+        .filter(function (_x) {
+            return _x != '' && littleWords.indexOf(_x.toLowerCase()) == -1;
+        })
+        .join('+');
+    
+    var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + terms + "&title=Special%3ASearch&profile=default&fulltext=1";;
     var searchMsg = new sn_ws.RESTMessageV2();
     searchMsg.setHttpMethod('GET');
     searchMsg.setEndpoint(searchEndPoint);
     searchMsg.setRequestHeader('User-Agent', 'servicenow');
     var response = searchMsg.execute();
 
-    var matches;
-    var comicNumbers = []; // store the search results, just the cominc number
-    while ((matches = regex.exec(response.getBody())) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (matches.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
-        // push the actual match to the array
-        comicNumbers.push(matches[1]);
-    }
+    // search the body in two passes, first the section that contains the page title matches
+    // if nothing found there, we'll search the page text section which is a search of body text
+    var pageTitleBody = body.substr(0, body.indexOf('Page text matches'));
+    var pageTextBody = body.substr(body.indexOf('Page text matches'));
+    var comicNumbers = getComicNumbers(pageTitleBody);
+    comicNumbers = comicNumbers.length > 0 ? comicNumbers : getComicNumbers(pageTextBody);
+    
     if (comicNumbers.length > 0) {
         // we have some comics so get a random one
         var randomComic = Math.floor(Math.random() * comicNumbers.length);

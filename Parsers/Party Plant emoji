@@ -1,0 +1,6 @@
+var sentence = current.text.replace(/!plant/gmi, "").trim().toUpperCase();
+if (sentence == '') {
+	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: gimme something to plant!', false, '', current.thread_ts);
+} else {
+	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :party-plant: '), current.thread_ts);
+}

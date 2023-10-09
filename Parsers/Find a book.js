@@ -80,7 +80,7 @@ function getBook(searchQuery) {
   var searchResponse = searchMessage.execute();
   if (searchResponse.getStatusCode() != 200) {
     output.success = false;
-    output.message = gs.getMessage('Book: There was an issue querying OpenLibrary with your search. Please try again later, or reach out to @Astrid if this continues to occur.');
+    output.message = gs.getMessage('Book: There was an issue querying OpenLibrary with your search. Please try again later, or reach out to <@U013T46E4DA> if this continues to occur.');
     output.payload = null;
   } else {
     var payload = JSON.parse(searchResponse.getBody());

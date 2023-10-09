@@ -149,7 +149,7 @@ function buildBlocks(details, imageUrl) {
     ]
   });
 
-  if (details.id_goodreads !== null) {
+  if (details.id_goodreads !== undefined) {
     blockArr.push({
       "type": "context",
       "elements": [

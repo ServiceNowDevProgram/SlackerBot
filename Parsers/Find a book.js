@@ -1,6 +1,6 @@
 /*
 activation_example:!book -t "Title", !book -t "Title" -a "Author", !book -s "Subject" - Quotation marks are required for lookups
-regex:^!book -((a|t|s) "|help)
+regex:!book -(\S\s|help)
 flags:gmi
 */
 
@@ -10,12 +10,7 @@ function handleBookInputs(message) {
   // Ignore anything preceeding !book
   var call = message.substring(message.indexOf('!book')); //^!book -((a|t|s) "|help)
   var invocation = call.replace('^!book', '').trim();
-  if (invocation.length == 0) {
-    // No detail provided, guide to help
-    output.message = gs.getMessage('Book: No flag was provided. Please call the command with `-help` for the supported flags and usage.');
-    output.success = false;
-    output.search = null;
-  } else if (invocation.match(/-help/gmi) !== null) {
+  if (invocation.match(/-help/gmi) !== null) {
     // Help was called, send the message
     output.message = gs.getMessage('Book: Slackerbot\'s integration to OpenLibrary for book lookups\n\nTo leverage !book, one or more of the following parameters must be sent:\n-a "Author": The name or a fragment of the name of an author\n-t "Title": The title of a book or a fragment thereof\n-s "Subject": The subject of a book\n\nThese flags can be used in any combination, but at least one is required for a successful search. Quotation marks are required for search parameters.');
     output.success = false;

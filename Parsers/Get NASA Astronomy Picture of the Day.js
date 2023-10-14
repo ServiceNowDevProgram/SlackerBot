@@ -24,7 +24,7 @@ var output = handleAPI(picResp, isRandom);
 var message = buildBlocks(output);
 
 // Send to Slack
-new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+new x_snc_slackerbot.Slacker().send_chat(current, message, true);
 
 // Function declarations
 

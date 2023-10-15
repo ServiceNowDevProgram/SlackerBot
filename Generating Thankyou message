@@ -1,0 +1,20 @@
+// Import the necessary library (you may need to install it)
+const { App } = require('@slack/bolt');
+
+// Initialize the Slack App with your token
+const app = new App({
+  token: 'YOUR_SLACK_API_TOKEN',
+  signingSecret: 'YOUR_SLACK_SIGNING_SECRET',
+});
+
+// Define a function to respond to a "Thank You" message
+app.message('thank you', async ({ message, say }) => {
+  // Generate and send a "You're welcome" response
+  await say(`You're welcome, ${message.user}! :blush:`);
+});
+
+// Start the Slack App
+(async () => {
+  await app.start();
+  console.log('Slackbot is running!');
+})();

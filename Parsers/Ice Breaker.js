@@ -1,6 +1,6 @@
 /*
-activation_example:!ice breaker
-regex:(!ice breaker)
+activation_example:!ice breaker, !icebreaker
+regex:!(ice breaker|icebreaker)
 flag:gmi
 */
 

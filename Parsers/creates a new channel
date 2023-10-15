@@ -1,0 +1,27 @@
+/*
+activation_example:channelName
+regex:channelName
+flags: nil
+*/
+const { WebClient } = require('@slack/web-api');
+
+// Replace with your own Slack API token
+const SLACK_API_TOKEN = 'YOUR_API_TOKEN';
+
+// Initialize the Slack client
+const client = new WebClient(SLACK_API_TOKEN);
+
+async function createChannel(channelName) {
+  try {
+    const result = await client.conversations.create({
+      name: channelName,
+    });
+
+    console.log(`Channel created: ${result.channel.name} (ID: ${result.channel.id})`);
+  } catch (error) {
+    console.error(`Error creating channel: ${error.message}`);
+  }
+}
+
+const channelName = 'your_channel_name'; // Replace with your desired channel name
+createChannel(channelName);

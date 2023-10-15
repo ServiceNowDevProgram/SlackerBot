@@ -44,7 +44,7 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 	if(additionalComics !== null){
 		var msgArr = [];
 		for(var i = 0; i < additionalComics.length; i++){
-			additionalComics[i] != xkcdPayload.num ? msgArr.push('<' + additionalComics[i] + '|https://xkcd.com/' + additionalComics[i] + '>' : null;
+			additionalComics[i] != xkcdPayload.num ? msgArr.push('<https://xkcd.com/' + additionalComics[i] + '|' + additionalComics[i] + '>') : null;
 		}
 		blockArr.push({
 			"type": "context",
@@ -92,15 +92,15 @@ var endPoint = 'https://xkcd.com/info.0.json';
 var comicFound = (terms == "");
 var msg;
 
-if (terms != "" && (terms == "-random" || comicNumProvided)) {
-	// random or a number specified, so we need the number of comics to be able to check either
-	var restMsg = new sn_ws.RESTMessageV2();
-	restMsg.setHttpMethod('GET');
-	restMsg.setEndpoint(endPoint);
-	restMsg.setRequestHeader('User-Agent', 'servicenow');
-	var response = restMsg.execute();
-	var jsonBody = JSON.parse(response.getBody());
+// we need the number of comics to be able to handle random, number, and negative path
+var restMsg = new sn_ws.RESTMessageV2();
+restMsg.setHttpMethod('GET');
+restMsg.setEndpoint(endPoint);
+restMsg.setRequestHeader('User-Agent', 'servicenow');
+var response = restMsg.execute();
+var jsonBody = JSON.parse(response.getBody());
 
+if (terms != "" && (terms == "-random" || comicNumProvided)) {
 	if (comicNumProvided && parseInt(terms) > 0 && parseInt(terms) <= jsonBody.num) {
 		// a comic number was provided and it's within the range of available comics
 		endPoint = "https://xkcd.com/" + terms + "/info.0.json";
@@ -127,7 +127,7 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 	searchMsg.setHttpMethod('GET');
 	searchMsg.setEndpoint(searchEndPoint);
 	searchMsg.setRequestHeader('User-Agent', 'servicenow');
-	var response = searchMsg.execute();
+	response = searchMsg.execute();
 	var body = response.getBody();
 
 	// search the body in two passes, first the section that contains the page title matches

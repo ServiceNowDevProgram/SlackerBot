@@ -8,6 +8,7 @@ var responses = [
     ["IST","Delhi, India"],
     ["PST","San Diego, USA"],
     ["GMT","London, UK"],
+    ["JST","Tokyo, Japan"],
     ["CET","Budapest, Hungary"]
 ];
 var randNumber=parseInt(Math.random() * responses.length);

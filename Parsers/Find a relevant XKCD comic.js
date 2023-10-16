@@ -4,7 +4,7 @@ regex:!xkcd
 flags:g
 */
 
-function buildComicOutput(xkcdPayload, comicFound) {
+function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 	var blockArr = [];
 
 	if (!comicFound) {
@@ -39,7 +39,23 @@ function buildComicOutput(xkcdPayload, comicFound) {
 				"text": "*Alt-text:* " + xkcdPayload.alt + "\n*Link:* https://xkcd.com/" + xkcdPayload.num + "/"
 			}
 		]
-	})
+	});
+	
+	if(additionalComics !== null){
+		var msgArr = [];
+		for(var i = 0; i < additionalComics.length; i++){
+			additionalComics[i] != xkcdPayload.num ? msgArr.push('<https://xkcd.com/' + additionalComics[i] + '|' + additionalComics[i] + '>') : null;
+		}
+		blockArr.push({
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": "*Other matching comics:* " + msgArr.join(', ')
+				}
+			]
+		});
+	}
 
 	return {
 		"text": xkcdPayload.safe_title,
@@ -74,17 +90,18 @@ var terms = current.text.replace(/!xkcd/g, '').trim();
 var comicNumProvided = /^-?\d+$/.test(terms);
 var endPoint = 'https://xkcd.com/info.0.json';
 var comicFound = (terms == "");
+var msg;
+
+// we need the number of comics to be able to handle random, number, and negative path
+var restMsg = new sn_ws.RESTMessageV2();
+restMsg.setHttpMethod('GET');
+restMsg.setEndpoint(endPoint);
+restMsg.setRequestHeader('User-Agent', 'servicenow');
+var response = restMsg.execute();
+var jsonBody = JSON.parse(response.getBody());
 
 if (terms != "" && (terms == "-random" || comicNumProvided)) {
-	// random or a number specified, so we need the number of comics to be able to check either
-	var restMsg = new sn_ws.RESTMessageV2();
-	restMsg.setHttpMethod('GET');
-	restMsg.setEndpoint(endPoint);
-	restMsg.setRequestHeader('User-Agent', 'servicenow');
-	var response = restMsg.execute();
-	var jsonBody = JSON.parse(response.getBody());
-
-	if (comicNumProvided && parseInt(terms) <= jsonBody.num) {
+	if (comicNumProvided && parseInt(terms) > 0 && parseInt(terms) <= jsonBody.num) {
 		// a comic number was provided and it's within the range of available comics
 		endPoint = "https://xkcd.com/" + terms + "/info.0.json";
 		comicFound = true;
@@ -110,7 +127,7 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 	searchMsg.setHttpMethod('GET');
 	searchMsg.setEndpoint(searchEndPoint);
 	searchMsg.setRequestHeader('User-Agent', 'servicenow');
-	var response = searchMsg.execute();
+	response = searchMsg.execute();
 	var body = response.getBody();
 
 	// search the body in two passes, first the section that contains the page title matches
@@ -125,6 +142,9 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 		var randomComic = Math.floor(Math.random() * comicNumbers.length);
 		endPoint = "https://xkcd.com/" + comicNumbers[randomComic] + "/info.0.json";
 		comicFound = true;
+	} else {
+		var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num));
+		endPoint = "https://xkcd.com/" + randomComic + "/info.0.json";
 	}
 }
 
@@ -135,6 +155,10 @@ comicDataMsg.setRequestHeader('User-Agent', 'servicenow');
 var response = comicDataMsg.execute();
 var body = JSON.parse(response.getBody());
 
-var msg = buildComicOutput(body, comicFound)
+if(comicNumbers && comicNumbers.length > 1){
+	msg = buildComicOutput(body, comicFound, comicNumbers);
+} else {
+	msg = buildComicOutput(body, comicFound, null);
+}
 
 var sendIt = new x_snc_slackerbot.Slacker().send_chat(current, msg, false);

@@ -1,6 +1,6 @@
 /*
 activation_example:hellofrom
-regex:(hellofrom)|(hello\sfrom) 
+regex:(!?hellofrom) 
 flags:gmi
 */
 

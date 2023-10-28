@@ -1,11 +1,11 @@
 /*
-activation_example:!clap your sentence
-regex:!clap
+activation_example:!downdetector service-name
+regex:!downdetector
 flags:gmi
 */
-var sentence = current.text.replace(/!clap/gmi, "").trim().toUpperCase();
+var service = current.text.replace(/!downdetector/gmi, "").trim().toLowerCase();
 if (sentence == '') {
-	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: gimme something to clap!', false, '', current.thread_ts);
+	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current.channel, ':upside_down_face: No service name given! Try with services like "google", "aws", etc.', false, '', current.thread_ts);
 } else {
-	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), current.thread_ts);
+	new x_snc_slackerbot.Slacker().send_chat(current, "https://downdetector.com/search/?q="+ service.toString(), current.thread_ts);
 }

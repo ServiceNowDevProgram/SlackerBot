@@ -58,7 +58,7 @@
 		rm2.setEndpoint(raw_url);
 		var r2 = rm2.execute();
 		var js_raw = r2.getBody();
-		var js = js_raw.split('\n');
+		var js = js_raw.trim().split('\n');
 		if (js[0].trim() != "/*") {
 			log.push("line 1 was not /*");
 			return;
@@ -95,11 +95,14 @@
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-28 03:26:38</sys_created_on>
         <sys_id>51ff0b8c1b1e1510d806dc23b24bcb5c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>event</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_ws_operation_51ff0b8c1b1e1510d806dc23b24bcb5c</sys_update_name>
+        <sys_updated_by>SapphicFire</sys_updated_by>
+        <sys_updated_on>2023-10-29 11:40:28</sys_updated_on>
         <web_service_definition display_value="SlackerBotGitHub">938f438c1b1e1510d806dc23b24bcb5a</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

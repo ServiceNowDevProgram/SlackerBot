@@ -2,9 +2,9 @@
 activation_example:!help
 regex:!help
 flags:gmi
+order:1
+stop_processing:true
 */
-
-
 
 var parser = new GlideRecord('x_snc_slackerbot_parser');
 parser.addQuery('active', 'true');

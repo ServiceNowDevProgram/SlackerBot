@@ -1,6 +1,6 @@
 /*
 activation_example:1 mile or 2 miles
-regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?k(m?|ilometer|ilometers|ilometre|ilometres)\b
+regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?m(ile|iles)\b
 flags:gmi
 */
 

@@ -5,93 +5,64 @@ flags:gmi
 */
 
 var where = current.text.indexOf('!animal ') + 8;
-var term = current.text.substr(where).trim().replace(/\s/g, '+');
+var term = current.text.substr(where).trim();
 var chatReq = new sn_ws.RESTMessageV2();
 chatReq.setEndpoint('https://api.api-ninjas.com/v1/animals?name=' + term);
 chatReq.setHttpMethod("GET");
-
-// Pull key from instance system properties
-chatReq.setRequestHeader('X-Api-Key', gs.getProperty('x_snc_slackerbot.SlackerBot.animal.token'));
+var apikey = gs.getProperty('slackerbot.animal.token');
+chatReq.setRequestHeader('X-Api-Key', apikey);
 var chatResponse = chatReq.execute();
 var chatResponseBody = chatResponse.getBody();
 
-try {
-  // Parse the API response as JSON
-  var responseData = JSON.parse(chatResponseBody);
+// Parse the API response as JSON
+var responseData = JSON.parse(chatResponseBody);
 
-  // Check if the API response contains any data
-  if (Array.isArray(responseData) && responseData.length > 0) {
-	//Display 3 random animals
-    var maxResults = 3; 
-    var shuffledIndices = [];
+// Check if the API response contains any data
+if (Array.isArray(responseData) && responseData.length > 0) {
+  var maxResults = 3; // Display the first 3 animals
 
-    // Create an array of indices
-    for (var i = 0; i < responseData.length; i++) {
-      shuffledIndices.push(i);
+  // Iterate through the first 3 animals in the array
+  for (var i = 0; i < Math.min(maxResults, responseData.length); i++) {
+    var animal = responseData[i];
+    var animalName = animal.name;
+    var animalLocations = animal.locations;
+    var animalLifespan = animal.characteristics.lifespan;
+    var animalFood = animal.characteristics.favorite_food;
+    var animalSlogan = animal.characteristics.slogan;
+    var animalWeight = animal.characteristics.weight;
+    var animalFeature = animal.characteristics.distinctive_feature;
+    var animalMostfeature = animal.characteristics.most_distinctive_feature;
+
+    // Check if "locations" is an array and has at least one location
+    if (Array.isArray(animalLocations) && animalLocations.length > 0) {
+      var locationList = animalLocations.join(', ');
+
+      var message = animalName + 's are located in ' + locationList + '. ';
+
+      if (typeof animalFood !== "undefined") {
+        message += 'Their favorite food is ' + animalFood + '. ';
+      }
+
+      if (typeof animalLifespan !== "undefined") {
+        message += 'Their average lifespan is ' + animalLifespan + '. ';
+      }
+
+      if (typeof animalSlogan !== "undefined") {
+        message += 'A fun fact: ' + animalSlogan + '. ';
+      }
+
+      if (typeof animalFeature !== "undefined") {
+        message += 'Main features: ' + animalFeature + '. ';
+      }
+
+      if (typeof animalMostfeature !== "undefined") {
+        message += 'Main features: ' + animalMostfeature + '. ';
+      }
+
+      new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+
     }
-
-    // Shuffle the indices
-    for (var i = shuffledIndices.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = shuffledIndices[i];
-      shuffledIndices[i] = shuffledIndices[j];
-      shuffledIndices[j] = temp;
-    }
-
-    // Iterate through the first 3 shuffled animals in the array
-    for (var i = 0; i < Math.min(maxResults, shuffledIndices.length); i++) {
-      var index = shuffledIndices[i];
-      processAnimal(responseData[index]);
-    }
-  } else {
-    new x_snc_slackerbot.Slacker().send_chat(current, "No fun facts for the provided animal.", false);
   }
-} catch (ex) {
-
-  // Handle errors gracefully
-  gs.error("An error occurred: " + ex.getMessage());
-  new x_snc_slackerbot.Slacker().send_chat(current, "An error occurred while fetching animal facts. Please try again later.", false);
-}
-
-function processAnimal(animal) {
-  var animalName = animal.name;
-  var animalLocations = animal.locations;
-  var animalLifespan = animal.characteristics.lifespan;
-  var animalFood = animal.characteristics.favorite_food;
-  var animalSlogan = animal.characteristics.slogan;
-  var animalWeight = animal.characteristics.weight;
-  var animalFeature = animal.characteristics.distinctive_feature;
-  var animalMostfeature = animal.characteristics.most_distinctive_feature;
-
-  // Check if "locations" is an array and has at least one location
-  // I chose locations because it locations exists for all animals in the database
-  if (Array.isArray(animalLocations) && animalLocations.length > 0) {
-    var locationList = animalLocations.join(', ');
-    var message = animalName + 's are located in ' + locationList + '. ';
-    var featuresMessage = '';
-
-    if (typeof animalFood !== "undefined") {
-      featuresMessage += 'Their favorite food is ' + animalFood + '. ';
-    }
-
-    if (typeof animalLifespan !== "undefined") {
-      featuresMessage += 'Their average lifespan is ' + animalLifespan + '. ';
-    }
-
-    if (typeof animalSlogan !== "undefined") {
-      featuresMessage += 'A fun fact: ' + animalSlogan + '. ';
-    }
-
-    if (typeof animalFeature !== "undefined") {
-      featuresMessage += 'Main features: ' + animalFeature + '. ';
-    }
-
-    if (typeof animalMostfeature !== "undefined") {
-      featuresMessage += 'Main features: ' + animalMostfeature + '. ';
-    }
-
-    message += featuresMessage;
-
-    new x_snc_slackerbot.Slacker().send_chat(current, message, false);
-  }
+} else {
+  new x_snc_slackerbot.Slacker().send_chat(current, "No fun facts for the provided animal.", false);
 }

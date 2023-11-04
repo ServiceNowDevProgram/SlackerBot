@@ -25,6 +25,11 @@ Slacker.prototype = {
                 userSysID = slackoff_user.insert();
             }
         }
+
+		if (slackoff_user.getValue('name_updated') < gs.daysAgoStart(0)) {
+			this.get_user_info(payload_user, userSysID); //Update user info once per day, in case of name change.
+		}
+		
         return userSysID;
     },
 
@@ -104,6 +109,7 @@ Slacker.prototype = {
             var grupdate = new GlideRecord('x_snc_slackerbot_user');
             grupdate.get(record_id);
             grupdate.setValue('name', response_body.user.real_name);
+			grupdate.setValue('name_updated', new GlideDateTime());
             grupdate.update();
             return true;
         } else {
@@ -154,10 +160,13 @@ Slacker.prototype = {
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:06:00</sys_created_on>
         <sys_id>b2c246ae1b861d10d806dc23b24bcbac</sys_id>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Slacker</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_script_include_b2c246ae1b861d10d806dc23b24bcbac</sys_update_name>
+        <sys_updated_by>SapphicFire</sys_updated_by>
+        <sys_updated_on>2023-11-04 10:48:44</sys_updated_on>
     </sys_script_include>
 </record_update>

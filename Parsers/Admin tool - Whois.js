@@ -31,6 +31,18 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
     } else message_body += key + ': ' + response_body.user[key] + '\n';
   }
 
+  // Add record details
+  var grUser = new GlideRecord('x_snc_slackerbot_user');
+  if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){ // Backwards support until instance updates with new schema
+    message_body += 'Identity verified: ' + (grUser.getValue('verified') == 1 ? 'Yes' : 'No') + '\n';
+    if(!gs.nil(grUser.getValue('admin_info'))){
+      message_body += 'Admin information: ' + grUser.getValue('admin_info') + '\n';
+    }
+    if(!gs.nil(grUser.getValue('user_info'))){
+      message_body += 'User-visible information: ' + grUser.getValue('user_info') + '\n';
+    }
+  }
+
   if (response_body.user.name){
     var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, '```' + message_body + '```',true);
   } else {

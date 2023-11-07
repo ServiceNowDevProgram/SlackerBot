@@ -15,7 +15,7 @@ flags:gmi
 	}
 
 	function findWordAfterDashDash(str) {
-		var match = str.match(/--\s*(\w+).+/);
+		var match = str.match(/--\s*(.+)/);
 		return match ? " in the style of " + match[1] : "";
 	}
 	var style = findWordAfterDashDash(current.text);

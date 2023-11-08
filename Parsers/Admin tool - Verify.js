@@ -23,7 +23,7 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
     } else {
       grUser.setValue('user_info', invocation);
       grUser.update();
-      message_body += 'Updated <@' + user_id + '>\'s user info message.');
+      message_body += 'Updated <@' + user_id + '>\'s user info message.';
     }
     grUser.update();
   }

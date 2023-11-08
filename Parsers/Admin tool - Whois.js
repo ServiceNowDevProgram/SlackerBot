@@ -26,7 +26,12 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
       message_body += 'profile: \n';
       for (var prof_key in response_body.user.profile) {
         if (prof_key.indexOf('image_') != -1) continue;
-        message_body += '  ' + prof_key + ': ' + response_body.user.profile[prof_key] + '\n';
+        if (prof_key == 'status_emoji_display_info'){
+          message_body += '  status_emoji_display_info: \n';
+          for (var stat_key in response_body.user.profile.status_emoji_display_info){
+            message_body += '    ' + stat_key + ': ' + response_body.user.profile.status_emoji_display_info[stat_key] + '\n';
+          }
+        } else message_body += '  ' + prof_key + ': ' + response_body.user.profile[prof_key] + '\n';
       }
     } else message_body += key + ': ' + response_body.user[key] + '\n';
   }

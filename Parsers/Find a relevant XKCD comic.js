@@ -36,7 +36,7 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 		"elements": [
 			{
 				"type": "mrkdwn",
-				"text": "*Alt-text:* " + xkcdPayload.alt + "\n*Link:* https://xkcd.com/" + xkcdPayload.num + "/"
+				"text": "*Alt-text:* " + xkcdPayload.alt
 			}
 		]
 	});
@@ -44,7 +44,7 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 	if(additionalComics !== null){
 		var msgArr = [];
 		for(var i = 0; i < additionalComics.length; i++){
-			additionalComics[i] != xkcdPayload.num ? msgArr.push('<https://xkcd.com/' + additionalComics[i] + '|' + additionalComics[i] + '>') : null;
+			additionalComics[i] != xkcdPayload.num ? msgArr.push(additionalComics[i]) : null;
 		}
 		blockArr.push({
 			"type": "context",

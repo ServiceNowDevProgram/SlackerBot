@@ -1,10 +1,10 @@
 /*
 activation_example:1km or 1 kilometre
-regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?k(m?|ilometer|ilometers|ilometre|ilometres)\b
+regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?k(m|ilometer|ilometers|ilometre|ilometres)\b
 flags:gmi
 */
 
-var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?k(m?|ilometer|ilometers|ilometre|ilometres)\b/gmi;
+var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?k(m|ilometer|ilometers|ilometre|ilometres)\b/gmi;
 var match = regextest.exec(current.text);
 var numbertest = /-?\d{1,}\.?\d{0,}/;
 var numbermatch = numbertest.exec(match[0]);

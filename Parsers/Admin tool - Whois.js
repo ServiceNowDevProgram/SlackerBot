@@ -36,6 +36,8 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
     } else message_body += key + ': ' + response_body.user[key] + '\n';
   }
 
+  message_body = message_body.match(/^(real_name|tz_label| {2}email):.*$/gm).join('\n');
+
   // Add record details
   var grUser = new GlideRecord('x_snc_slackerbot_user');
   if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){ // Backwards support until instance updates with new schema

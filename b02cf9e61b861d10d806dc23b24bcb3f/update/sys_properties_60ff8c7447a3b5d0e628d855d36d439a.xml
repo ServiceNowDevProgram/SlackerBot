@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <ignore_cache>true</ignore_cache>
+        <is_private>true</is_private>
+        <name>x_snc_slackerbot.SlackerBot.supertoken</name>
+        <read_roles/>
+        <suffix>SlackerBot.supertoken </suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-01-02 17:01:45</sys_created_on>
+        <sys_id>60ff8c7447a3b5d0e628d855d36d439a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_slackerbot.SlackerBot.supertoken</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_60ff8c7447a3b5d0e628d855d36d439a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-01-02 17:01:45</sys_updated_on>
+        <type>string</type>
+        <value>xoxp-4875183738982-4878939533269-5671252055938-310fa2fba81a7fe6d3956e8bacdf4e3c</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=60ff8c7447a3b5d0e628d855d36d439a"/>
+</record_update>

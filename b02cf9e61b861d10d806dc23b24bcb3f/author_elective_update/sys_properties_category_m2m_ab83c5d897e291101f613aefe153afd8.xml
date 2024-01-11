@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="DELETE">
+        <category display_value="SlackerBot Properties">23c2c59897e291101f613aefe153afd6</category>
+        <order>200</order>
+        <property display_value="x_snc_slackerbot.SlackerBot.token" name="x_snc_slackerbot.SlackerBot.token">05da82661bc61d10d806dc23b24bcbf6</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-10 22:04:49</sys_created_on>
+        <sys_id>ab83c5d897e291101f613aefe153afd8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_snc_slackerbot.SlackerBot.token.SlackerBot Properties</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_ab83c5d897e291101f613aefe153afd8</sys_update_name>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-10 22:07:17</sys_updated_on>
+    </sys_properties_category_m2m>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</application>
+        <file_path/>
+        <instance_id>d38c0fe1dba5d5d48aea21c405961981</instance_id>
+        <instance_name>dev133050</instance_name>
+        <name>sys_properties_category_m2m_ab83c5d897e291101f613aefe153afd8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="SlackerBot Properties">23c2c59897e291101f613aefe153afd6</category>
+        <order>200</order>
+        <property display_value="x_snc_slackerbot.SlackerBot.token" name="x_snc_slackerbot.SlackerBot.token">05da82661bc61d10d806dc23b24bcbf6</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>mattias.johnsson</sys_created_by>
+        <sys_created_on>2022-10-10 22:04:49</sys_created_on>
+        <sys_id>ab83c5d897e291101f613aefe153afd8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_snc_slackerbot.SlackerBot.token.SlackerBot Properties</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_ab83c5d897e291101f613aefe153afd8</sys_update_name>
+        <sys_updated_by>mattias.johnsson</sys_updated_by>
+        <sys_updated_on>2022-10-10 22:07:17</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>]]></payload>
+        <payload_hash>909630725</payload_hash>
+        <record_name>x_snc_slackerbot.SlackerBot.token.SlackerBot Properties</record_name>
+        <reverted_from/>
+        <source>9963a11a47602110e628d855d36d4315</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-01-24 15:37:29</sys_created_on>
+        <sys_id>c363251a47602110e628d855d36d43ac</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>185e46d57400000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-01-24 15:37:29</sys_updated_on>
+        <type>Category Property</type>
+        <update_guid>8363251a6f6021109b1665cff3bc9cac</update_guid>
+        <update_guid_history>8363251a6f6021109b1665cff3bc9cac:909630725</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-01-02 16:48:09</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties_category_m2m">sys_properties_category_m2m</sys_db_object>
+        <sys_id>305aae8e2ae5484492d10eef5d4d4384</sys_id>
+        <sys_metadata>ab83c5d897e291101f613aefe153afd8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_slackerbot.SlackerBot.token.SlackerBot Properties</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
+        <sys_update_name>sys_properties_category_m2m_ab83c5d897e291101f613aefe153afd8</sys_update_name>
+        <sys_update_version display_value="sys_properties_category_m2m_ab83c5d897e291101f613aefe153afd8">c363251a47602110e628d855d36d43ac</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-01-02 16:48:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

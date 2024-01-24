@@ -1,6 +1,6 @@
 /*
-activation_example:!newdalle minty donut
-regex:!newdalle
+activation_example:!dalle minty donut
+regex:!dalle
 flags:gmi
 */
 var prompt = current.text.replace(/!dalle/gmi, "").trim().substring(0, 1000);

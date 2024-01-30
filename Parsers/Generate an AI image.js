@@ -14,7 +14,9 @@ dalleReq.setRequestHeader("Accept", "*/*");
 var body = {
 	"prompt": prompt,
 	"n": 1,
-	"size": "512x512",
+	"size": "1024x1024",
+	quality: "standard",
+	model: "dall-e-3",
 	"response_format": "url",
 	"user": current.user.name.toString()
 };

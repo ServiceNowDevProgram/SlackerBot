@@ -1,6 +1,6 @@
 /*
 activation_example:!iss
-regex:!iss
+regex:!iss\b
 flags:gmi
 */
 

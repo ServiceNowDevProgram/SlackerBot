@@ -14,7 +14,9 @@ dalleReq.setRequestHeader("Accept", "*/*");
 var body = {
 	"prompt": prompt,
 	"n": 1,
-	"size": "512x512",
+	"size": "1024x1024",
+	quality: "standard",
+	model: "dall-e-3",
 	"response_format": "url",
 	"user": current.user.name.toString()
 };
@@ -22,63 +24,23 @@ dalleReq.setRequestBody(JSON.stringify(body));
 var dalleResponse = dalleReq.execute();
 var dalleResponseBody = JSON.parse(dalleResponse.getBody());
 
-//Second RM to get the image into the sys_attachments table
-var getImageReq = new sn_ws.RESTMessageV2();
-getImageReq.setEndpoint(dalleResponseBody.data[0].url);
-getImageReq.setHttpMethod("GET");
-
-//Need to save the file to this parser as it's within scope
-var dalleTable = 'x_snc_slackerbot_parser';
-var parserLookup = new GlideRecord('x_snc_slackerbot_parser');
-parserLookup.addQuery('regexLIKEdalle');
-parserLookup.query();
-parserLookup.next();
-var dalleRecord = parserLookup.getValue('sys_id');
-
-//Indicate we want to save the image to the parser record as `${prompt}.png`
-getImageReq.saveResponseBodyAsAttachment(dalleTable, dalleRecord, (prompt.trim() + '.png'));
-
-var getImageResponse = getImageReq.execute();
-
-//Get the sys_id of the newly created attachment
-var newAttachmentSysId = getImageResponse.getResponseAttachmentSysid();
-
-//Lookup the attachment
-var attachGr = new GlideRecord('sys_attachment');
-attachGr.get(newAttachmentSysId);
-
-//Get the base 64 from the image
-var sysAtt = new GlideSysAttachment();
-var b64 = sysAtt.getContentBase64(attachGr);
-
-//Start the upload to Imgur
-var imgurReq = new sn_ws.RESTMessageV2();
-imgurReq.setEndpoint('https://api.imgur.com/3/image');
-imgurReq.setHttpMethod('POST');
-imgurReq.setRequestHeader("Authorization", "Bearer " + gs.getProperty("imgur.token"));
-imgurReq.setRequestHeader('Content-Type', "application/json");
-imgurReq.setRequestHeader('User-Agent', "ServiceNow");
-imgurReq.setRequestHeader("Accept", "*/*");
-var imgurBody = {
-	"image": b64,
-	"type": "base64",
-	"title": (current.user.name.toString() + ' - ' + prompt),
-	"description": "DALL-E generated image for the prompt '" + prompt + "'"
+//Cloudinary
+var cloudinary = new sn_ws.RESTMessageV2();
+cloudinary.setEndpoint('https://api.cloudinary.com/v1_1/dxllc568e/image/upload');
+cloudinary.setHttpMethod('POST');
+cloudinary.setRequestHeader('Content-Type', "application/json");
+cloudinary.setRequestHeader('User-Agent', "ServiceNow");
+cloudinary.setRequestHeader("Accept", "*/*");
+var cloudinaryBody = {
+	"file": dalleResponseBody.data[0].url,
+	"upload_preset": gs.getProperty("cloudinary_upload_preset"), 
+	"api_key": gs.getProperty("cloudinary_api_key"),
+	"timestamp": Math.floor(new Date().getTime() / 1000),
 };
-//Set the album, if it exists
-if(gs.getProperty('imgur.album')) imgurBody.album = gs.getProperty('imgur.album');
 
-imgurReq.setRequestBody(JSON.stringify(imgurBody));
+cloudinary.setRequestBody(JSON.stringify(cloudinaryBody));
 
-var imgurResponse = imgurReq.execute();
-var imgurResponseBody = JSON.parse(imgurResponse.getBody());
-
-try{
-	new x_snc_slackerbot.Slacker().send_chat(current, "<" + imgurResponseBody.data.link + "|" + prompt + ">\n");
-
-	//Now that we're done, get rid of the attachment
-	gs.eventQueue('x_snc_slackerbot.delete_attachment', attachGr, attachGr.sys_id);
-
-} catch(em){
-	new x_snc_slackerbot.Slacker().send_chat(current, "I'm finicky and decided to not work this time, try again.", true);
-}
+var cloudinaryResponse = cloudinary.execute();
+var cloudinaryResponseBody = JSON.parse(cloudinaryResponse.getBody());
+new x_snc_slackerbot.Slacker().send_chat(current, "<" + cloudinaryResponseBody.url + "|" + prompt + ">\n");
+//new x_snc_slackerbot.Slacker().send_chat(current, "<" + cloudinaryResponseBody.url + "|" + prompt + "> (<" + "https://collection.cloudinary.com/dxllc568e/86896fd03420bdbdb47adcc037086bdf" + "|" + "gallery>)");

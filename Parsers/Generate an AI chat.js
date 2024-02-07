@@ -1,6 +1,6 @@
 /*
 activation_example:!chatgpt hello there
-regex:!chatgpt
+regex:!(chatgpt|gpt)
 flags:gmi
 */
 var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000);
@@ -12,8 +12,8 @@ chatReq.setRequestHeader('Content-Type', "application/json");
 chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 var body = {
-  "model": "gpt-3.5-turbo",
-  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses"}],
+  "model": "gpt-4-turbo-preview",
+  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation."}],
 //  "max_tokens": 250
 };
 chatReq.setRequestBody(JSON.stringify(body));

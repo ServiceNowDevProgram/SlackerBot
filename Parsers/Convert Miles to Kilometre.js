@@ -1,10 +1,10 @@
 /*
 activation_example:1 mile or 2 miles
-regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?m(ile|iles)\b
+regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?mi(le|les)\b
 flags:gmi
 */
 
-var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?m(ile|iles)\b/gmi;
+var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?mi(le|iles)\b/gmi;
 var match = regextest.exec(current.text);
 var numbertest = /-?\d{1,}\.?\d{0,}/;
 var numbermatch = numbertest.exec(match[0]);

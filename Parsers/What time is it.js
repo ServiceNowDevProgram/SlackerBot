@@ -12,7 +12,7 @@ var tza = getTimeZoneArray();
 var endText = "";
 
 if (astrid) {
-    tz = "Australia/Brisbane";
+    tz = "Australia/Sydney";
     endText = "Astrid time!";
 }
 else

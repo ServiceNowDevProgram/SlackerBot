@@ -41,7 +41,7 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
   // Add record details
   var grUser = new GlideRecord('x_snc_slackerbot_user');
   if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){ // Backwards support until instance updates with new schema
-    message_body += 'Identity verified: ' + (grUser.getValue('verified') == 1 ? 'Yes' : 'No') + '\n';
+    message_body += '\nIdentity verified: ' + (grUser.getValue('verified') == 1 ? 'Yes' : 'No') + '\n';
     if(!gs.nil(grUser.getValue('admin_info'))){
       message_body += 'Admin information: ' + grUser.getValue('admin_info') + '\n';
     }

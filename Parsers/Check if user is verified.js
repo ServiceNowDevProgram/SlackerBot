@@ -1,6 +1,6 @@
 /*
-activation_example:!verify @Astrid - Admin-validated user identity info
-regex:^!verify\b
+activation_example:!verify @Astrid - Admin-validated users
+regex:^!verify$|!verify[^-]
 flags:gmi
 */
 
@@ -13,7 +13,7 @@ user_id = user_id.replace('>', '').trim();
 var grUser = new GlideRecord('x_snc_slackerbot_user');
 if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){
     verification_status = (grUser.getValue('verified') == 1 ? true : false) ? 'has been verified' : 'has not been verified';
-    user_info = grUser.getValue('user_info').toString();
+    user_info = grUser.getValue('user_info') !== null ? grUser.getValue('user_info').toString() : '';
 
     message_body += '' + grUser.getValue('name') + '\'s identity '+ verification_status + '.';
     if(!gs.nil(user_info)) message_body += '\nThe following information has been noted about this user: ' + user_info;

@@ -1,18 +1,18 @@
 /*
 activation_example:!verify @Astrid - Admin-validated users
 regex:^!verify$|!verify[^-]
-flags:gmi
+flags:gi
 */
 
 var message_body = '';
 var verification_status = '';
 var user_info = '';
 var user_id = current.text.replace('!verify <@', '');
-user_id = user_id.replace('>', '').trim();
+user_id = user_id.replace(/>.*/, '').trim();
 
 var grUser = new GlideRecord('x_snc_slackerbot_user');
 if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){
-    verification_status = (grUser.getValue('verified') == 1 ? true : false) ? 'has been verified' : 'has not been verified';
+    verification_status = (grUser.getValue('verified') == 1 ? true : false) ? 'has been verified and confirmed by the Slack admins.' : 'has not been verified and confirmed by the Slack admins.';
     user_info = grUser.getValue('user_info') !== null ? grUser.getValue('user_info').toString() : '';
 
     message_body += '' + grUser.getValue('name') + '\'s identity '+ verification_status + '.';

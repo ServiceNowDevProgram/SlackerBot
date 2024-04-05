@@ -1,5 +1,5 @@
 /*
-activation_example:!verify @Astrid - Admin-validated user identity info
+activation_example:!verify @Astrid - Admin-validated users
 regex:^!verify$|!verify[^-]
 flags:gmi
 */

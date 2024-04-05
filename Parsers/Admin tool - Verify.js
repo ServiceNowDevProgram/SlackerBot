@@ -1,5 +1,5 @@
 /*
-activation_example:!verify-admin @Astrid. Optional second arg to set message
+activation_example:!verify-admin @Astrid
 regex:^!verify-admin\b
 flags:gmi
 */
@@ -19,7 +19,7 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
     if(invocation.length == 0){
       verification_status = !(grUser.getValue('verified') == 1 ? true : false); // Get verified and toggle
       grUser.setValue('verified',verification_status);
-      message_body += 'Updated <@' + user_id + '>\'s verification status. They are now ' + (verification_status ? 'verified.' : 'unverified.');
+      message_body += 'Updated <@' + user_id + '>\'s verification status. They are now ' + (verification_status ? 'verified.' : 'unverified. To add a user-visible note, add text after `!verify-admin @User `.');
     } else {
       grUser.setValue('user_info', invocation);
       grUser.update();

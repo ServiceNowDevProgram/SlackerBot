@@ -1,6 +1,6 @@
 /*
 activation_example:!verify @Astrid - Admin-validated user identity info
-regex:^!verify\b
+regex:^!verify$|!verify[^-]
 flags:gmi
 */
 

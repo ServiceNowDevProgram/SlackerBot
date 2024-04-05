@@ -1,17 +1,17 @@
 /*
 activation_example:!info-admin @Astrid Notes here
 regex:^!info-admin\b
-flags:gmi
+flags:gi
 */
 
 if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.channel == "G7M4AP6U8") { //admin channels on sndevs
   var message_body = '';
   var verification_status = false;
 
-  // Grab user ID and then prep invocation if User-visible info provided
+  // Grab user ID and then prep invocation if admin-visible info provided
   var invocation = current.text;
   var user_id = invocation.replace('!info-admin <@', '');
-  user_id = user_id.replace('>', '').trim();
+  user_id = user_id.replace(/>.*/, '').trim();
   invocation = invocation.replace('!info-admin <@' + user_id + '>','').trim();
   
   var grUser = new GlideRecord('x_snc_slackerbot_user');

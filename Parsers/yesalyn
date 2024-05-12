@@ -1,0 +1,6 @@
+/*
+activation_example:@Jesalyn
+regex:<@UUMAQ183U>
+flags:g
+*/
+new x_snc_slackerbot.Slacker().send_reaction(current, 'yesalyn');

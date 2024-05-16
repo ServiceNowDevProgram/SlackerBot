@@ -15,7 +15,7 @@ if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -
     verification_status = (grUser.getValue('verified') == 1 ? true : false) ? 'has been verified and confirmed by the Slack admins.' : 'has not been verified and confirmed by the Slack admins.';
     user_info = grUser.getValue('user_info') !== null ? grUser.getValue('user_info').toString() : '';
 
-    message_body += '' + grUser.getValue('name') + '\'s identity '+ verification_status + '.';
+    message_body += '' + grUser.getValue('name') + '\'s identity '+ verification_status;
     if(!gs.nil(user_info)) message_body += '\nThe following information has been noted about this user: ' + user_info;
 }
 else {

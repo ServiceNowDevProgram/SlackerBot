@@ -1,0 +1,6 @@
+/*
+regex:\bbased\b
+flags:gi
+*/
+
+Math.floor(Math.random() * 4) == 0 && new x_snc_slackerbot.Slacker().send_reaction(current, "based");

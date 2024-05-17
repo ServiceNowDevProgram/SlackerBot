@@ -1,4 +1,5 @@
 /*
+activation_example: based.
 regex:\bbased\b
 flags:gi
 */

@@ -21,13 +21,23 @@ flags:gmi
 	var style = findWordAfterDashDash(current.text);
 	
 	var chats = [];
+	var nda = false;
 	var chatGr = new GlideRecord('x_snc_pointsthing_chat');
 	chatGr.addEncodedQuery('thread_ts=' + thread_ts + '^ORts=' + thread_ts + '^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
 	chatGr.orderBy('sys_created_on');
 	chatGr.query();
 	while (chatGr.next()){
 		var chat = chatGr.getDisplayValue('user') + ': ' + chatGr.getValue('text');
+		if (chat.indexOf('!nda') > -1 || chat.indexOf('!confidential') > -1) {
+			nda = true;
+			break;
+		}
 		chats.push(chat);
+	}
+
+	if(nda){
+		new x_snc_slackerbot.Slacker().send_chat(current, "This thread has been marked confidential and can not be summarized.", false);
+		return;
 	}
 
 	var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000);
@@ -39,7 +49,7 @@ flags:gmi
 	chatReq.setRequestHeader('User-Agent', "ServiceNow");
 	chatReq.setRequestHeader("Accept", "*/*");
 	var body = {
-		"model": "gpt-3.5-turbo",
+		"model": "gpt-4o",
 		"messages": [{"role": "user", "content": "summarize the following conversation" + style + ". You cannot ask for follow-up responses. Ignore the user named Slackbot.\n\n" + chats.join("\n")}],
 		//  "max_tokens": 250
 	};

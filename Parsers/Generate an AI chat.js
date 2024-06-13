@@ -3,7 +3,7 @@ activation_example:!chatgpt hello there
 regex:!(chatgpt|gpt)
 flags:gmi
 */
-var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000);
+var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000) ;
 var chatReq = new sn_ws.RESTMessageV2();
 chatReq.setEndpoint('https://api.openai.com/v1/chat/completions');
 chatReq.setHttpMethod("POST");
@@ -13,7 +13,7 @@ chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 var body = {
   "model": "gpt-4o",
-  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation."}],
+  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation. Format your response for Slack"}],
 //  "max_tokens": 250
 };
 chatReq.setRequestBody(JSON.stringify(body));

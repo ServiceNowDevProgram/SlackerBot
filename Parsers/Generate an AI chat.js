@@ -3,7 +3,7 @@ activation_example:!chatgpt hello there
 regex:!(chatgpt|gpt)
 flags:gmi
 */
-var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000) ;
+var prompt = current.text.replace(/!chatgpt/gmi, "").trim().substring(0, 1000);
 var chatReq = new sn_ws.RESTMessageV2();
 chatReq.setEndpoint('https://api.openai.com/v1/chat/completions');
 chatReq.setHttpMethod("POST");

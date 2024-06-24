@@ -6,11 +6,13 @@ order:200
 stop_processing:false
 */
 
-// uhhh, send a bunch of reacts i guess lol ¯\_(ツ)_/¯ 
+reactjis = ['alphabet-white-e', 'alphabet-white-x', 'alphabet-white-t', 'alphabet-white-r', 'alphabet-white-a', 'action-right'];
+
+// send this right away
 new x_snc_slackerbot.Slacker().send_reaction(current, 'action-left');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'alphabet-white-e');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'alphabet-white-x');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'alphabet-white-t');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'alphabet-white-r');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'alphabet-white-a');
-new x_snc_slackerbot.Slacker().send_reaction(current, 'action-right');
+// use setTimeout to try and keep them in the right order
+reactjis.forEach(function(item, index){
+    setTimeout(function(){ 
+        new x_snc_slackerbot.Slacker().send_reaction(current, item);
+    }, ((index + 1) * 1000) + 1);
+});

@@ -14,5 +14,5 @@ new x_snc_slackerbot.Slacker().send_reaction(current, 'action-left');
 reactjis.forEach(function(item, index){
     setTimeout(function(){ 
         new x_snc_slackerbot.Slacker().send_reaction(current, item);
-    }, ((index + 1) * 1000) + 1);
+    }, (((index + 1) * 1000) + 1);
 });

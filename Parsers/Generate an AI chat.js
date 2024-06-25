@@ -13,7 +13,7 @@ chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 var body = {
   "model": "gpt-4o",
-  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation."}],
+  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation. Format your response for Slack"}],
 //  "max_tokens": 250
 };
 chatReq.setRequestBody(JSON.stringify(body));

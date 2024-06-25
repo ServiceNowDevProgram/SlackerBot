@@ -50,7 +50,7 @@ flags:gmi
 	chatReq.setRequestHeader("Accept", "*/*");
 	var body = {
 		"model": "gpt-4o",
-		"messages": [{"role": "user", "content": "summarize the following conversation" + style + ". You cannot ask for follow-up responses. Ignore the user named Slackbot.\n\n" + chats.join("\n")}],
+		"messages": [{"role": "user", "content": "summarize the following conversation" + style + ". You cannot ask for follow-up responses. Ignore the user named Slackbot. Format your response for Slack\n\n" + chats.join("\n")}],
 		//  "max_tokens": 250
 	};
 	chatReq.setRequestBody(JSON.stringify(body));

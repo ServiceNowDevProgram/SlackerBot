@@ -10,9 +10,8 @@ var reactjis = ['alphabet-white-e', 'alphabet-white-x', 'alphabet-white-t', 'alp
 
 // send this right away
 new x_snc_slackerbot.Slacker().send_reaction(current, 'action-left');
-// use setTimeout to try and keep them in the right order
-reactjis.forEach(function(item, index){
-    setTimeout(function(){ 
-        new x_snc_slackerbot.Slacker().send_reaction(current, item);
-    }, (((index + 1) * 1000) + 1));
+// use sleepy to try and keep them in the right order
+reactjis.forEach(function(item){
+    global.sleepy(1050)
+    new x_snc_slackerbot.Slacker().send_reaction(current, item);
 });

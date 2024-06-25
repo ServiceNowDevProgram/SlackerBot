@@ -6,7 +6,7 @@ order:200
 stop_processing:false
 */
 
-reactjis = ['alphabet-white-e', 'alphabet-white-x', 'alphabet-white-t', 'alphabet-white-r', 'alphabet-white-a', 'action-right'];
+let reactjis = ['alphabet-white-e', 'alphabet-white-x', 'alphabet-white-t', 'alphabet-white-r', 'alphabet-white-a', 'action-right'];
 
 // send this right away
 new x_snc_slackerbot.Slacker().send_reaction(current, 'action-left');

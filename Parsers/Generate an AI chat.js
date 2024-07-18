@@ -12,7 +12,7 @@ chatReq.setRequestHeader('Content-Type', "application/json");
 chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 var body = {
-  "model": "gpt-4o",
+  "model": "gpt-4o-mini",
   "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation."}],
 //  "max_tokens": 250
 };

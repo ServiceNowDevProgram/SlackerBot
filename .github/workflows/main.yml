@@ -23,6 +23,7 @@ on:
 
 jobs:
   deployment:
+    if: github.repository == 'ServiceNowDevProgram/SlackerBot'
     runs-on: ubuntu-latest
     steps:
     - name: Log payload

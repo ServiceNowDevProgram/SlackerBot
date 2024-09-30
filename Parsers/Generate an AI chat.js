@@ -20,8 +20,9 @@ chatReq.setRequestBody(JSON.stringify(body));
 var chatResponse = chatReq.execute();
 gs.info(chatResponse.getBody());
 var chatResponseBody = JSON.parse(chatResponse.getBody());
+var chatResponseContent = chatResponseBody.choices[0].message.content;
 
 var show_tokens = false;
 var token_cost = show_tokens ? "> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002).toFixed(6) + ")\n" : "";
 
-new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n" + token_cost + "\n" + chatResponseBody.choices[0].message.content, false);
+new x_snc_slackerbot.Slacker().send_chat(current, "> " + prompt.replace(/\n/gmi, ". ") + "\n" + token_cost + "\n" + chatResponseContent, chatResponseContent.length > 500 ? true : false);

@@ -1,7 +1,7 @@
 /*
 activation_example:fact
-regex:fact
-flags:gmi
+regex:\bfact\b
+flags:gi
 */
 
 if (Math.floor(Math.random() * 4) == 0) {

@@ -11,5 +11,5 @@ if (Math.floor(Math.random() * 4) == 0) {
     var chatResponse = fact.execute();
     var chatResponseBody = JSON.parse(chatResponse.getBody());
 
-    new x_snc_slackerbot.Slacker().send_chat(current, 'Another fact is: " + chatResponseBody.text, false);
+    new x_snc_slackerbot.Slacker().send_chat(current, "Another fact is: " + chatResponseBody.text, false);
     }

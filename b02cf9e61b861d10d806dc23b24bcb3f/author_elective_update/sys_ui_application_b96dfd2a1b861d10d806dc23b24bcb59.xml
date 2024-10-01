@@ -54,6 +54,7 @@
         <sys_db_object display_value="" name="sys_ui_application">sys_ui_application</sys_db_object>
         <sys_id>3f9df57fdc74405d83aa910b3be9b139</sys_id>
         <sys_metadata>b96dfd2a1b861d10d806dc23b24bcb59</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>SlackerBot</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_parent/>
@@ -62,5 +63,7 @@
         <sys_scope_delete display_value="">037003e1313b46e4831058384767d651</sys_scope_delete>
         <sys_update_name>sys_ui_application_b96dfd2a1b861d10d806dc23b24bcb59</sys_update_name>
         <sys_update_version display_value="sys_ui_application_b96dfd2a1b861d10d806dc23b24bcb59">51fd796a1b861d10d806dc23b24bcb5c</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:24:12</sys_updated_on>
     </sys_metadata_delete>
 </record_update>

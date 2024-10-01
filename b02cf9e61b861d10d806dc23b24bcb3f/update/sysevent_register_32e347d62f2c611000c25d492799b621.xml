@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register">
     <sysevent_register action="INSERT_OR_UPDATE">
         <caller_access/>
+        <derived_priority/>
         <description/>
         <event_name>x_snc_slackerbot.delete_attachment</event_name>
         <fired_by/>
+        <priority/>
         <queue/>
         <suffix>delete_attachment</suffix>
         <sys_class_name>sysevent_register</sys_class_name>
         <sys_created_by>dxcrcc</sys_created_by>
         <sys_created_on>2023-01-24 22:39:30</sys_created_on>
         <sys_id>32e347d62f2c611000c25d492799b621</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>x_snc_slackerbot.delete_attachment</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sysevent_register_32e347d62f2c611000c25d492799b621</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:24:11</sys_updated_on>
         <table>sys_attachment</table>
     </sysevent_register>
 </record_update>

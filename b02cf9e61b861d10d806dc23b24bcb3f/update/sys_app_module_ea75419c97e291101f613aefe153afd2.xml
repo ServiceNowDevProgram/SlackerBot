@@ -17,6 +17,7 @@
         <override_menu_roles>false</override_menu_roles>
         <query>system_properties_ui.do?sysparm_category=SlackerBot Properties&amp;sysparm_title=SlackerBot Properties</query>
         <report/>
+        <require_confirmation>false</require_confirmation>
         <roles/>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>mattias.johnsson</sys_created_by>

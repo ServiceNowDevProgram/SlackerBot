@@ -7,11 +7,14 @@
         <sys_created_by>guest</sys_created_by>
         <sys_created_on>2022-09-23 06:38:20</sys_created_on>
         <sys_id>027c0a221b0edd10cba18485604bcb55</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>GlideRecord.insert</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_scope_privilege_027c0a221b0edd10cba18485604bcb55</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:24:06</sys_updated_on>
         <target_name>GlideRecord.insert</target_name>
         <target_scope display_value="Global">global</target_scope>
         <target_type>scriptable</target_type>

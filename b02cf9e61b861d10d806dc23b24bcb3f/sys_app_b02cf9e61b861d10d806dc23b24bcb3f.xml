@@ -5,6 +5,7 @@
         <enforce_license>none</enforce_license>
         <guided_setup_guid/>
         <hide_on_ui>false</hide_on_ui>
+        <ide_created/>
         <installed_as_dependency>false</installed_as_dependency>
         <js_level>helsinki_es5</js_level>
         <licensable>true</licensable>
@@ -15,6 +16,7 @@
         <logo/>
         <menu/>
         <name>SlackerBot</name>
+        <package_json/>
         <private>false</private>
         <restrict_table_access>false</restrict_table_access>
         <runtime_access_tracking>permissive</runtime_access_tracking>
@@ -24,11 +26,15 @@
         <source>x_snc_slackerbot</source>
         <store_correlation_id/>
         <store_url/>
+        <subscription_entitlement/>
         <sys_class_name>sys_app</sys_class_name>
         <sys_code/>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 05:26:59</sys_created_on>
         <sys_id>b02cf9e61b861d10d806dc23b24bcb3f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:23:55</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <uninstall_blocked>false</uninstall_blocked>
@@ -37,4 +43,5 @@
         <vendor_prefix/>
         <version>1.0.0</version>
     </sys_app>
+    <sys_translated_text action="delete_multiple" query="documentkey=b02cf9e61b861d10d806dc23b24bcb3f"/>
 </record_update>

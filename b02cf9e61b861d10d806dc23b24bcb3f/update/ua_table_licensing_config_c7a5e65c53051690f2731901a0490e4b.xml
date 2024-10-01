@@ -4,19 +4,22 @@
         <license_condition/>
         <license_model>none</license_model>
         <license_roles/>
-        <name>x_snc_slackerbot_parser</name>
+        <name>x_snc_slackerbot_chat</name>
         <op_delete>true</op_delete>
         <op_insert>true</op_insert>
         <op_update>true</op_update>
         <owner_condition/>
         <sys_class_name>ua_table_licensing_config</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
-        <sys_created_on>2022-09-23 05:55:49</sys_created_on>
-        <sys_id>13b2c2ae1b861d10d806dc23b24bcbf0</sys_id>
-        <sys_name>x_snc_slackerbot_parser</sys_name>
+        <sys_created_on>2022-09-23 05:49:08</sys_created_on>
+        <sys_id>c7a5e65c53051690f2731901a0490e4b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_slackerbot_chat</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>ua_table_licensing_config_13b2c2ae1b861d10d806dc23b24bcbf0</sys_update_name>
+        <sys_update_name>ua_table_licensing_config_c7a5e65c53051690f2731901a0490e4b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:23:56</sys_updated_on>
     </ua_table_licensing_config>
 </record_update>

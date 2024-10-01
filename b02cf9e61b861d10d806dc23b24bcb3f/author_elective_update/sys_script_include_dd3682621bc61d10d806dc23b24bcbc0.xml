@@ -98,7 +98,7 @@ ISS.prototype = {
         <reverted_from/>
         <source>ddda0410db929110791d8f8d13961989</source>
         <source_table>sys_update_set</source_table>
-        <state>current</state>
+        <state>previous</state>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-10-12 16:28:21</sys_created_on>
         <sys_id>9ab90e70476ed150248ddf37436d4365</sys_id>

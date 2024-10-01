@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="pa_dashboards_permissions">
     <pa_dashboards_permissions action="INSERT_OR_UPDATE">
-        <dashboard display_value="Developer Content">369cf2a8133fa200973e70d66144b067</dashboard>
+        <dashboard display_value="">369cf2a8133fa200973e70d66144b067</dashboard>
         <delete>true</delete>
         <group/>
         <identity>pa_power_user</identity>
@@ -10,11 +10,14 @@
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 16:03:44</sys_created_on>
         <sys_id>d0ed0cb21b8e1d10d806dc23b24bcb48</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>pa_power_user</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>pa_dashboards_permissions_d0ed0cb21b8e1d10d806dc23b24bcb48</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:24:05</sys_updated_on>
         <type>1</type>
         <user/>
         <write>true</write>

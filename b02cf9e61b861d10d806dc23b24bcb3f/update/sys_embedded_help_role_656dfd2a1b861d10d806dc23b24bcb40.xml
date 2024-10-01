@@ -6,10 +6,13 @@
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 05:32:29</sys_created_on>
         <sys_id>656dfd2a1b861d10d806dc23b24bcb40</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>a16dfd2a1b861d10d806dc23b24bcb3d</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_embedded_help_role_656dfd2a1b861d10d806dc23b24bcb40</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-01 00:24:05</sys_updated_on>
     </sys_embedded_help_role>
 </record_update>

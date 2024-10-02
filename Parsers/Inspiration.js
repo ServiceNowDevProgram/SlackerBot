@@ -1,6 +1,6 @@
 /*
 activation_example:!inspire
-regex:\b(inspire|inspiration|inspiring|inspired|motivation|motivate|motivated)\b
+regex:\b!inspire\b|\b!inspiration\b
 flags:gmi
 */
 
@@ -13,4 +13,4 @@ var chatResponseBody = JSON.parse(chatResponse.getBody());
 var quoteText = chatResponseBody[0].q;
 var author = chatResponseBody[0].a;
 
-new x_snc_slackerbot.Slacker().send_chat(current, 'Some food for thought!:\n "' + quoteText + '" - ' + author, false);
+new x_snc_slackerbot.Slacker().send_chat(current, 'A dose of inspiration for you!:\n "' + quoteText + '" - ' + author, false);

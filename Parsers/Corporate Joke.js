@@ -20,8 +20,7 @@ var chatResponseBody = chatResponse.getBody();
 // Parse the API response as JSON
 var responseData = JSON.parse(chatResponseBody);
 
-// Check if the API response contains any   
- jokes
+// Check if the API response contains any jokes
 if (responseData.result.length > 0) {
   var joke = responseData.result[0].value;
   new x_snc_slackerbot.Slacker().send_chat(current, joke, false);

@@ -8,7 +8,7 @@ var where = current.text.indexOf('!parse_news ') + 12;
 var term = current.text.substr(where).trim();
 
 // Build the search URL using a public news API
-var searchUrl = 'https://newsapi.org/v2/everything?q=' + term + '&apiKey=981bfffa7e064a22aa8d7c8723e673ae';
+var searchUrl = 'https://newsapi.org/v2/everything?q=' + term + '&apiKey='+gs.getProperty("newsapi.key");
 
 // Replace "YOUR_API_KEY" with your actual News API key
 var chatReq = new sn_ws.RESTMessageV2();

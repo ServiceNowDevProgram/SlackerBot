@@ -1,16 +1,14 @@
 /*
-activation_example:!parse_news name of news website
-regex:!parse_news
+activation_example:!news topic or story to search for
+regex:!news
 flags:gmi
 */
 
-var where = current.text.indexOf('!parse_news ') + 12;
-var term = current.text.substr(where).trim();
+var term = current.text.replace("!news ", "").trim();
 
-// Build the search URL using a public news API
-var searchUrl = 'https://newsapi.org/v2/everything?q=' + term + '&apiKey='+gs.getProperty("newsapi.key");
+// Build the search URL using a public news API to search for a specific topic or story
+var searchUrl = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(term) + '&apiKey=' + gs.getProperty("newsapi.key");
 
-// Replace "YOUR_API_KEY" with your actual News API key
 var chatReq = new sn_ws.RESTMessageV2();
 chatReq.setEndpoint(searchUrl);
 chatReq.setHttpMethod("GET");
@@ -25,13 +23,13 @@ if (responseData.articles.length > 0) {
   // Extract information from the first article
   var article = responseData.articles[0];
   var title = article.title;
-  var author = article.author;
-  var description = article.description;
+  var author = article.author || "Unknown author";
+  var description = article.description.length > 255 ? article.description.substring(0, 252) + "... Read More" : article.description;
   var url = article.url;
 
   // Send the extracted information as a Slack message
-  var message = "**Title:** " + title + "\n**Author:** " + author + "\n**Description:** " + description + "\n**URL:** " + url;
-  new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+  var message = "*Title:* " + title + "\n*Author:* " + author + "\n*Description:* " + description + "\n*URL:* " + url;
+  new x_snc_slackerbot.Slacker().send_chat(current, message, true);
 } else {
-  new x_snc_slackerbot.Slacker().send_chat(current, "Sorry, I couldn't find any news articles related to \"" + term + "\".", false);
+  new x_snc_slackerbot.Slacker().send_chat(current, "Sorry, I couldn't find any news articles related to \"" + term + "\".", true);
 }

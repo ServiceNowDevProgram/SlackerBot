@@ -8,11 +8,11 @@ flags:gmi
 	var si = new Slacker();
 	var thread_ts = current.getValue( 'thread_ts' );
 
-	if( !thread_ts ){
-		message = 'This command is only usable in a thread.';
-		si.send_chat( current, message, false );
-		return null;
-	}
+	// if( !thread_ts ){
+	// 	message = 'This command is only usable in a thread.';
+	// 	si.send_chat( current, message, false );
+	// 	return null;
+	// }
 
 	function findWordAfterDashDash(str) {
 		var match = str.match(/--\s*(.+)/);
@@ -23,7 +23,11 @@ flags:gmi
 	var chats = [];
 	var nda = false;
 	var chatGr = new GlideRecord('x_snc_pointsthing_chat');
-	chatGr.addEncodedQuery('thread_ts=' + thread_ts + '^ORts=' + thread_ts + '^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
+	if (thread_ts){
+		chatGr.addEncodedQuery('thread_ts=' + thread_ts + '^ORts=' + thread_ts + '^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
+	} else {
+		chatGr.addEncodedQuery('channel=' + current.getValue('channel') + '^sys_created_onONLast 30 minutes@javascript:gs.beginningOfLast30Minutes()@javascript:gs.endOfLast30Minutes()^thread_ts=NULL^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup')
+	}
 	chatGr.orderBy('sys_created_on');
 	chatGr.query();
 	while (chatGr.next()){
@@ -36,7 +40,11 @@ flags:gmi
 	}
 
 	if(nda){
-		new x_snc_slackerbot.Slacker().send_chat(current, "This thread has been marked confidential and can not be summarized.", false);
+		if (thread_ts){
+			new x_snc_slackerbot.Slacker().send_chat(current, "This thread has been marked confidential and cannot be summarized.", false);
+		} else {
+			new x_snc_slackerbot.Slacker().send_chat(current, "This recent conversation has been marked confidential and cannot be summarized.", false);
+		}
 		return;
 	}
 
@@ -61,5 +69,6 @@ flags:gmi
 	var show_tokens = false;
 	var token_cost = show_tokens ? "> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002).toFixed(6) + ")\n" : "";
 
-	new x_snc_slackerbot.Slacker().send_chat(current, "> This thread so far:\n" + token_cost + "\n" + chatResponseBody.choices[0].message.content, false);
+	var intro = thread_ts ? "> This thread so far:\n" : "> Last 30 minutes summarized:\n";
+	new x_snc_slackerbot.Slacker().send_chat(current, intro + token_cost + "\n" + chatResponseBody.choices[0].message.content, false);
 } )( current );

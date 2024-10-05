@@ -1,3 +1,9 @@
+/*
+activation_example:!quiz itsm
+regex:!quiz\s+(.+)
+flags:gmi
+*/
+
 (function(current) {
     var slacker = new x_snc_slackerbot.Slacker();
 
@@ -13,7 +19,7 @@
     var quizTopic = match[1].trim();
 
     try {
-		// Openai Integration - Generate Quiz
+	// Openai Integration - Generate Quiz
         var apiKey = gs.getProperty("openai.key");
 
         var restMessage = new sn_ws.RESTMessageV2();

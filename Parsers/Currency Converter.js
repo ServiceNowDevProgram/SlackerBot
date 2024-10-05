@@ -26,8 +26,7 @@ var chatResponseBody = chatResponse.getBody();
 // Parse the API response as JSON
 var responseData = JSON.parse(chatResponseBody);
 
-// Check if the API response   
- contains exchange rates
+// Check if the API response contains exchange rates
 if (responseData.rates && responseData.rates[toCurrency]) {
   var exchangeRate = responseData.rates[toCurrency];
   var convertedAmount = amount * exchangeRate;

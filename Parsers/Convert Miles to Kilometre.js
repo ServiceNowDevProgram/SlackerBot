@@ -4,7 +4,7 @@ regex:(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?mi(le|les)\b
 flags:gmi
 */
 
-var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?mi(le|iles)\b/gmi;
+var regextest = /(?:^|\s)(=?-?\d{1,5}\.?\d{0,8})\s?mi(le|les)\b/gmi;
 var match = regextest.exec(current.text);
 var numbertest = /-?\d{1,}\.?\d{0,}/;
 var numbermatch = numbertest.exec(match[0]);

@@ -4,6 +4,7 @@ regex: !random (\d+) (\d+)
 flags: gmi
 order: 100
 stop_processing: true
+active:false
 */
 
 var matches = current.text.match(/!random (\d+) (\d+)/);

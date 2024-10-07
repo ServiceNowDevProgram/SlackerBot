@@ -1,0 +1,24 @@
+/*
+activation_example: !add task to my list
+regex: !add (.+)
+flags: gmi
+order: 100
+stop_processing: true
+*/
+
+var tasks = []; // Store tasks
+
+var matches = current.text.match(/!add (.+)/);
+if (matches) {
+    var task = matches[1].trim();
+    tasks.push(task);
+    new x_snc_slackerbot.Slacker().send_chat(current, `Task added: "${task}"`, false);
+} else if (current.text === '!tasks') {
+    if (tasks.length === 0) {
+        new x_snc_slackerbot.Slacker().send_chat(current, 'Your to-do list is empty.', false);
+    } else {
+        new x_snc_slackerbot.Slacker().send_chat(current, 'Your tasks:\n' + tasks.join('\n'), false);
+    }
+} else {
+    new x_snc_slackerbot.Slacker().send_chat(current, 'Please use the format: !add task or !tasks to view your list.', true);
+}

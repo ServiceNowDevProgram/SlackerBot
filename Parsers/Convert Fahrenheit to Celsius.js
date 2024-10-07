@@ -4,21 +4,18 @@ regex:(?:^|\s)(-?\d{1,3}\.?\d{0,2})°?\s?(?:degrees)?\s?f(?:ahrenheit)?\b
 flags:gmi
 */
 
-var regextest = /(?:^|\s)(-?\d{1,3}\.?\d{0,2})°?\s?(?:degrees)?\s?f(?:ahrenheit)?\b/gmi;
-var numbertest = /-?\d{1,}\.?\d{0,}/;
-var conversions = [];
+const regexTest = /(-?\d{1,3}(?:\.\d{1,2})?)°?\s?(?:degrees?)?\s?f(?:ahrenheit)?\b/gi;
+const fahrenheitToCelsius = f => ((f - 32) * 5 / 9).toFixed(2);
+const formatNumber = num => Number(num).toFixed(2).replace(/\.00$/, '');
+const conversions = [];
 
-var match;
-while ((match = regextest.exec(current.text)) !== null) {
-    var numbermatch = numbertest.exec(match[0]);
-    var fahrenheit = parseFloat(numbermatch[0]);
-    var celsius = (fahrenheit - 32) * 5/9;
-    
-    var originalNumber = fahrenheit.toFixed(2).toString().slice(-3) == '.00' ? 
-        fahrenheit.toFixed(0) : fahrenheit.toFixed(2);
-    
-    conversions.push(originalNumber + '°F is ' + celsius.toFixed(2) + ' degrees in sane units (Celsius).');
-    current.text = current.text.replace(match[0], celsius.toFixed(2) + '°C');
-}
-var conversionMessage = conversions.join('\n');
-var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, conversionMessage);
+current.text = current.text.replace(regexTest, (match, f) => {
+  const celsius = fahrenheitToCelsius(f);
+  const formattedF = formatNumber(f);
+  conversions.push(`${formattedF}°F is ${celsius} degrees in sane units (Celsius).`);
+  return `${celsius}°C`;
+});
+
+const conversionMessage = conversions.join('\n');
+
+new x_snc_slackerbot.Slacker().send_chat(current, conversionMessage);

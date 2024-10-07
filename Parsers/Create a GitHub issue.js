@@ -5,10 +5,10 @@ flags:i
 */
 
 // Prepare variables
-var clientId = gs.getProperty('x_snc_slackerbot.issueapp.id','invalid_id');
-var providerId = gs.getProperty('x_snc_slackerbot.issueapp.provider','invalid_id');
-var installId = gs.getProperty('x_snc_slackerbot.issueapp.install_id','invalid_id');
-var repositoryOwner = gs.getProperty('x_snc_slackerbot.issueapp.owner','ServiceNowDevProgram');
+var clientId = gs.getProperty('slackerbot.issueapp.id','invalid_id');
+var providerId = gs.getProperty('slackerbot.issueapp.provider','invalid_id');
+var installId = gs.getProperty('slackerbot.issueapp.install_id','invalid_id');
+var repositoryOwner = gs.getProperty('slackerbot.issueapp.owner','ServiceNowDevProgram');
 var supportedRepos = getSupportedRepos();
 var message = '';
 var selectedRepository = '';

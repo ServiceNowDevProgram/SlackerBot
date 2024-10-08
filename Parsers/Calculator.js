@@ -1,7 +1,7 @@
 /*
-activation_example: !calculate <expression>
-regex: !calculate (.+)
-flags: gmi
+activation_example:!calculate <expression>
+regex:!calculate (.+)
+flags:gmi
 */
 
 var input = current.text.trim();

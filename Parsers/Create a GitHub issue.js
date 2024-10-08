@@ -72,7 +72,7 @@ if(message.length > 0 || selectedRepository.length == 0 || clientId == 'invalid_
             slacker.send_chat(current, message, false);
         }  else {
             blockMsg = buildBlockMessage(output.number, output.html_url);
-            slacker.send_chat(current, message, false);
+            slacker.send_chat(current, blockMsg, false);
         }
     }
 }

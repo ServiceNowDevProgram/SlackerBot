@@ -18,6 +18,8 @@
 
 Eg. Run a script when a user says ____
 
+**Notice that lines that have key:value pairs have no leading spaces before the value**. Eg. `regex:!test` is correct, while `regex: !test` is very incorrect and could cause errors
+
 - Line 1 must always be `/*`
 - Line 2 must always be `activation_example:` followed by a short description of how this parser would be activate
 - Line 3 must always be `regex:` followed by a regex expression that validates if the parser should run. Do not include the opening and closing `/`

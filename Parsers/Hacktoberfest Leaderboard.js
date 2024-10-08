@@ -24,52 +24,55 @@ var leaderboard = [];
 var leaderboard_index = 0;
 var count = 0;
 if (Math.floor(items.length * 0.05) > 0) {
-  leaderboard.push("**Top 5% contributors:**");
+  leaderboard.push("*Top 5% contributors:*");
   count = Math.floor(items.length * 0.05);
+  var this_section = [];
   for (var i05 = 0; i05 < count; i05++) {
-    leaderboard.push(items[leaderboard_index].username + ".");
+    this_section.push(items[leaderboard_index].username);
     leaderboard_index++;
   }
+  leaderboard.push(this_section.join(", "));
   leaderboard.push("");
 }
 if (Math.floor(items.length * 0.1) > 0) {
-  leaderboard.push("**Top 10% contributors:**");
+  leaderboard.push("*Top 10% contributors:*");
   count = Math.floor(items.length * 0.1) - Math.floor(items.length * 0.05);
+  this_section = [];
   for (var i10 = 0; i10 < count; i10++) {
-    leaderboard.push(items[leaderboard_index].username + ".");
+    this_section.push(items[leaderboard_index].username);
     leaderboard_index++;
   }
+  leaderboard.push(this_section.join(", "));
   leaderboard.push("");
 }
 if (Math.floor(items.length * 0.25) > 0) {
-  leaderboard.push("**Top 25% contributors:**");
+  leaderboard.push("*Top 25% contributors:*");
   count =
     Math.floor(items.length * 0.25) -
     Math.floor(items.length * 0.1) -
     Math.floor(items.length * 0.05);
+  this_section = [];
   for (var i25 = 0; i25 < count; i25++) {
-    leaderboard.push(items[leaderboard_index].username + ".");
+    this_section.push(items[leaderboard_index].username);
     leaderboard_index++;
   }
+  leaderboard.push(this_section.join(", "));
   leaderboard.push("");
 }
 if (Math.floor(items.length * 0.5) > 0) {
-  leaderboard.push("**Top 50% contributors:**");
+  leaderboard.push("*Top 50% contributors:*");
   count =
     Math.floor(items.length * 0.5) -
     Math.floor(items.length * 0.25) -
     Math.floor(items.length * 0.1) -
     Math.floor(items.length * 0.05);
+  this_section = [];
   for (var i50 = 0; i50 < count; i50++) {
-    leaderboard.push(items[leaderboard_index].username + ".");
+    this_section.push(items[leaderboard_index].username);
     leaderboard_index++;
   }
+  leaderboard.push(this_section.join(", "));
   leaderboard.push("");
-}
-leaderboard.push("**Other contributors:**");
-while (leaderboard_index < items.length) {
-  leaderboard.push(items[leaderboard_index].username + ".");
-  leaderboard_index++;
 }
 
 new x_snc_slackerbot.Slacker().send_chat(current, leaderboard.join("\n"), true);

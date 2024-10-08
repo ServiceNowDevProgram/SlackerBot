@@ -1,5 +1,5 @@
 /*
-activation_example: !issue Slacker Donut is moldy, !issue -h
+activation_example:!issue Slacker Moldy donut, !issue -help
 regex:^!issue\u0020?
 flags:i
 */
@@ -14,6 +14,7 @@ var message = '';
 var selectedRepository = '';
 var body, blockMsg;
 var titleLength = 60; // Lets be brief since we'll reflect the description in the body too
+var slacker = new x_snc_slackerbot.Slacker();
 
 // Get message
 var issueCall = current.text.replace(/^!issue\u0020?/i,'').trim();
@@ -31,7 +32,7 @@ if(callArr.length == 1){
             message += '\n\t`' + repo + '` - Accepted triggers:\n\t\t`' + supportedRepos[repo].join('`, `') + '`';
         }
     } else {
-        message = '!issue must be called with the name of a repo, *followed by the issue description*. For example: `!issue Slacker My donut has no hole`\n\nThe full list of repos and accepted triggers can be found by sending !issue -help';
+        message = '!issue must be called with the name of a repo, followed by the issue description. For example: `!issue Slacker My donut has no hole`\n\nThe full list of repos and accepted triggers can be found by sending !issue -help';
     }
 }
 
@@ -47,12 +48,12 @@ if(callArr.length >= 2){
 
 // Validate if we should progress
 if(message.length > 0 || selectedRepository.length == 0 || clientId == 'invalid_id' || providerId == 'invalid_id' || installId == 'invalid_id'){
-	if(selectedRepository.length == 0){
+	if(selectedRepository.length == 0 && callArr.length > 1 && callArr[0] != '-help'){
 		message = 'The provided repository is not supported by the SNDevs Slacker Issue Reporter at this time. New repos can be added by submitting a pull request.';
 	} else if(message.length == 0 && (clientId == 'invalid_id' || providerId == 'invalid_id' || installId == 'invalid_id')){
 		message = 'A required property has not been configured. Please advise users in <#CKJ2TE0AK> so this can be addressed.';
 	}
-    new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+	slacker.send_chat(current, message, false);
 } else {
     body = {};
     body.title = callArr.join(' ').substring(0,titleLength);
@@ -63,15 +64,15 @@ if(message.length > 0 || selectedRepository.length == 0 || clientId == 'invalid_
 
     if(!accessToken){
         message = 'An issue occurred while generating the access token for GitHub. Please advise users in <#CKJ2TE0AK> so they can investigate.';
-        new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+        slacker.send_chat(current, message, false);
     } else {
         var output = createIssue(repositoryOwner, selectedRepository, body, accessToken);
         if(!output){
             message = 'An issue occured while creating an issue over the API. Please wait a few seconds and try again. If the issue persists, please advise users in <#CKJ2TE0AK> so they can investigate.';
-            new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+            slacker.send_chat(current, message, false);
         }  else {
             blockMsg = buildBlockMessage(output.number, output.html_url);
-            new x_snc_slackerbot.Slacker().send_chat(current, message, false);
+            slacker.send_chat(current, message, false);
         }
     }
 }
@@ -84,14 +85,14 @@ function getSupportedRepos() {
     // Make triggers lowercase so that we can do case-insensitive matching
     var repoMap = {
         'code-snippets':                    ['code-snippets','snippets'],
-        'SlackerBot':                       ['slacker','slackbot'],
+        'SlackerBot':                       ['slackerbot','slacker','slackbot'],
         'UI-Builder-Conference-Notes-App':  ['ui-builder-conference-notes-app','conference-notes','notes-app'],
         'Points-Thing':                     ['points-thing','pt','points'],
         'Plants':                           ['plants'],
         'example-instancescan-checks':      ['example-instancescan-checks','checks','instancescan'],
         'syntax_macros':                    ['syntax_macros','macros'],
         'ServiceNow-GenAi-Prompt-Library':  ['serviceNow-genai-prompt-library','genai','prompts','prompt','library','prompt-library'],
-        'Hacktoberfest':                    ['Hacktoberfest']
+        'Hacktoberfest':                    ['hacktoberfest']
     }
     
     return repoMap;
@@ -199,5 +200,6 @@ function buildBlockMessage(number, url){
             }
         ]
     };
+    blocks.text = 'Issue #' + number + ' created!';
     return blocks;
 }

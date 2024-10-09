@@ -24,38 +24,47 @@
 
     // ###### Slacker QUIZ ###### //
     } else if (contentType === 'application/x-www-form-urlencoded') {
+		var slackerProvider = new x_snc_slackerbot.Slacker();
         var bodyData = request.queryParams;
         var formData = bodyData.payload;
         var interactionPayload = JSON.parse(formData);
 
-        // Get selected option and correct option
+        // Get selected option, correct option, the user ID that initiated the quiz, and explanation
         var action = interactionPayload.actions[0];
         var selectedOption = action.value;
         var parts = selectedOption.split("|");
-        var userSelection = parts[0]; 
+        var userSelection = parts[0];
         var correctOption = parts[1];
+        var originalUserId = parts[2];
+        var explanation = parts[3];
 
-        // Apply styles to each button based on whether it was selected and whether its correct
+        // Verify if the interacting user is the same as the original user
+        if (interactionPayload.user.id !== originalUserId) return;
+
+        // Apply styles to each button based on whether it was selected and whether it's correct
         var blocks = interactionPayload.message.blocks;
-        blocks[1].elements.forEach(function(button) {       
-            if (button.value === selectedOption) {
-                button.style = (userSelection === correctOption) ? "primary" : "danger";
-            } else if (button.value === correctOption) {
-                button.style = "primary"; 
+        var correctIndex = parseInt(correctOption.split('_')[1]) - 1;
+
+        blocks[1].elements.forEach(function(button, index) {
+            if (userSelection === correctOption) {
+                button.style = (index === correctIndex) ? "primary" : "danger";
+            } else {
+                if (button.value === selectedOption) {
+                    button.style = "danger";
+                }
             }
         });
 
-        // Update Message in Slack to reflect button styles
         var updateMessagePayload = {
             "channel": interactionPayload.channel.id,
             "ts": interactionPayload.message.ts,
             "blocks": blocks,
             "text": "Updating the quiz feedback."
         };
-        var responseMessageUpdated = new x_snc_slackerbot.Slacker().update_chat(updateMessagePayload);
+
+        var responseMessageUpdated = slackerProvider.update_chat(updateMessagePayload);
 
         // Validate User Answer and send appropriate feedback
-        var slacker = new x_snc_slackerbot.Slacker();
         var current = {
             "text": interactionPayload.message.blocks[0].text.text,
             "ts": interactionPayload.message.ts,
@@ -67,16 +76,17 @@
             }
         };
 
-        var correctIndex = parseInt(correctOption.split('_')[1]) - 1;
-        var correctAnswerText = interactionPayload.message.blocks[0].text.text.split("\n")[correctIndex + 2]; 
-        var correctAnswer = correctAnswerText.trim();
+        var questionText = interactionPayload.message.blocks[0].text.text;
+        var textLines = questionText.split("\n");
+        var correctAnswerText = textLines[correctIndex + 4].trim();
+        var correctAnswer = correctAnswerText.replace(/^[A-D]\)\s*/, '');
 
         if (userSelection === correctOption) {
-            var correctMessage = "Well done! The correct answer is:\n *" + correctAnswer + "*";
-            slacker.send_chat(current, correctMessage, false);
+            var correctMessage = "Well done! The correct answer is:\n*" + correctAnswer + "*\n\n" + explanation;
+            slackerProvider.send_chat(current, correctMessage, false);
         } else {
             var incorrectMessage = "Oops, not quite! Try Again.";
-            slacker.send_chat(current, incorrectMessage, false);
+            slackerProvider.send_chat(current, incorrectMessage, false);
         }
     }
 
@@ -94,14 +104,14 @@
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:36:30</sys_created_on>
         <sys_id>bbcb42a61bc61d10d806dc23b24bcbd2</sys_id>
-        <sys_mod_count>62</sys_mod_count>
+        <sys_mod_count>64</sys_mod_count>
         <sys_name>Event</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_ws_operation_bbcb42a61bc61d10d806dc23b24bcbd2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-10-05 17:46:51</sys_updated_on>
+        <sys_updated_on>2024-10-09 21:40:43</sys_updated_on>
         <web_service_definition display_value="SlackerBot Event Handler">1fabce661bc61d10d806dc23b24bcbd6</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

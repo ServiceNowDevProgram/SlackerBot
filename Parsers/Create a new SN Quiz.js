@@ -12,14 +12,15 @@ flags:gmi
     var match = text.match(/!quiz\s+(.+)/i);
 
     if (!match) {
-        slacker.send_chat(current, "Please provide a valid quiz topic, e.g., !quiz ITSM.", false);
+        slacker.send_chat(current, "Please provide a valid ServiceNow quiz topic, e.g., !quiz ITSM.", false);
         return;
     }
 
     var quizTopic = match[1].trim();
+    var originalUserId = current.user.user_id;
 
     try {
-	// Openai Integration - Generate Quiz
+        // Openai Integration - Generate Quiz
         var apiKey = gs.getProperty("openai.key");
 
         var restMessage = new sn_ws.RESTMessageV2();
@@ -29,18 +30,19 @@ flags:gmi
         restMessage.setRequestHeader('Content-Type', 'application/json');
 
         var requestBody = {
-            "model": "gpt-4",
+            "model": "gpt-4o",
             "messages": [{
                     "role": "system",
                     "content": "You are an assistant that creates structured multiple-choice quiz questions about ServiceNow topics. Return the question and answers in JSON format."
                 },
                 {
                     "role": "user",
-                    "content": "Please generate one multiple-choice quiz question on the topic of " + quizTopic + ". Return the result in the following JSON format:\n{\n  \"question\": \"<question text>\",\n  \"answers\": [\"option 1\", \"option 2\", \"option 3\", \"option 4\"],\n  \"correct\": \"<correct answer>\",\n  \"explanation\": \"<why this option is correct>\"\n}"
+                    "content": "Please generate one multiple-choice quiz question on the topic of " + quizTopic + ". The answers should not include any prefixes like 'A)', '1.', etc. Just provide the plain answer text. Return the result in the following JSON format:\n{\n  \"question\": \"<question text>\",\n  \"answers\": [\"option 1\", \"option 2\", \"option 3\", \"option 4\"],\n  \"correct\": \"<correct answer>\",\n  \"explanation\": \"<why this option is correct>\"\n}"
                 }
             ],
             "max_tokens": 200
         };
+
 
         restMessage.setRequestBody(JSON.stringify(requestBody));
         var response = restMessage.execute();
@@ -73,11 +75,13 @@ flags:gmi
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*Question:* " + quizQuestion.question + "\n\n" +
+                    "text": "Hello, " + current.user.name + "! Test your ServiceNow skills and have fun! \n\n" +
+                        "*Question:* " + quizQuestion.question + "\n\n" +
                         optionLetters[0] + ") " + quizQuestion.answers[0] + "\n" +
                         optionLetters[1] + ") " + quizQuestion.answers[1] + "\n" +
                         optionLetters[2] + ") " + quizQuestion.answers[2] + "\n" +
-                        optionLetters[3] + ") " + quizQuestion.answers[3]
+                        optionLetters[3] + ") " + quizQuestion.answers[3] + "\n\n" +
+                        "_*Note:* Only the person who initiated the quiz can answer._"
                 }
             },
             {
@@ -89,7 +93,8 @@ flags:gmi
                             "type": "plain_text",
                             "text": optionLetters[index]
                         },
-                        "value": "option_" + (index + 1) + "|" + correctOptionIndex,
+
+                        "value": "option_" + (index + 1) + "|" + correctOptionIndex + "|" + originalUserId + "|" + quizQuestion.explanation,
                         "action_id": "quiz_answer_" + (index + 1)
                     };
                 })

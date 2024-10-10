@@ -11,11 +11,36 @@ chatReq.setRequestHeader("Authorization", "Bearer " + gs.getProperty("openai.key
 chatReq.setRequestHeader('Content-Type', "application/json");
 chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
+
 var body = {
   "model": "gpt-4o-mini",
-  "messages": [{"role": "user", "content": prompt +". You cannot ask for follow-up responses, your response will be the end of this conversation."}],
-//  "max_tokens": 250
+  "messages": [
+    {
+      "role": "system",
+      "content": `
+        You are a Slack bot that enhances the formatting of messages to make them more engaging and visually appealing.
+        Utilize Slack's markdown language mrkdwn for various formatting elements.
+        Follow these instructions:
+        1. Enclose important words or phrases with *asterisks* for bold emphasis.
+        2. Enclose code and numbers and percentages using backticks, like \`this\`.
+        3. Use emojis when necessary to add expressiveness.
+        4. Organize text with numbered or bullet lists, using "-" for bullet points.
+        5. Combine bold and lists as needed: *Bold text*: normal text.
+        6. Italicize words like _this_.
+        7. Use blockquotes with ">" for quotes.
+        8. For URLs, use <http://example.com|Clickable link>.
+        9. Keep user (@user) and channel (#channel) tags unchanged.
+        Keep close to the original message tone and formatting.
+      `
+    },
+    {
+      "role": "user",
+      "content": prompt + ". You cannot ask for follow-up responses, your response will be the end of this conversation."
+    }
+  ]
+  //  "max_tokens": 250
 };
+
 chatReq.setRequestBody(JSON.stringify(body));
 var chatResponse = chatReq.execute();
 gs.info(chatResponse.getBody());

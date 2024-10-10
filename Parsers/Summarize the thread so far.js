@@ -1,7 +1,7 @@
 /*
-activation_example: !catchmeup or !summary
-regex: !(catchmeup|summary|catchup)
-flags: gmi
+activation_example:!catchmeup or !summary
+regex:!(catchmeup|summary|catchup)
+flags:gmi
 */
 
 (function(current) {

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="02baca4b972d7110af7dfa400153afd0" label="Parser" max_length="40" name="x_snc_slackerbot_parser" type="collection">
-        <element attributes="edge_encryption_enabled=true" label="Activation example" max_length="40" name="activation_example" type="string"/>
+        <element default="true" label="Include in !help" max_length="40" name="include_in_help" type="boolean"/>
+        <element label="Stop processing" max_length="40" name="stop_processing" type="boolean"/>
         <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
         <element display="true" label="Description" max_length="128" name="description" type="string"/>
-        <element attributes="edge_encryption_enabled=true" label="Emoji" max_length="128" name="emoji" type="string"/>
-        <element label="Flags" max_length="40" name="flags" type="string"/>
-        <element default="true" label="Include in !help" max_length="40" name="include_in_help" type="boolean"/>
         <element attributes="edge_encryption_enabled=true" label="Order" max_length="40" name="order" type="integer"/>
-        <element label="Regex" max_length="128" name="regex" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Activation example" max_length="40" name="activation_example" type="string"/>
+        <element attributes="edge_encryption_enabled=true,trim_value=true" label="Emoji" max_length="128" name="emoji" type="string"/>
+        <element attributes="trim_value=true" label="Regex" max_length="128" name="regex" type="string"/>
+        <element attributes="trim_value=true" label="Flags" max_length="40" name="flags" type="string"/>
         <element label="Script" max_length="8000" name="script" type="script"/>
-        <element label="Stop processing" max_length="40" name="stop_processing" type="boolean"/>
     </element>
 </database>

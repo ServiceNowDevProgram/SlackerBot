@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="regex" table="x_snc_slackerbot_parser">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>trim_value=true</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -57,6 +57,8 @@
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_dictionary_x_snc_slackerbot_parser_regex</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-10 19:02:23</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

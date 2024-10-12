@@ -4,10 +4,10 @@ regex: !random (\d+) (\d+)
 flags: gmi
 order: 100
 stop_processing: true
-active:false
+active:true
 */
 
-var matches = current.text.match(/!random (\d+) (\d+)/);
+var matches = current.text.trimStart().match(/!random (\d+) (\d+)/);
 if (matches) {
     var min = parseInt(matches[1], 10);
     var max = parseInt(matches[2], 10);

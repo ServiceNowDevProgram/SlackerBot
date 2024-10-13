@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>b2e5285cc39112102b22921ed40131be</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!hellofrom Miami, FL&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Hello from&lt;/description&gt;
+        &lt;emoji/&gt;
+        &lt;flags&gt;gmi&lt;/flags&gt;
+        &lt;include_in_help&gt;true&lt;/include_in_help&gt;
+        &lt;order/&gt;
+        &lt;regex&gt;(!hellofrom) &lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[/*
+activation_example:!hellofrom Miami, FL
+regex:(!hellofrom)
+flags:gmi
+*/
+
+var rawInput = current.text;
+// Check if the user is requesting help
+if (rawInput.trim().toLowerCase() === "!hellofrom -help") {
+    provideHelpText();
+} else {
+    processHelloFromCommand(rawInput);
+}
+
+function provideHelpText() {
+    var helpText = "SNDevs Slacker Hello From\n" +
+        "A command to get the current date and time for a specified location.\n\n" +
+        "Usage: `!hellofrom [location]`\n" +
+        "Examples:\n" +
+        "  `!hellofrom New York, NY`\n" +
+        "  `!hellofrom Paris, France`\n" +
+        "  `!hellofrom Tokyo`\n\n" +
+        "Notes:\n" +
+        "• You can specify a city by itself, or include a state or country for more precision.\n" +
+        "• The command will return the current date and time for the specified location.";
+    
+    new x_snc_slackerbot.Slacker().send_chat(current, helpText, true);
+}
+
+function processHelloFromCommand(input) {
+    var location = processLocationString(input);
+    var encodedLocation = encodeURIComponent(location);
+    var apiKey = gs.getProperty("x_snc_slackerbot.timezone.token");
+
+    // Build the full endpoint
+    var baseUrl = 'https://api.ipgeolocation.io/timezone';
+    var searchUrl = baseUrl + '?location=' + encodedLocation + '&amp;apiKey=' + apiKey;
+
+    // Make the API request
+    var chatReq = new sn_ws.RESTMessageV2();
+    chatReq.setEndpoint(searchUrl);
+    chatReq.setHttpMethod("GET");
+    var chatResponse = chatReq.execute();
+    var chatResponseBody = JSON.parse(chatResponse.getBody());
+    var dateTimeTxt = chatResponseBody.date_time_txt;
+
+    var response = "Hello from " + location + ". Our current date and time is " + dateTimeTxt;
+
+    new x_snc_slackerbot.Slacker().send_chat(current, response, true);
+}
+
+function processLocationString(input) {
+    // Remove "!hellofrom" and trim
+    var cleaned = input.replace(/^!hellofrom\s*/, '').trim();
+    
+    // Limit to first location (up to first comma if present)
+    var limited = cleaned.split(',')[0].trim();
+    
+    return limited;
+}]]&gt;&lt;/script&gt;
+        &lt;stop_processing&gt;false&lt;/stop_processing&gt;
+        &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2024-10-13 01:21:28&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;b2e5285cc39112102b22921ed40131be&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;7&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2024-10-13 02:45:37&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+    &lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;
+        &lt;id&gt;b2e5285cc39112102b22921ed40131be&lt;/id&gt;
+        &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2024-10-13 01:23:11&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;3b46285cc39112102b22921ed401315b&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2024-10-13 01:23:11&lt;/sys_updated_on&gt;
+        &lt;table&gt;x_snc_slackerbot_parser&lt;/table&gt;
+        &lt;use_es_latest&gt;false&lt;/use_es_latest&gt;
+    &lt;/sys_es_latest_script&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-13 02:46:50</sys_created_on>
+        <sys_id>9d797cd0c31512102b22921ed4013129</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Hello from</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_9d797cd0c31512102b22921ed4013129</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-13 02:46:50</sys_updated_on>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+</record_update>

@@ -21,7 +21,7 @@ function evaluateExpression(expr) {
 
     // Use Free API to calculate
     var calc = new sn_ws.RESTMessageV2();
-	var url = 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(expr);
+    var url = 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(expr);
     calc.setEndpoint(url);
     calc.setHttpMethod("GET");
     var chatResponse = calc.execute();

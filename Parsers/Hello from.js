@@ -29,8 +29,8 @@ function provideHelpText() {
 
 function processHelloFromCommand(input) {
     var location = processLocationString(input);
-    var encodedLocation = encodeURIComponent(location);
-    var apiKey = gs.getProperty("x_snc_slackerbot.timezone.token");
+    // You will need to create a global system property called 'timezone.token' and obtain an API key from https://ipgeolocation.io/ to use this parser.
+    var apiKey = gs.getProperty("timezone.token");
 
     // Build the full endpoint
     var baseUrl = 'https://api.ipgeolocation.io/timezone';

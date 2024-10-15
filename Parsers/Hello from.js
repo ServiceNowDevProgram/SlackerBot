@@ -34,7 +34,7 @@ function processHelloFromCommand(input) {
 
     // Build the full endpoint
     var baseUrl = 'https://api.ipgeolocation.io/timezone';
-    var searchUrl = baseUrl + '?location=' + encodedLocation + '&apiKey=' + apiKey;
+    var searchUrl = baseUrl + '?location=' + location + '&apiKey=' + apiKey;
 
     // Make the API request
     var chatReq = new sn_ws.RESTMessageV2();

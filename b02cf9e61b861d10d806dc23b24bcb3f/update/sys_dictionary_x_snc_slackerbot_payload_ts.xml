@@ -2,7 +2,6 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="ts" table="x_snc_slackerbot_payload">
         <active>true</active>
         <array>false</array>
-        <array_denormalized>false</array_denormalized>
         <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
         <calculation/>
@@ -25,9 +24,10 @@
         <element>ts</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="String">string</internal_type>
+        <internal_type display_value="">calendar_date_time</internal_type>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
         <name>x_snc_slackerbot_payload</name>
@@ -42,21 +42,18 @@
         <reference_qual/>
         <reference_qual_condition/>
         <reference_type/>
-        <sizeclass/>
         <spell_check>false</spell_check>
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-10-01 06:58:00</sys_created_on>
-        <sys_id>88bd97c9db565510791d8f8d13961932</sys_id>
-        <sys_mod_count>0</sys_mod_count>
         <sys_name>Timestamp</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_dictionary_x_snc_slackerbot_payload_ts</sys_update_name>
-        <sys_updated_by>earl.duque</sys_updated_by>
-        <sys_updated_on>2022-10-01 06:58:00</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-16 09:40:14</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -64,6 +61,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>

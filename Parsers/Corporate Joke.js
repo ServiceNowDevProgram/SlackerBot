@@ -6,6 +6,7 @@ flags:gmi
 
 var where = current.text.indexOf('!corporatejoke ') + 13;
 var term = current.text.substr(where).trim();
+term = gs.urlEncode(term);
 
 // Build the search URL using a public joke API
 var searchUrl = 'https://api.chucknorris.io/jokes/search?query=' + term;

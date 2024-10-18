@@ -6,6 +6,7 @@ flags:gmi
 
 var where = current.text.indexOf('!animal ') + 8;
 var term = current.text.substr(where).trim();
+term = gs.urlEncode(term);
 var chatReq = new sn_ws.RESTMessageV2();
 chatReq.setEndpoint('https://api.api-ninjas.com/v1/animals?name=' + term);
 chatReq.setHttpMethod("GET");

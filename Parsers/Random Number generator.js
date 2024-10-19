@@ -1,10 +1,10 @@
 /*
-activation_example: !random 1 10
-regex: !random (\d+) (\d+)
-flags: gmi
-order: 100
-stop_processing: true
-active:false
+activation_example:!random 1 10
+regex:!random (\d+) (\d+)
+flags:gmi
+order:100
+stop_processing:false
+active:true
 */
 
 var matches = current.text.match(/!random (\d+) (\d+)/);

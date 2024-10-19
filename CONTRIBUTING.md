@@ -1,37 +1,39 @@
 # Contributing
 
-## General requirements
+We appreciate your interest in contributing to the project! Please adhere to the following guidelines to ensure a smooth contribution process.
 
-- API usage should follow the information found in the [readme](README.md#available-apisvariables-in-parsers)
-- Pull request descriptions must be explicit and descriptive to what is being changed.
-  - Changes that are not within the scope of the description will result in the entire PR being rejected
-- No updates should be made directly to the automatically generated ServiceNow folders. Updates to these files should directly to the app after being imported into a ServiceNow instance.
-- Parser additions/updates must follow the [Parser template](#required-parser-template) below.
-- Low effort/spam Pull Requests will be marked as spam accordingly.
-- Filenames should not have special characters that are not allowed on normal file systems (eg. do not put ! in the file name).
-- Parsers should not be spammy or activated unintentionally by a user in a way that would be deemed spammy. For example, a parser that is activated by a common word would likely be rejected. Instead, use a `!` notation as this is widely accepted as an activation character (eg. `!question` instead of just `question` as an activation phrase)
-- We want the SlackerBot to be as close to base functionality as possible. The app (in ServiceNow) should not be updated with script includes that pertain to individual parsers, and such functionality should be entirely within a parser file so that users can choose which parsers they want to use without having extra script includes included. The only script includes that should be added to the app is if it's adding direct functionality to the bot itself (eg. the ability for the bot to parse emojis, or to send ephemeral messages, or accept blocks messages, etc.).
+## General Requirements
+
+- **API Usage**: Follow the guidelines outlined in the [README](README.md#available-apisvariables-in-parsers) regarding available APIs and variables in parsers.
+- **Descriptive Pull Requests**: Ensure your pull request descriptions are explicit and clearly articulate the changes made.
+  - Pull requests that deviate from the scope outlined in the description may be rejected.
+- **Automated Folders**: Do not make updates directly to the automatically generated ServiceNow folders. Any changes to these files should be made directly in the application after importing it into a ServiceNow instance.
+- **Parser Guidelines**: Additions or updates to parsers must conform to the [required parser template](#required-parser-template) outlined below.
+- **Quality Control**: Low-effort or spam pull requests will be marked as spam.
+- **File Naming Conventions**: Avoid using special characters that are not allowed in standard file systems (e.g., do not include `!` in filenames).
+- **Activation Phrase**: Parsers should not be inadvertently triggered in a spammy manner. For example, using common words as activation phrases may lead to rejection. Instead, use a `!` notation as an activation character (e.g., `!question` instead of just `question`).
+- **Modular Functionality**: We aim to keep SlackerBot's functionality as streamlined as possible. Do not include script includes pertaining to individual parsers within the app. Any such functionality should reside entirely within the parser file, allowing users to choose which parsers to activate without unnecessary script includes. The only script includes that should be added to the app are those providing direct functionality to the bot (e.g., parsing emojis, sending ephemeral messages, or handling block messages).
 
 ## Required Parser Template
 
-### For chat parsers
+### For Chat Parsers
 
-Eg. Run a script when a user says ____
+Example: Run a script when a user says ____
 
-**Notice that lines that have key:value pairs have no leading spaces before the value**. Eg. `regex:!test` is correct, while `regex: !test` is very incorrect and could cause errors
+**Note**: Lines containing key-value pairs should have no leading spaces before the value. For example, `regex:!test` is correct, while `regex: !test` is incorrect and may cause errors.
 
 - Line 1 must always be `/*`
-- Line 2 must always be `activation_example:` followed by a short description of how this parser would be activate
-- Line 3 must always be `regex:` followed by a regex expression that validates if the parser should run. Do not include the opening and closing `/`
-- Line 4 must always be `flags:` followed by the regex flags needed for line 3. If no flags are needed then leave the line as `flags:`
-- *Optional*: `order:` that the parser should run (lower orders run first, null/empty orders run last).
-- *Optional*: `stop_processing:` if set to `true`, will stop the parser from running any other parsers after this one.
-- The file header must always end with `*/`
-- The rest of the file should be the JavaScript (ES5) that does your desired parsing.
+- Line 2 must always be `activation_example:` followed by a short description of how this parser would be activated.
+- Line 3 must always be `regex:` followed by a regex expression that validates when the parser should run. Do not include the opening and closing `/`.
+- Line 4 must always be `flags:` followed by the regex flags needed for Line 3. If no flags are required, leave the line as `flags:`.
+- *Optional*: `order:` that specifies the order in which the parser should run (lower orders run first; null or empty orders run last).
+- *Optional*: `stop_processing:` if set to `true`, will prevent any subsequent parsers from executing after this one.
+- The file header must always end with `*/`.
+- The remaining content of the file should be valid JavaScript (ES5) that implements the desired parsing logic.
 
-Example acceptable chat parser file (From [Clap back.js](Parsers/Clap%20back.js)):
+**Example of an Acceptable Chat Parser File (from [Clap back.js](Parsers/Clap%20back.js))**:
 
-```js
+```javascript
 /*
 activation_example:!clap your sentence
 regex:!clap
@@ -42,29 +44,29 @@ stop_processing:false
 
 var sentence = current.text.replace(/!clap/gmi, "").trim().toUpperCase();
 if (sentence == '') {
-	new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
+    new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: gimme something to clap!', true);
 } else {
-	new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), false);
+    new x_snc_slackerbot.Slacker().send_chat(current, sentence.split(' ').join(' :clap: '), false);
 }
 ```
 
-### For reaction-added parsers
+### For Reaction-Added Parsers
 
-Eg. Run a script when a user adds a specific emoji as a reaction
+Example: Run a script when a user adds a specific emoji as a reaction.
 
-- Line 1 must always be /*
-- Line 2 must always be `emoji:` followed by a comma separated list of emojis that will activate this parser
-- Line 3 must always be */
-- The rest of the file should be the JavaScript (ES5) that does your desired parsing.
+- Line 1 must always be `/*`
+- Line 2 must always be `emoji:` followed by a comma-separated list of emojis that will activate this parser.
+- Line 3 must always be `*/`
+- The remaining content of the file should be valid JavaScript (ES5) that implements the desired parsing logic.
 
-Example acceptable react parser file (From [Parrot wave starter.js](Parsers/Parrot%20wave%20starter.js)
+**Example of an Acceptable Reaction Parser File (from [Parrot wave starter.js](Parsers/Parrot%20wave%20starter.js))**:
 
-```js
+```javascript
 /*
 emoji:parrotwave1
 */
 
-for (var i = 2; i <= 7; i++){
-  new x_snc_slackerbot.Slacker().send_reaction(current, 'parrotwave' + i);
+for (var i = 2; i <= 7; i++) {
+    new x_snc_slackerbot.Slacker().send_reaction(current, 'parrotwave' + i);
 }
 ```

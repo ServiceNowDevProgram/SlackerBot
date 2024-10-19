@@ -19,8 +19,19 @@ function evaluateExpression(expr) {
         throw new Error("Invalid expression");
     }
 
-    // Use Function constructor to evaluate the expression safely
-    return new Function('return ' + expr)();
+    // Use Free API to calculate
+    var calc = new sn_ws.RESTMessageV2();
+    var url = 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(expr);
+    calc.setEndpoint(url);
+    calc.setHttpMethod("GET");
+    var chatResponse = calc.execute();
+    var result = JSON.parse(chatResponse.getBody());
+
+    result = parseFloat(result);
+
+    // Return the evaluated result
+    return result;
+
 }
 
 try {
@@ -30,8 +41,8 @@ try {
     var roundedResult = result.toFixed(2);
 
     // Send the calculated result back to the user
-    new x_snc_slackerbot.Slacker().send_chat(current, `The result is: ${roundedResult}`, false);
-  
+    new x_snc_slackerbot.Slacker().send_chat(current, "The result is: " + roundedResult, false);
+
 } catch (error) {
     // Handle errors if the expression is invalid
     new x_snc_slackerbot.Slacker().send_chat(current, "Oops! I couldn't understand that. Please provide a valid mathematical expression.", false);

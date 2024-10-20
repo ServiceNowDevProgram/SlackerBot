@@ -27,7 +27,7 @@ var uno = `⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀
 
 var string = current.text.replace(/!reverse/gmi, "").split('').reverse().join('');
 if (string == '') {
-	new x_snc_slackerbot.Slacker().send_chat(current, uno, true);
+	new x_snc_slackerbot.Slacker().send_chat(current, uno, false);
 } else {
-	new x_snc_slackerbot.Slacker().send_chat(current, string, true);
+	new x_snc_slackerbot.Slacker().send_chat(current, string, false);
 }

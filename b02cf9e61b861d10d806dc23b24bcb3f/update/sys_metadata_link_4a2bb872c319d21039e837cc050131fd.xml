@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>408a3032c319d21039e837cc05013197</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="x_snc_slackerbot_parser"&gt;
+    &lt;x_snc_slackerbot_parser action="INSERT_OR_UPDATE"&gt;
+        &lt;activation_example&gt;!dictionary type a word&lt;/activation_example&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;description&gt;Dictionary&lt;/description&gt;
+        &lt;emoji/&gt;
+        &lt;flags&gt;gmi&lt;/flags&gt;
+        &lt;include_in_help&gt;true&lt;/include_in_help&gt;
+        &lt;order&gt;200&lt;/order&gt;
+        &lt;regex&gt;!dictionary&lt;/regex&gt;
+        &lt;script&gt;&lt;![CDATA[/*
+activation_example:!dictionary type a word
+regex:!dictionary
+flags:gmi
+order:200
+stop_processing:false
+*/
+
+var word = current.text.replace(/!dictionary/gmi, "").trim();
+if (word == '') {
+    new x_snc_slackerbot.Slacker().send_chat(current, 'Please type a word', false);
+} else {
+    var regex = /[0-9!@#$%^&amp;*(),.?":{}|&lt;&gt;]/;
+    if (regex.test(word)) {
+        new x_snc_slackerbot.Slacker().send_chat(current, 'Please type a word with only characters', false);
+    } else {
+        var wordsArray = word.split(" ");
+        var firstWord = wordsArray[0];
+		
+        var dictionary = new sn_ws.RESTMessageV2();
+        dictionary.setEndpoint('https://api.dictionaryapi.dev/api/v2/entries/en/' + firstWord);
+        dictionary.setHttpMethod("GET");
+        dictionary.setRequestHeader("Accept", "application/json");
+        var response = dictionary.execute();
+        var responseBody = response.getBody();
+        var statuscode = response.getStatusCode();
+        var responseJson = JSON.parse(responseBody);
+        var sendsentence = "";
+        if (statuscode == 200) {
+            var meaning = responseJson[0].meanings[0].definitions[0].definition;
+            sendsentence = firstWord + ': ' + meaning;
+        } else {
+            sendsentence = "Sorry pal, we couldn't find definitions for the word you were looking for.";
+        }
+        new x_snc_slackerbot.Slacker().send_chat(current, sendsentence, false);
+    }
+}]]&gt;&lt;/script&gt;
+        &lt;stop_processing&gt;false&lt;/stop_processing&gt;
+        &lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2024-10-20 21:17:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;408a3032c319d21039e837cc05013197&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2024-10-20 21:17:01&lt;/sys_updated_on&gt;
+    &lt;/x_snc_slackerbot_parser&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-20 21:19:04</sys_created_on>
+        <sys_id>4a2bb872c319d21039e837cc050131fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Dictionary</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_metadata_link_4a2bb872c319d21039e837cc050131fd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-20 21:19:04</sys_updated_on>
+        <tablename>x_snc_slackerbot_parser</tablename>
+    </sys_metadata_link>
+</record_update>

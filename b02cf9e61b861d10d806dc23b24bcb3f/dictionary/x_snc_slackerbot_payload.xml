@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="cd63611a47602110e628d855d36d43c1" label="Payload" max_length="40" name="x_snc_slackerbot_payload" type="collection">
-        <element attributes="edge_encryption_enabled=true" label="Channel" max_length="40" name="channel" type="string"/>
         <element attributes="json_view=true" label="Payload" max_length="4000" name="payload" read_only="true" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Timestamp" max_length="40" name="ts" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Channel" max_length="40" name="channel" type="string"/>
+        <element choice="1" default="event" label="Payload type" max_length="40" name="payload_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Event" sequence="1" value="event"/>
+                <element inactive_on_update="false" label="Interaction" sequence="2" value="interaction"/>
+            </choice>
+        </element>
     </element>
 </database>

@@ -1,126 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
     <sys_ws_operation action="INSERT_OR_UPDATE">
         <active>true</active>
-        <consumes>application/json,application/xml,text/xml,application/x-www-form-urlencoded</consumes>
-        <consumes_customized>true</consumes_customized>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
         <http_method>POST</http_method>
         <name>Event</name>
-        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-    var contentType = request.getHeader('Content-Type');
-    var slackerProvider = new x_snc_slackerbot.Slacker();
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 
-    if (contentType === 'application/json') {
-        if (request.body.data.challenge) {
-            response.setStatus(200);
-            response.setContentType('text/plain');
-            response.getStreamWriter().writeString(request.body.data.challenge);
-        } else {
-            var botCanAnswerJson = checkIfBotCanAnswer(request.body.data.event);
-            if (!botCanAnswerJson) return;
-
-            //gs.info('slackoff: ' + (request.body.dataString));
-            var payload = new GlideRecord('x_snc_slackerbot_payload');
-            payload.initialize();
-            payload.setValue('payload', JSON.stringify(request.body.data, null, 2));
-            payload.insert();
-        }
-
-    } else if (contentType === 'application/x-www-form-urlencoded') {
-        var bodyData = request.queryParams;
-        var formData = bodyData.payload;
-        var interactionPayload = JSON.parse(formData);
-        var botCanAnswerEncoded = checkIfBotCanAnswer(interactionPayload);
-        if (!botCanAnswerEncoded) return;
-
-        sendQuizInteraction(bodyData, formData, interactionPayload);
-    }
-
-    // ###### Slacker QUIZ ###### //
-    function sendQuizInteraction(bodyData, formData) {
-        // Get selected option, correct option, the user ID that initiated the quiz, and explanation
-        var action = interactionPayload.actions[0];
-        var selectedOption = action.value;
-        var parts = selectedOption.split("|");
-        var userSelection = parts[0];
-        var correctOption = parts[1];
-        var originalUserId = parts[2];
-        var explanation = parts[3];
-
-        // Verify if the interacting user is the same as the original user
-        if (interactionPayload.user.id !== originalUserId) return;
-
-        // Apply styles to each button based on whether it was selected and whether it's correct
-        var blocks = interactionPayload.message.blocks;
-        var correctIndex = parseInt(correctOption.split('_')[1]) - 1;
-
-        blocks[1].elements.forEach(function(button, index) {
-            if (userSelection === correctOption) {
-                button.style = (index === correctIndex) ? "primary" : "danger";
-            } else {
-                if (button.value === selectedOption) {
-                    button.style = "danger";
-                }
-            }
-        });
-
-        var updateMessagePayload = {
-            "channel": interactionPayload.channel.id,
-            "ts": interactionPayload.message.ts,
-            "blocks": blocks,
-            "text": "UpdatingQuiz"
-        };
-
-        var responseMessageUpdated = slackerProvider.update_chat(updateMessagePayload);
-
-        // Validate User Answer and send appropriate feedback
-        var current = {
-            "text": interactionPayload.message.blocks[0].text.text,
-            "ts": interactionPayload.message.ts,
-            "thread_ts": interactionPayload.container.message_ts,
-            "channel": interactionPayload.channel.id,
-            "user": {
-                "user_id": interactionPayload.user.id,
-                "name": interactionPayload.user.name
-            }
-        };
-
-        var questionText = interactionPayload.message.blocks[0].text.text;
-        var textLines = questionText.split("\n");
-        var correctAnswerText = textLines[correctIndex + 4].trim();
-        var correctAnswer = correctAnswerText.replace(/^[A-D]\)\s*/, '');
-
-        if (userSelection === correctOption) {
-            var correctMessage = "Well done! The correct answer is:\n*" + correctAnswer + "*\n\n" + explanation;
-            slackerProvider.send_chat(current, correctMessage, false);
-        } else {
-            var incorrectMessage = "Oops, not quite! Try Again.";
-            slackerProvider.send_chat(current, incorrectMessage, false);
-        }
-    }
-
-    function checkIfBotCanAnswer(requestBodyEvent) {
-        var botCanAnswer = false;
-
-		// Allows response if the type is block_action and the message was sent by a user
-		if(requestBodyEvent.user && requestBodyEvent.user.username && requestBodyEvent.type === "block_actions") return true;
-		
-        if (requestBodyEvent.bot_id) {
-            // Allows response if the message subtype is message update
-            if (requestBodyEvent.subtype && requestBodyEvent.subtype === "message_changed") {
-				botCanAnswer = true;
-            }
-            // Allows response if the thread was started by a user
-            else if (requestBodyEvent.parent_user_id && requestBodyEvent.parent_user_id !== requestBodyEvent.user) {
-                botCanAnswer = true;
-            }
-        } else {
-            botCanAnswer = true;
-        }
-
-        return botCanAnswer;
-    }
+    if (request.body.data.challenge){
+		response.setStatus(200);
+		response.setContentType('text/plain');
+		response.getStreamWriter().writeString(request.body.data.challenge);
+	} else {
+		if (request.body.data.event.bot_id) return;
+		//gs.info('slackoff: ' + (request.body.dataString));
+		var payload = new GlideRecord('x_snc_slackerbot_payload');
+		payload.initialize();
+		payload.setValue('payload', JSON.stringify(request.body.data, null, 2));
+		payload.insert(); 
+	}
 
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_snc_slackerbot/slackerbot_event_handler</operation_uri>
@@ -130,21 +30,32 @@
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>false</requires_authentication>
-        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:36:30</sys_created_on>
         <sys_id>bbcb42a61bc61d10d806dc23b24bcbd2</sys_id>
-        <sys_mod_count>105</sys_mod_count>
+        <sys_mod_count>107</sys_mod_count>
         <sys_name>Event</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_ws_operation_bbcb42a61bc61d10d806dc23b24bcbd2</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-10-11 00:48:14</sys_updated_on>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-24 10:18:00</sys_updated_on>
         <web_service_definition display_value="SlackerBot Event Handler">1fabce661bc61d10d806dc23b24bcbd6</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>bbcb42a61bc61d10d806dc23b24bcbd2</id>
+        <sys_created_by>asteroid</sys_created_by>
+        <sys_created_on>2024-10-24 10:16:34</sys_created_on>
+        <sys_id>94e9cb37c3d15a5055bdd523e401313d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-24 10:16:34</sys_updated_on>
+        <table>sys_ws_operation</table>
+        <use_es_latest>false</use_es_latest>
+    </sys_es_latest_script>
 </record_update>

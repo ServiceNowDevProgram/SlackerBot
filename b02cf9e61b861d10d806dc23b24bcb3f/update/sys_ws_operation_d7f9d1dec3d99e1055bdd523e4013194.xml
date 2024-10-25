@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/x-www-form-urlencoded</consumes>
+        <consumes_customized>true</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>POST</http_method>
+        <name>Interaction</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+	var objBody = JSON.parse(request.queryParams.payload);
+
+	var grPayload = new GlideRecord('x_snc_slackerbot_payload');
+	grPayload.initialize();
+	grPayload.setValue('payload_type','interaction');
+	grPayload.setValue('payload', JSON.stringify(objBody,null,2));
+	if(objBody.container.type == 'message'){
+		grPayload.setValue('channel',objBody.container.channel_id);
+		grPayload.setValue('ts',objBody.container.message_ts);
+	}
+	grPayload.insert();
+
+	response.setStatus(200);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_snc_slackerbot/slackerbot_event_handler/interaction</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/interaction</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>asteroid</sys_created_by>
+        <sys_created_on>2024-10-19 10:21:29</sys_created_on>
+        <sys_id>d7f9d1dec3d99e1055bdd523e4013194</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Interaction</sys_name>
+        <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
+        <sys_update_name>sys_ws_operation_d7f9d1dec3d99e1055bdd523e4013194</sys_update_name>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-20 09:21:20</sys_updated_on>
+        <web_service_definition display_value="SlackerBot Event Handler">1fabce661bc61d10d806dc23b24bcbd6</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>d7f9d1dec3d99e1055bdd523e4013194</id>
+        <sys_created_by>asteroid</sys_created_by>
+        <sys_created_on>2024-10-19 10:21:29</sys_created_on>
+        <sys_id>a30b5912c31d9e1055bdd523e40131e4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-19 10:21:29</sys_updated_on>
+        <table>sys_ws_operation</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

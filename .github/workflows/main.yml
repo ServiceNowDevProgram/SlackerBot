@@ -8,6 +8,7 @@ on:
   push:
     paths:
       - Parsers/**
+      - Interactions/**
 #     branches: [ "main" ]
 #   pull_request:
 #     branches: [ "main" ]
@@ -23,7 +24,7 @@ on:
 
 jobs:
   deployment:
-    if: github.repository == 'ServiceNowDevProgram/SlackerBot'
+    if: github.repository == 'SapphicFire/SlackerBot'
     runs-on: ubuntu-latest
     steps:
     - name: Log payload

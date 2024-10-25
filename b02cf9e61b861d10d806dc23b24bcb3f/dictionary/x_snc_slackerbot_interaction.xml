@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="ee0be417c3dd165055bdd523e401314f" label="Interaction" max_length="40" name="x_snc_slackerbot_interaction" type="collection">
+        <element label="Action ID regex" max_length="128" name="action_id_regex" type="string"/>
+        <element display="true" label="Description" max_length="128" name="description" type="string"/>
+        <element default="true" function_definition="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Script" max_length="8000" name="script" type="script"/>
+        <element label="Related parsers" max_length="4000" name="related_parsers" reference="x_snc_slackerbot_parser" type="glide_list"/>
+    </element>
+</database>

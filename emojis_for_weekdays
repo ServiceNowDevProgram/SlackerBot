@@ -14,7 +14,7 @@ function weeklyMoji() {
         6: 'saturday-chill'     // Saturday
     };
 
-    var day = new Date().getDay(); // Get the current day of the week (0 = Sunday, 6 = Saturday)
+    var day = new GlideDateTime().getDayOfWeekUTC(); // Get the current day of the week (0 = Sunday, 6 = Saturday)
     return weekEmojis[day];
 }
 //Added slackerbot script for weekly emoji reactions

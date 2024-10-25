@@ -8,7 +8,7 @@ on:
   push:
     paths:
       - Parsers/**
-      - Interactions/**
+      - Interaction/**
 #     branches: [ "main" ]
 #   pull_request:
 #     branches: [ "main" ]

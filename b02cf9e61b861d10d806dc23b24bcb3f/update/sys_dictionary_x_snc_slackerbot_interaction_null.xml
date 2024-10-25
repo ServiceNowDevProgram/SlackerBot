@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="regex" table="x_snc_slackerbot_parser">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="" table="x_snc_slackerbot_interaction">
         <active>true</active>
         <array>false</array>
-        <attributes>trim_value=true</attributes>
+        <attributes/>
         <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
+        <calculation/>
+        <choice>0</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>Regex</column_label>
+        <column_label/>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -26,16 +21,16 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>regex</element>
+        <element/>
         <element_reference>false</element_reference>
         <foreign_database/>
         <formula/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="String">string</internal_type>
+        <internal_type display_value="Collection">collection</internal_type>
         <mandatory>false</mandatory>
-        <max_length>128</max_length>
-        <name>x_snc_slackerbot_parser</name>
+        <max_length>40</max_length>
+        <name>x_snc_slackerbot_interaction</name>
         <next_element/>
         <primary>false</primary>
         <read_only>false</read_only>
@@ -50,15 +45,15 @@
         <spell_check>false</spell_check>
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
-        <sys_created_by>earl.duque</sys_created_by>
-        <sys_created_on>2022-09-23 05:55:48</sys_created_on>
-        <sys_name>Regex</sys_name>
+        <sys_created_by>asteroid</sys_created_by>
+        <sys_created_on>2024-10-22 09:25:37</sys_created_on>
+        <sys_name>x_snc_slackerbot_interaction</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
-        <sys_update_name>sys_dictionary_x_snc_slackerbot_parser_regex</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-10-10 19:02:23</sys_updated_on>
+        <sys_update_name>sys_dictionary_x_snc_slackerbot_interaction_null</sys_update_name>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-22 09:25:37</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

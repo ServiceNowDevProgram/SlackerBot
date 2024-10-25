@@ -30,18 +30,32 @@
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>false</requires_authentication>
-        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>earl.duque</sys_created_by>
         <sys_created_on>2022-09-23 06:36:30</sys_created_on>
         <sys_id>bbcb42a61bc61d10d806dc23b24bcbd2</sys_id>
+        <sys_mod_count>107</sys_mod_count>
         <sys_name>Event</sys_name>
         <sys_package display_value="SlackerBot" source="x_snc_slackerbot">b02cf9e61b861d10d806dc23b24bcb3f</sys_package>
         <sys_policy/>
         <sys_scope display_value="SlackerBot">b02cf9e61b861d10d806dc23b24bcb3f</sys_scope>
         <sys_update_name>sys_ws_operation_bbcb42a61bc61d10d806dc23b24bcbd2</sys_update_name>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-24 10:18:00</sys_updated_on>
         <web_service_definition display_value="SlackerBot Event Handler">1fabce661bc61d10d806dc23b24bcbd6</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>bbcb42a61bc61d10d806dc23b24bcbd2</id>
+        <sys_created_by>asteroid</sys_created_by>
+        <sys_created_on>2024-10-24 10:16:34</sys_created_on>
+        <sys_id>94e9cb37c3d15a5055bdd523e401313d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>asteroid</sys_updated_by>
+        <sys_updated_on>2024-10-24 10:16:34</sys_updated_on>
+        <table>sys_ws_operation</table>
+        <use_es_latest>false</use_es_latest>
+    </sys_es_latest_script>
 </record_update>

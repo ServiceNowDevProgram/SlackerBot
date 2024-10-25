@@ -1,8 +1,4 @@
-/*
-activation_example:@All
-regex:<@U.*>
-flags:g
-*/
+
 new x_snc_slackerbot.Slacker().send_reaction(current, weeklyMoji());
 
 function weeklyMoji() {

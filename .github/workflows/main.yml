@@ -24,7 +24,7 @@ on:
 
 jobs:
   deployment:
-    if: github.repository == 'SapphicFire/SlackerBot'
+    if: github.repository == 'ServiceNowDevProgram/SlackerBot'
     runs-on: ubuntu-latest
     steps:
     - name: Log payload

@@ -1,4 +1,6 @@
-
+/*
+emoji:sunday-funday
+*/
 new x_snc_slackerbot.Slacker().send_reaction(current, weeklyMoji());
 
 function weeklyMoji() {

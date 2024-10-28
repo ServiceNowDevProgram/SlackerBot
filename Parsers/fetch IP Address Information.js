@@ -31,22 +31,16 @@ function fetchinfo(ipaddress) {
 try {
     if (regexp.test(ipaddress)) {
         var ipdata = fetchinfo(ipaddress); // calling the fetchinfo function
-        var ipInfomation = {
-            " ip ": ipdata.ip,
-            " city ": ipdata.city,
-            " region ": ipdata.region,
-            " country ": ipdata.country,
-            " loc ": ipdata.loc,
-            " org ": ipdata.org,
-            " postal ": ipdata.postal,
-            " timezone ": ipdata.timezone,
-
-        };
-
-        var ipInformationString = JSON.stringify(ipInfomation); // Covert the object to string
-
-
-        new x_snc_slackerbot.Slacker().send_chat(current, "IP Address Infomation  :=> " + ipInformationString, false); // display the output to user
+        var ipInformationSlackMessage = "*IP Information:*\n" +
+            "• *IP*: " + ipdata.ip + "\n" +
+            "• *City*: " + ipdata.city + "\n" +
+            "• *Region*: " + ipdata.region + "\n" +
+            "• *Country*: " + ipdata.country + "\n" +
+            "• *Location*: " + ipdata.loc + "\n" +
+            "• *Organization*: " + ipdata.org + "\n" +
+            "• *Postal Code*: " + ipdata.postal + "\n" +
+            "• *Timezone*: " + ipdata.timezone;  //formatting for slack mark down 
+        new x_snc_slackerbot.Slacker().send_chat(current,  ipInformationSlackMessage , false); // display the output to user
 
     } else {
         new x_snc_slackerbot.Slacker().send_chat(current, "Oops! I couldn't understand that. Please provide a valid IP Address.", false); // Message to show when IP is invalid

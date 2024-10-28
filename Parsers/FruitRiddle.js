@@ -54,7 +54,7 @@ To submit a guess, use the following command:
 
 If you know the answer, type: 
 
-						!fruit riddle fruit
+						!fruit riddle solution fruit
 
 If you want to give up, use the message: 
 

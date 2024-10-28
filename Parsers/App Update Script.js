@@ -8,7 +8,7 @@ flags:gmi
 
 const eric_script = `
 /*----------------------------------------------------*/
-/*                                                    */
+/*                 TEMPLATE LITERAL                   */
 /*  Have a bunch of apps that need to be updated?     */
 /*  Run this and follow the directions in the output  */
 /*  It will build a payload and use the CI/CD API to  */

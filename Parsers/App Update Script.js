@@ -1,6 +1,6 @@
 /*
-activation_example:!appupdate
-regex:^!newline\b
+activation_example:!newline
+regex:!newline
 flags:gmi
 */
 
@@ -74,7 +74,7 @@ if (appsArray.length > 0) {
 } else {
     gs.info("\\nNo apps to update found.\\nIf you think this is incorrect please try running this script again with `updateCheck` set to `true`. This will check the store for any new updates.\\n\\n(sometimes there are apps in the Application Manager that say that there are updates but you can't actually update them)");
 }
-`
+`;
 
 const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
 

@@ -1,5 +1,5 @@
 /*
-emoji: calendar
+emoji:calendar
 */
 
 new x_snc_slackerbot.Slacker().send_reaction(current, weeklyMoji());

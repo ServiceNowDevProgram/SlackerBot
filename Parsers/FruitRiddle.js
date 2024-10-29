@@ -113,8 +113,6 @@ ${this.user}!! So you give up...I wouldn't have thought that about you.`
 					var letters = command.split('');
 					var result = this._revealLetters(this._getRandomFruit(), letters);
 
-					gs.info("Fruit: " + this._getRandomFruit());
-
 					return {
 						thread: true,
 						message: `Here we go:  ${result}`

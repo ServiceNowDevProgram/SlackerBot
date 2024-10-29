@@ -1,6 +1,6 @@
 /*
 activation_example:!fruit riddle start
-regex:^fruit riddle.*$
+regex:^!fruit riddle.*$
 flags:gmi
 */
 
@@ -11,7 +11,6 @@ flags:gmi
  *  - Text (text)
  *  - User (user)
  *  - Channel (channel)
- *  - Channel (thread_ts)
  */
 
 var FruitRiddle = Class.create();
@@ -33,6 +32,9 @@ FruitRiddle.prototype = {
 		this.fruits = ["apple", "banana", "orange", "mango", "strawberry", "blueberry", "raspberry", "pineapple", "watermelon", "papaya", "kiwi", "peach", "pear", "grape", "cherry", "pomegranate", "lemon", "lime", "coconut", "avocado", "fig", "plum", "nectarine", "apricot", "dragonfruit", "grapefruit", "persimmon", "guava", "jackfruit", "lychee"];
     },
 
+	/**
+	 * The main logic is handled by this function
+	 */
 	parse: function() {
 
 		// Need to check the text at first
@@ -111,6 +113,8 @@ ${this.user}!! So you give up...I wouldn't have thought that about you.`
 					var letters = command.split('');
 					var result = this._revealLetters(this._getRandomFruit(), letters);
 
+					gs.info("Fruit: " + this._getRandomFruit());
+
 					return {
 						thread: true,
 						message: `Here we go:  ${result}`
@@ -163,7 +167,7 @@ Let's start! 💪`
 	 * @return - one element from the fruit array
 	 */
 	_getRandomFruit: function() {
-		var _threadTs = (this.threadTs + "").split(".")[1];
+		var _threadTs = (this.threadTs + "").split(".")[0];
 		var randomNumber = _threadTs % 30;
 		return this.fruits[randomNumber];
 	},

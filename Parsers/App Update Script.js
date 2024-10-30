@@ -1,6 +1,6 @@
 /*
 activation_example:!newline
-regex:!newline
+regex:\b(!appupdate|!update|!app-update|!bulkupdate|!bulk-update|!plugin|!plugins)\b
 flags:gmi
 */
 

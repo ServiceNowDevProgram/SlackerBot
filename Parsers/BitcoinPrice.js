@@ -12,7 +12,7 @@ quote.setHttpMethod('GET');
 var chatResponse = quote.execute();
 var chatResponseBody = JSON.parse(chatResponse.getBody());
 
-if (chatResponseBody && chatResponseBody.bpi && chatResponseBody.bpi.USD && chatResponseBody.bpi.USD.rate) {
+if (chatResponseBody?.bpi?.USD?.rate) {
     var bitcoinpriceFormatted = chatResponseBody.bpi.USD.rate;
-    new x_snc_slackerbot.Slacker().send_chat(current, 'The current price of one bitcoin is: ' + bitcoinpriceFormatted + '$', false);
+    new x_snc_slackerbot.Slacker().send_chat(current, 'The current price of one bitcoin is: $' + bitcoinpriceFormatted + ' USD', false);
 }

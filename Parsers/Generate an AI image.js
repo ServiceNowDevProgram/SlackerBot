@@ -52,8 +52,23 @@ if (dalleResponseStatusCode != 200) {
     var cloudinaryResponse = cloudinary.execute();
     var cloudinaryResponseBody = JSON.parse(cloudinaryResponse.getBody());
 
-    if (cloudinaryResponseBody.url) {
-        new x_snc_slackerbot.Slacker().send_chat(current, "<" + cloudinaryResponseBody.url + "|" + prompt + ">\n");
+	var message = {
+		"blocks": [
+			{
+				"type": "image",
+				"title": {
+					"type": "plain_text",
+					"text": prompt
+				},
+				"block_id": "image4",
+				"image_url": cloudinaryResponseBody.url,
+				"alt_text": prompt
+			}
+		]
+	}
+
+	if (cloudinaryResponseBody.url) {
+		new x_snc_slackerbot.Slacker().send_chat(current, message);
     } else {
         new x_snc_slackerbot.Slacker().send_chat(current, failureMessage);
     }

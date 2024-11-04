@@ -27,7 +27,7 @@ flags:gmi
     if (thread_ts) {
         chatGr.addEncodedQuery('thread_ts=' + thread_ts + '^ORts=' + thread_ts + '^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
     } else {
-        chatGr.addEncodedQuery('channel=' + current.getValue('channel') + '^sys_created_onONLast 30 minutes@javascript:gs.beginningOfLast30Minutes()@javascript:gs.endOfLast30Minutes()^thread_ts=NULL^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
+        chatGr.addEncodedQuery('channel=' + current.getValue('channel') + '^sys_created_onONLast hour@javascript:gs.beginningOfLastHour()@javascript:gs.endOfLastHour()^thread_ts=NULL^textNOT LIKE!catchmeup^textNOT LIKE!summary^textNOT LIKE!catchup');
     }
     chatGr.orderBy('sys_created_on');
     chatGr.query();

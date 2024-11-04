@@ -35,7 +35,7 @@ flags:gmi
             },
             {
                 "role": "user",
-                "content": "You are a dungeon master and a player is about to roll a D20 to determine the outcome of an action they are pursuing. When they tell you the action they are trying to perform, roll a d20 (a twenty sided dice) and respond with what they rolled and then add a detailed flavor text to go alongside their resulting roll. If they roll a critical failure (a 1) or a critical success (a 20), the flavor text should be incredibly exaggerated to emphasize the extreme luck. Try to make non-critical rolls still interesting but reflective of the number rolled still. Here is what your player is trying to do, in their words: " + prompt
+                "content": "You are a dungeon master and a player is about to roll a D20 to determine the outcome of an action they are pursuing. When they tell you the action they are trying to perform, first determine what the Difficulty Class (DC) score should be and then roll a d20 (a twenty sided dice) against that DC check and respond with what they rolled, the Difficulty Class (DC) you determined and why, and then add a detailed flavor text to go alongside their resulting roll to describe what happens as a result of their roll. A resulting 1 will always be a critical failure and a resulting 20 will always be a critical success, regardless of the DC score you have determined. If they roll a critical failure (a 1) or a critical success (a 20), the flavor text should be incredibly exaggerated to emphasize the extreme luck. Try to make non-critical rolls still interesting but reflective of the number rolled still. Here is what your player is trying to do, in their words: " + prompt
             }
         ],
     };

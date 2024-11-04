@@ -91,6 +91,6 @@ flags:gmi
     var show_tokens = false;
     var token_cost = show_tokens ? "> tokens: " + chatResponseBody.usage.total_tokens + " ($" + (parseInt(chatResponseBody.usage.total_tokens) * 0.000002).toFixed(6) + ")\n" : "";
 
-    var intro = thread_ts ? "> This thread so far:\n" : "> Last 30 minutes summarized:\n";
+    var intro = thread_ts ? "> This thread so far:\n" : "> Last 60 minutes summarized:\n";
     new x_snc_slackerbot.Slacker().send_chat(current, intro + token_cost + "\n" + chatResponseBody.choices[0].message.content, false);
 })(current);

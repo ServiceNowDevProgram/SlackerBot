@@ -1,6 +1,6 @@
 /*
 activation_example:!maintainers
-regex:!hackmaintainers|!hacktobermaintainers|!maintainershacktoberfest
+regex:!hackmaintainers|!hacktobermaintainers|!maintainershacktoberfest|!maintainers
 flags:gmi
 */
 

@@ -5,7 +5,6 @@ flags:gmi
 */
 
 const eric_script = `
-\`\`\`
 /*----------------------------------------------------*/
 /*                      AUTO                          */
 /*  Have a bunch of apps that need to be updated?     */
@@ -101,35 +100,34 @@ if (grSBIP.get(updateObj.batch_installation_id)) {
         "\\n\\n-----------------------------------------------\\n\\nAll apps appear to be up-to-date. \\n\\nIf you think this is incorrect please try running this script again with \`updateCheck\` set to \`true\`. This will check the store for any new updates.\\n(sometimes there are apps in the Application Manager that say that there are updates but you can't actually update them)\\n\\n-----------------------------------------------\\n\\n"
     );
 }
-\`\`\`
 `;
 
 //const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
 const message = {
-	"blocks": [
-		{
-			"type": "rich_text",
-			"elements": [
-				{
-					"type": "rich_text_section",
-					"elements": [
-						{
-							"type": "text",
-							"text": "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n"
-						}
-					]
-				},
-				{
-					"type": "rich_text_preformatted",
-					"elements": [
-						{
-							"type": "text",
-							"text": eric_script
-						}
-					]
-				}
-			]
-		}
-	]
+  "blocks": [
+    {
+      "type": "rich_text",
+      "elements": [
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "text",
+              "text": "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n"
+            }
+          ]
+        },
+        {
+          "type": "rich_text_preformatted",
+          "elements": [
+            {
+              "type": "text",
+              "text": eric_script
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 new x_snc_slackerbot.Slacker().send_chat(current, message, true);

@@ -4,6 +4,9 @@ regex:(!appupdate|!update|!app-update|!bulkupdate|!bulk-update|!plugin|!plugins)
 flags:gmi
 */
 
+// NOTE!
+// When you update eric_script, you must find/replace \n with \\n and ` with \`
+
 const eric_script = `
 /*----------------------------------------------------*/
 /*                      AUTO                          */
@@ -102,7 +105,7 @@ if (grSBIP.get(updateObj.batch_installation_id)) {
 }
 `;
 
-//const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
+// Using block kit because the script is too long for a regular message
 const message = {
   "blocks": [
     {

@@ -70,7 +70,7 @@ function updateAvailable(grSSA) {
     return false;
 }
 if (appsArray.length > 0) {
-    gs.info("\n\n------------------------------------------------\n\nLinks to track progress below the payload information\n\n(scroll down)\n\n-----------------------------------------------\n\n");
+    gs.info("\\n\\n------------------------------------------------\\n\\nLinks to track progress below the payload information\\n\\n(scroll down)\\n\\n-----------------------------------------------\\n\\n");
 
     var appsPackages = {};
     appsPackages.packages = appsArray;
@@ -81,30 +81,30 @@ if (appsArray.length > 0) {
     var update = new sn_appclient.AppUpgrader().installBatch(data);
     var updateObj = JSON.parse(update);
     gs.info(
-        "\n\n------------------------------------------------\n\nOpen the Batch install link to monitor the installation progress. It may take some time for the apps to all populate in the related list. After all apps have populated the install will start and the State will change to In progress.\n\nBatch install:\n" +
+        "\\n\\n------------------------------------------------\\n\\nOpen the Batch install link to monitor the installation progress. It may take some time for the apps to all populate in the related list. After all apps have populated the install will start and the State will change to In progress.\\n\\nBatch install:\\n" +
         baseUrl +
         "nav_to.do?uri=sys_batch_install_plan.do?sys_id=" +
         updateObj.batch_installation_id +
-        "\n\nExecution tracker:\n" +
+        "\\n\\nExecution tracker:\\n" +
         baseUrl +
         "nav_to.do?uri=sys_progress_worker.do?sys_id=" +
         updateObj.execution_tracker_id +
-        "\n\n-----------------------------------------------\n\n"
+        "\\n\\n-----------------------------------------------\\n\\n"
     );
     var grSBIP = new GlideRecord('sys_batch_install_plan');
 if (grSBIP.get(updateObj.batch_installation_id)) {
-    grSBIP.setValue('notes','It may take some time for the apps to all populate in the related list below (you can refresh the list as needed to see them populating). \n\nAfter all apps have populated the install will start and the State (above) will change to In progress. \n\nWhen the batch is done the state will update to Installed');
+    grSBIP.setValue('notes','It may take some time for the apps to all populate in the related list below (you can refresh the list as needed to see them populating). \\n\\nAfter all apps have populated the install will start and the State (above) will change to In progress. \\n\\nWhen the batch is done the state will update to Installed');
     grSBIP.update();
 }
 } else {
     gs.info(
-        "\n\n-----------------------------------------------\n\nAll apps appear to be up-to-date. \n\nIf you think this is incorrect please try running this script again with \`updateCheck\` set to \`true\`. This will check the store for any new updates.\n(sometimes there are apps in the Application Manager that say that there are updates but you can't actually update them)\n\n-----------------------------------------------\n\n"
+        "\\n\\n-----------------------------------------------\\n\\nAll apps appear to be up-to-date. \\n\\nIf you think this is incorrect please try running this script again with \`updateCheck\` set to \`true\`. This will check the store for any new updates.\\n(sometimes there are apps in the Application Manager that say that there are updates but you can't actually update them)\\n\\n-----------------------------------------------\\n\\n"
     );
 }
 
 \`\`\`
 `;
 
-const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
+const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\\n\\n" + eric_script;
 
 new x_snc_slackerbot.Slacker().send_chat(current, message, true);

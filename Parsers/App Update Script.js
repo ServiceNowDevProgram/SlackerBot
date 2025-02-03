@@ -106,17 +106,15 @@ if (grSBIP.get(updateObj.batch_installation_id)) {
 const message = {
   "blocks": [
     {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n"
+      }
+    },
+    {
       "type": "rich_text",
       "elements": [
-        {
-          "type": "rich_text",
-          "elements": [
-            {
-              "type": "text",
-              "text": "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n"
-            }
-          ]
-        },
         {
           "type": "rich_text_preformatted",
           "elements": [

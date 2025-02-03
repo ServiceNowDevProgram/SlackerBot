@@ -101,7 +101,6 @@ if (grSBIP.get(updateObj.batch_installation_id)) {
         "\\n\\n-----------------------------------------------\\n\\nAll apps appear to be up-to-date. \\n\\nIf you think this is incorrect please try running this script again with \`updateCheck\` set to \`true\`. This will check the store for any new updates.\\n(sometimes there are apps in the Application Manager that say that there are updates but you can't actually update them)\\n\\n-----------------------------------------------\\n\\n"
     );
 }
-
 \`\`\`
 `;
 

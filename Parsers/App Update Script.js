@@ -104,6 +104,32 @@ if (grSBIP.get(updateObj.batch_installation_id)) {
 \`\`\`
 `;
 
-const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
-
+//const message = "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n" + eric_script;
+const message = {
+	"blocks": [
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "<@U6E2TEKQ9> made a cool script for bulk updating apps!\n\n"
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": eric_script
+						}
+					]
+				}
+			]
+		}
+	]
+}
 new x_snc_slackerbot.Slacker().send_chat(current, message, true);

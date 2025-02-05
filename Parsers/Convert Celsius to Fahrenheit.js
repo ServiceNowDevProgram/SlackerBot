@@ -7,7 +7,7 @@ flags:gmi
 const regexTest = /(-?\d{1,3}(?:\.\d{1,2})?)°?\s?(?:degrees?)?\s?c(?:elsius)?\b/gi;
 const celsiusToFahrenheit = c => ((c * 9 / 5) + 32).toFixed(2);
 const formatNumber = num => Number(num).toFixed(2).replace(/\.00$/, '');
-const conversions = [];,
+const conversions = [];
 
 let match;
 while ((match = regexTest.exec(current.text)) !== null) {

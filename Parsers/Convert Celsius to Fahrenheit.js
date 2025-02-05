@@ -25,7 +25,7 @@ while ((fMatch = fahrenheitRegex.exec(current.text)) !== null) {
     const fahrenheit = parseFloat(fMatch);
     const celsius = fahrenheitToCelsius(fahrenheit);
     conversions.push(`${formatNumber(fahrenheit)}°F is ${formatNumber(celsius)} degrees in sane units (Celsius).`);
-}a
+}
 
 const conversionMessage = conversions.join('\n');
 

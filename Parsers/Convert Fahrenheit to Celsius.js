@@ -9,12 +9,12 @@ const fahrenheitToCelsius = f => ((f - 32) * 5 / 9).toFixed(2);
 const formatNumber = num => Number(num).toFixed(2).replace(/\.00$/, '');
 const conversions = [];
 
-current.text = current.text.replace(regexTest, (match, f) => {
-  const celsius = fahrenheitToCelsius(f);
-  const formattedF = formatNumber(f);
-  conversions.push(`${formattedF}°F is ${celsius} degrees in sane units (Celsius).`);
-  return `${celsius}°C`;
-});
+let match;
+while ((match = regexTest.exec(current.text)) !== null) {
+    const fahrenheit = parseFloat(match);
+    const celsius = fahrenheitToCelsius(fahrenheit);
+    conversions.push(`${formatNumber(fahrenheit)}°F is ${formatNumber(celsius)} degrees in sane units (Celsius).`);
+}
 
 const conversionMessage = conversions.join('\n');
 

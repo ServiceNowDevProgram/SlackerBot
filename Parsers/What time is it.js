@@ -5,7 +5,7 @@ flags:gmi
 */
 
 var term = /^(?:!time )([^\s]+)/gmi.exec(current.text);
-var astrid = /!astrid/.test(current.text)
+var astrid = /!astrid/.test(current.text);
 var tz = "";
 var text = "";
 var tza = getTimeZoneArray();
@@ -36,15 +36,15 @@ else {
   gd.setValue(rb.datetime.replace('T',' '));
   dateString = gd.getByFormat('EEEE, MMMM dd, yyyy');
   endText = !endText ? rb.timezone : endText;
-  var text = 'It is currently ' + timeString + ' on ' + dateString + ' in ' + endText;
+  text = 'It is currently ' + timeString + ' on ' + dateString + ' in ' + endText;
   new x_snc_slackerbot.Slacker().send_chat(current, text, false);
 }
 
 function getTimeZoneArray(){
-    var uri = "https://worldtimeapi.org/api/timezone/"
+    var uri = "https://worldtimeapi.org/api/timezone/";
     var rm = new sn_ws.RESTMessageV2();
     rm.setEndpoint(uri);
     rm.setHttpMethod('get');
     response = rm.execute();
-    return JSON.parse(response.getBody()).map(function(e){return e.toLowerCase()});
+    return JSON.parse(response.getBody()).map(function(e){return e.toLowerCase();});
 }

@@ -37,7 +37,6 @@ if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.
   }
 
   message_body = message_body.match(/^(real_name|tz_label| {2}email):.*$/gm).join('\n');
-  message_body = message_body.replace(/^\s{2}(email)/gm, '$1');
 
   // Add record details
   var grUser = new GlideRecord('x_snc_slackerbot_user');

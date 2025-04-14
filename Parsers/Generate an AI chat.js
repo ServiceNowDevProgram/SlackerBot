@@ -13,7 +13,7 @@ chatReq.setRequestHeader('User-Agent', "ServiceNow");
 chatReq.setRequestHeader("Accept", "*/*");
 
 var body = {
-  "model": "gpt-4.1-mini",
+  "model": "gpt-4o-mini",
   "messages": [
     {
       "role": "system",

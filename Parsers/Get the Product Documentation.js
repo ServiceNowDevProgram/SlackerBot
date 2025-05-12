@@ -9,5 +9,5 @@ var term = current.text.substr(where).trim();
 if (term == '') {
 	var send_confusion = new x_snc_slackerbot.Slacker().send_chat(current, ':upside_down_face: !docs *something*', false);
 } else {
-	var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, 'https://docs.servicenow.com/search?q=' + escape(term) + '&labels=2', false);
+	var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, 'https://www.servicenow.com/docs/search?personalize=true&q=' + escape(term), false);
 }

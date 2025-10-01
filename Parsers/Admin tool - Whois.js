@@ -5,55 +5,74 @@ flags:gmi
 */
 
 if (current.channel == "GD51HTR46" || current.channel == "G9LAJG7G8" || current.channel == "G7M4AP6U8") { //admin channels on sndevs
-  var rm = new sn_ws.RESTMessageV2();
-  rm.setHttpMethod('GET');
-  rm.setLogLevel('all');
-  rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  rm.setRequestHeader('authorization', 'Bearer '+gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token')));
-  var bodyString = '';
-//   bodyString += 'token=' + gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'));
-  var user_id = current.text;
-  user_id = user_id.replace('!whois <@', '');
-  user_id = user_id.replace('>', '').trim();
-  bodyString += 'user=' + gs.urlEncode(user_id);
-  rm.setEndpoint('https://slack.com/api/users.info'+'?'+bodyString);
-  var response = rm.execute();
-  var response_body = JSON.parse(response.getBody());
+	// Update desired keys if you want to change returned fields from payload
+	const desiredKeys = ['user.real_name', 'user.profile.pronouns', 'user.profile.email', 'user.tz_label', 'user.updated'];
+	const slacker = new x_snc_slackerbot.Slacker();
+	let userId = current.text;
+	userId = userId.replace('!whois <@', '');
+	userId = gs.urlEncode(userId.replace('>', '').trim());
 
-  var message_body = '';
-  for (var key in response_body.user){
-    if (key == 'profile') {
-      message_body += 'profile: \n';
-      for (var prof_key in response_body.user.profile) {
-        if (prof_key.indexOf('image_') != -1) continue;
-        if (prof_key == 'status_emoji_display_info'){
-          message_body += '  status_emoji_display_info: \n';
-          for (var stat_key in response_body.user.profile.status_emoji_display_info){
-            message_body += '    ' + stat_key + ': ' + response_body.user.profile.status_emoji_display_info[stat_key] + '\n';
-          }
-        } else message_body += '  ' + prof_key + ': ' + response_body.user.profile[prof_key] + '\n';
-      }
-    } else message_body += key + ': ' + response_body.user[key] + '\n';
-  }
+	const rm = new sn_ws.RESTMessageV2();
+	rm.setHttpMethod('GET');
+	rm.setLogLevel('all');
+	rm.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	rm.setRequestHeader('authorization', `Bearer ${gs.urlEncode(gs.getProperty('x_snc_slackerbot.SlackerBot.token'))}`);
+	rm.setEndpoint(`https://slack.com/api/users.info?user=${userId}`);
+	const response = rm.execute();
+	const responseBody = JSON.parse(response.getBody());
 
-  message_body = message_body.match(/^(real_name|tz_label| {2}email):.*$/gm).join('\n');
-  message_body = message_body.replace(/^\s{2}(email)/gm, '$1');
+	if (!responseBody.ok) {
+		slacker.send_chat(current, 'i dunno', false);
+	} else {
+		const messageArray = [];
+		let messageBody = '';
 
-  // Add record details
-  var grUser = new GlideRecord('x_snc_slackerbot_user');
-  if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -1){ // Backwards support until instance updates with new schema
-    message_body += '\nIdentity verified: ' + (grUser.getValue('verified') == 1 ? 'Yes' : 'No') + '\n';
-    if(!gs.nil(grUser.getValue('admin_info'))){
-      message_body += 'Admin information: ' + grUser.getValue('admin_info') + '\n';
-    }
-    if(!gs.nil(grUser.getValue('user_info'))){
-      message_body += 'User-visible information: ' + grUser.getValue('user_info') + '\n';
-    }
-  }
+		for (let key of desiredKeys) {
+			let path = key.split('.');
+			let obj = {};
+			switch (path.length) {
+				case 1:
+					obj[path[0]] = responseBody[path[0]] ?? '{Not set}';
+					break;
+				case 2:
+					obj[path[1]] = responseBody[path[0]][path[1]] ?? '{Not set}';
+					break;
+				case 3:
+					obj[path[2]] = responseBody[path[0]][path[1]][path[2]] ?? '{Not set}';
+					break;
+				default:
+					gs.warn(`Whois parser encountered unexpected path length for a key. Key is ${key}`);
+			}
 
-  if (response_body.user.name){
-    var send_chat = new x_snc_slackerbot.Slacker().send_chat(current, '```' + message_body + '```', false);
-  } else {
-    var send_chat2 = new x_snc_slackerbot.Slacker().send_chat(current, 'i dunno', false);
-  }
+			// Handle conversions
+			if (path[1] == 'updated') {
+				let time = new GlideDateTime();
+				time.setValue(responseBody[path[0]][path[1]] * 1000);
+				obj[path[1]] = `${time.getDisplayValue()} (${gs.getSession().getTimeZoneName()})`;
+			}
+			messageArray.push(obj);
+		}
+
+		// Get verify data
+		const grUser = new GlideRecord('x_snc_slackerbot_user');
+		if (grUser.get('user_id', userId)) {
+			messageArray.push({
+				'Identity verified': grUser.getValue('verified') == 1 ? 'Yes' : 'No'
+			});
+			if (!gs.nil(grUser.getValue('admin_info'))) {
+				messageArray.push({
+					'Admin information': grUser.getValue('admin_info')
+				});
+			}
+			if (!gs.nil(grUser.getValue('user_info'))) {
+				messageArray.push({
+					'User-visible information': grUser.getValue('user_info')
+				});
+			}
+		}
+
+		messageBody = messageArray.map(obj => `${Object.keys(obj)[0]}: ${Object.values(obj)[0]}`).join('\n');
+		
+		slacker.send_chat(current, '```' + messageBody + '```', false);
+	}
 }

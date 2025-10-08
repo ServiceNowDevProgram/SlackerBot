@@ -92,6 +92,7 @@ function getSupportedRepos() {
         'example-instancescan-checks':      ['example-instancescan-checks','checks','instancescan'],
         'syntax_macros':                    ['syntax_macros','macros'],
         'ServiceNow-GenAi-Prompt-Library':  ['serviceNow-genai-prompt-library','genai','prompts','prompt','library','prompt-library'],
+		'Hack4Good-Idea-Submission':        ['hack4good','h4g'],
         'Hacktoberfest':                    ['hacktoberfest']
     }
     

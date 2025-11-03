@@ -63,7 +63,12 @@ if (
       verificationStatus != null
         ? grUser.setValue("verified", verificationStatus)
         : grUser.getValue("verified");
-      description.length > 0 ? grUser.setValue("user_info", description) : null;
+      if (description.length > 0) {
+        grUser.setValue("user_info", description);
+      } else {
+        description = grUser.getValue("user_info");
+      }
+
       grUser.update();
 
       messageBody =

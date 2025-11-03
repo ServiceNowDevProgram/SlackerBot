@@ -1,6 +1,6 @@
 /*
 activation_example:!verify-admin @Astrid, !verify-admin -help
-regex:^!verify-admin\u0020?
+regex:^!(?:un)?verify-admin\u0020?
 flags:gi
 */
 
@@ -12,7 +12,7 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
     var slacker = new x_snc_slackerbot.Slacker();
   
     // Grab user ID and then prep invocation if User-visible info provided
-    var invocation = current.text.replace(/^!verify-admin\u0020?/gi,'').trim();
+    var invocation = current.text.replace(/^!(?:un)?verify-admin\u0020?/gi,'').trim();
     var paramArr = invocation.split(' ');
 
     if(paramArr.length == 0){
@@ -42,7 +42,10 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
             messageBody = 'Please only provide one verify parameter in your message. Verification message ignored.';
             slacker.send_chat(current, messageBody, true);
         } else {
-            if(paramArr.indexOf('-v') > -1){
+            if(/^!unverify/.test(current.text)){
+                verificationStatus = false;
+            }
+            else if(paramArr.indexOf('-v') > -1){
                 verificationStatus = true;
             }
 

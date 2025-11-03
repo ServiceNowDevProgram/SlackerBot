@@ -32,17 +32,16 @@ if (
       "Admin Tool - Verify user\nA parser for setting user verification and descriptions. *Note:* This parser can only be triggered from admin channels specified.\n\nUsage: `!verify-admin @username [-v|-unv] [message]`\nExamples:\n`!verify-admin @Astrid -unv Is an Impasta`\n`!verify-admin @Astrid Some Role, Some Company`\n`!verify-admin @Astrid -v`\n\nSupported flags:\n-v: Verify the user\n-unv: Remove verification from user\n-help: Show this message";
   }
 
-  if (paramArr.length >= 2) {
     if (/^<@.*?>$/.test(paramArr[0])) {
+      messageBody = paramArr[0];
       userId = paramArr[0].replace(/[<>@]/g, "");
       paramArr.shift();
     } else {
       messageBody =
         "!verify-admin must be called with a user tag, followed by an optional parameter and optional description. For example: `!verify-admin @Astrid -unv Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`";
-        slacker.send_chat(current, messageBody, true);
+      slacker.send_chat(current, messageBody, true);
     }
-  }
-
+ 
   if (paramArr.indexOf("-v") > -1 && paramArr.indexOf("-unv") > -1) {
     messageBody =
       "Please only provide one verify parameter in your message. Verification message ignored.";
@@ -77,8 +76,7 @@ if (
         "\n";
       messageBody += "User information:\n>" + description;
     } else {
-      messageBody +=
-        `I'm afraid I can't do that as the ~limit~ user (<@${userId}>) does not exist.`;
+      messageBody += `I'm afraid I can't do that as the ~limit~ user (<@${userId}>) does not exist.`;
     }
     slacker.send_chat(current, messageBody, true);
   }

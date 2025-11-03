@@ -19,13 +19,9 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
         messageBody = '!verify-admin must be called with a user tag, followed by an optional parameter and optional description. For example: `!verify-admin @Astrid -unv Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`';
     }
 
-    if(paramArr.length == 1){
-        if(paramArr[0] == '-help'){
+    if(paramArr.length == 1 && paramArr[0] == '-help'){
             messageBody = 'Admin Tool - Verify user\nA parser for setting user verification and descriptions. *Note:* This parser can only be triggered from admin channels specified.\n\nUsage: `!verify-admin @username [-v|-unv] [message]`\nExamples:\n`!verify-admin @Astrid -unv Is an Impasta`\n`!verify-admin @Astrid Some Role, Some Company`\n`!verify-admin @Astrid -v`\n\nSupported flags:\n-v: Verify the user\n-unv: Remove verification from user\n-help: Show this message';
-        } else {
-            messageBody = '!verify-admin must be called with a user tag, followed by an optional parameter and optional description. For example: `!verify-admin @Astrid -unv Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`';
-        }
-    }
+            }
 
     if(paramArr.length >= 2){
         if(/^<@.*?>$/.test(paramArr[0])){
@@ -50,14 +46,12 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
                 verificationStatus = true;
             }
 
-            if(paramArr.indexOf('-unv') > -1){
+            else if(paramArr.indexOf('-unv') > -1){
                 verificationStatus = false;
             }
 
-            if(verificationStatus != null){
-                paramArr = paramArr.filter(function(val){
-                    return (val != '-v' && val != '-unv');
-                })
+            else if(verificationStatus != null){
+                verificationStatus = true;
             }
 
             description = paramArr.join(' ');
@@ -67,9 +61,15 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
                 description.length > 0 ? grUser.setValue('user_info',description) : null;
                 grUser.update();
 
-                messageBody = 'Updated <@' + userId + '>\'s verification information. Run `!verify` or `!whois` to verify output.';
+                messageBody = 'Updated <@' + userId + '>\'s verification information with the following info:\n';
+                if(verificationStatus != null){
+                    messageBody += 'Verification status: ' + (verificationStatus ? 'Verified' : 'Unverified') + '\n';
+                }
+                if(description.length > 0){
+                    messageBody += 'User information: ' + description;
+                }
             } else {
-                messageBody += 'I\'m afraid I can\'t do that as the user does not exist.';
+                messageBody += 'I\'m afraid I can\'t do that as the ~limit~ user does not exist.';
             }
             slacker.send_chat(current, messageBody, true);
         }

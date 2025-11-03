@@ -39,6 +39,7 @@ if (
     } else {
       messageBody =
         "!verify-admin must be called with a user tag, followed by an optional parameter and optional description. For example: `!verify-admin @Astrid -unv Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`";
+        slacker.send_chat(current, messageBody, true);
     }
   }
 
@@ -77,7 +78,7 @@ if (
       messageBody += "User information:\n>" + description;
     } else {
       messageBody +=
-        "I'm afraid I can't do that as the ~limit~ user does not exist.";
+        `I'm afraid I can't do that as the ~limit~ user (<@${userId}>) does not exist.`;
     }
     slacker.send_chat(current, messageBody, true);
   }

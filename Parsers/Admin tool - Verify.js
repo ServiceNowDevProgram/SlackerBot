@@ -50,24 +50,21 @@ if (current.channel == 'GD51HTR46' || current.channel == 'G9LAJG7G8' || current.
                 verificationStatus = false;
             }
 
-            else if(verificationStatus != null){
+            else if(verificationStatus == null){
                 verificationStatus = true;
             }
 
             description = paramArr.join(' ');
             var grUser = new GlideRecord('x_snc_slackerbot_user');
             if(grUser.get('user_id',userId)){
-                verificationStatus != null ? grUser.setValue('verified',verificationStatus) : null;
+                verificationStatus != null ? grUser.setValue('verified',verificationStatus) : grUser.getValue('verified');
                 description.length > 0 ? grUser.setValue('user_info',description) : null;
                 grUser.update();
 
                 messageBody = 'Updated <@' + userId + '>\'s verification information with the following info:\n';
-                if(verificationStatus != null){
-                    messageBody += 'Verification status: ' + (verificationStatus ? 'Verified' : 'Unverified') + '\n';
-                }
-                if(description.length > 0){
-                    messageBody += 'User information: ' + description;
-                }
+                messageBody += 'Verification status: ' + (verificationStatus ? '*Verified*' : '*Unverified*') + '\n';
+                messageBody += 'User information:\n>' + description;
+               
             } else {
                 messageBody += 'I\'m afraid I can\'t do that as the ~limit~ user does not exist.';
             }

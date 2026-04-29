@@ -17,6 +17,11 @@ if(grUser.get('user_id',user_id) && Object.keys(grUser).indexOf('verified') != -
 
     message_body += '' + grUser.getValue('name') + '\'s identity '+ verification_status;
     if(!gs.nil(user_info)) message_body += '\n\nThe following information has been noted about this user:\n\n> ' + user_info;
+    if (
+        current.channel == "GD51HTR46" ||
+        current.channel == "G9LAJG7G8" ||
+        current.channel == "G7M4AP6U8"
+    ) { message_body += `\n\n Hey! You\'re in an admin channel!\nIf you want to change the verify status or add a note, try \`!verify-admin <@${user_id}>\``; }
 }
 else {
   message_body += 'I\'m afraid I can\'t do that. Either the user does not exist, or the logic to support this functionality is not yet on the instance.';

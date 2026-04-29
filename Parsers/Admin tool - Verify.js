@@ -54,7 +54,7 @@ flags:gi
     // 2. Validate that a user tag is provided
     if (paramArr.length == 0 || !/^<@.*?>$/.test(paramArr[0])) {
       messageBody =
-        "!verify-admin must be called with a user tag, followed by an optional parameter and optional description. For example: `!verify-admin @Astrid -unv Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`";
+        "!verify-admin must be called with a user tag and optional description. For example: `!verify-admin @Astrid Is an Impasta`\n\nThe full list of accepted triggers can be found by sending `!verify-admin -help`";
       slacker.send_chat(current, messageBody, true);
       return;
     }
@@ -115,7 +115,7 @@ flags:gi
         "\n";
       messageBody += "User information:\n>" + description;
     } else {
-      messageBody = "I'm afraid I can't do that as the user (<@" + userId + ">) does not exist.";
+      messageBody = "I'm afraid I can't do that as the ~limit~ user (<@" + userId + ">) does not exist.";
     }
     
     slacker.send_chat(current, messageBody, true);

@@ -30,7 +30,7 @@ var prevName;
 var appsArray = [];
 var grSSA = new GlideRecord("sys_store_app");
 grSSA.addEncodedQuery(
-    "install_dateISNOTEMPTY^hide_on_ui=false^vendor=ServiceNow^ORvendorISEMPTY"
+    "install_dateISNOTEMPTY^hide_on_ui=false^vendor=ServiceNow^ORvendorISEMPTY^latest_version!="
 );
 grSSA.orderBy("name");
 grSSA.orderBy("version");

@@ -41,21 +41,37 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 		]
 	});
 	
-	if (additionalComics && additionalComics.length > 1) {
-		var msgArr = [];
-		for(var i = 0; i < additionalComics.length; i++){
-			parseInt(additionalComics[i], 10) !== xkcdPayload.num ? msgArr.push(additionalComics[i]) : null;
-		}
-		blockArr.push({
-			"type": "context",
-			"elements": [
-				{
-					"type": "mrkdwn",
-					"text": "*Other matching comics:* " + msgArr.join(', ')
-				}
-			]
-		});
-	}
+if (additionalComics && additionalComics.length > 1) {
+    var msgArr = [];
+    for (var i = 0; i < additionalComics.length; i++) {
+        if (parseInt(additionalComics[i].id, 10) !== xkcdPayload.num) {
+            msgArr.push(
+                "- #" +
+                additionalComics[i].id +
+                " - " +
+                additionalComics[i].title
+            );
+
+            if (msgArr.length >= 3) {
+                break;
+            }
+        }
+    }
+
+    if (msgArr.length > 0) {
+        blockArr.push({
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text":
+                        "*Other matching comics:*\n" +
+                        msgArr.join("\n")
+                }
+            ]
+        });
+    }
+}
 
 	return {
 		"text": xkcdPayload.safe_title,
@@ -125,9 +141,10 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 
         if (searchResults.hits) {
             for (var i = 0; i < Math.min(searchResults.hits.length, 10); i++) {
-                comicNumbers.push(
-                    searchResults.hits[i].document.id
-                );
+                comicNumbers.push({
+				    id: searchResults.hits[i].document.id,
+				    title: searchResults.hits[i].document.title
+				});
             }
         }
 
@@ -136,15 +153,14 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
             // Use the highest ranked result instead of random
             endPoint =
                 "https://xkcd.com/" +
-                comicNumbers[0] +
+                comicNumbers[0].id +
                 "/info.0.json";
 
             comicFound = true;
 
         } else {
 
-            var randomComic =
-                Math.floor(Math.random() * parseInt(jsonBody.num));
+            var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num)) + 1;
 
             endPoint =
                 "https://xkcd.com/" +
@@ -161,7 +177,7 @@ comicDataMsg.setRequestHeader('User-Agent', 'servicenow');
 response = comicDataMsg.execute();
 var body = JSON.parse(response.getBody());
 
-if(comicNumbers && comicNumbers.length > 1){
+if(comicNumbers.length > 1){
 	msg = buildComicOutput(body, comicFound, comicNumbers);
 } else {
 	msg = buildComicOutput(body, comicFound, null);

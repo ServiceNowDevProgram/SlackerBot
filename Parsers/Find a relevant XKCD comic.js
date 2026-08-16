@@ -41,10 +41,10 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 		]
 	});
 	
-	if(additionalComics !== null){
+	if (additionalComics && additionalComics.length > 1) {
 		var msgArr = [];
 		for(var i = 0; i < additionalComics.length; i++){
-			additionalComics[i] != xkcdPayload.num ? msgArr.push(additionalComics[i]) : null;
+			parseInt(additionalComics[i], 10) !== xkcdPayload.num ? msgArr.push(additionalComics[i]) : null;
 		}
 		blockArr.push({
 			"type": "context",
@@ -64,23 +64,6 @@ function buildComicOutput(xkcdPayload, comicFound, additionalComics) {
 
 }
 
-function getComicNumbers(body) {
-	var regex = /title="([0-9]+): .+"/gm;
-	var matches;
-	var comicNumbers = []; // store the search results, just the comic number
-	while ((matches = regex.exec(body)) !== null) {
-		// This is necessary to avoid infinite loops with zero-width matches
-		if (matches.index === regex.lastIndex) {
-			regex.lastIndex++;
-		}
-
-		// push the actual match to the array
-		comicNumbers.push(matches[1]);
-	}
-
-	return comicNumbers;
-}
-
 // if no parameters, display latest
 // if number, display that number if valid otherwise random
 // if -random then find a random
@@ -91,6 +74,7 @@ var comicNumProvided = /^-?\d+$/.test(terms);
 var endPoint = 'https://xkcd.com/info.0.json';
 var comicFound = (terms == "");
 var msg;
+var comicNumbers = [];
 
 // we need the number of comics to be able to handle random, number, and negative path
 var restMsg = new sn_ws.RESTMessageV2();
@@ -107,52 +91,74 @@ if (terms != "" && (terms == "-random" || comicNumProvided)) {
 		comicFound = true;
 	} else {
 		// otherwise just work out 
-		var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num));
+		var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num)) + 1;
 		endPoint = "https://xkcd.com/" + randomComic + "/info.0.json";
 		comicFound = !comicNumProvided; // set comic found to true only if a random one was selected on purpose
 	}
 } else if (terms != "") {
-	// assume it's a search, so use the search facility of explainxkcd
-	// the search results don't give us an indication of relevance, so to clean the results
-	// up we'll remove punctuation and insignificant words
-	var littleWords = ['of', 'the', "in", "on", "at", "to", "a", "is"];
-	terms = terms.split(' ')
-		.filter(function (_x) {
-			return _x != '' && littleWords.indexOf(_x.toLowerCase()) == -1;
-		})
-		.join('+');
 
-	var searchEndPoint = "https://www.explainxkcd.com/wiki/index.php?search=" + terms + "&title=Special%3ASearch&profile=default&fulltext=1";
-	var searchMsg = new sn_ws.RESTMessageV2();
-	searchMsg.setHttpMethod('GET');
-	searchMsg.setEndpoint(searchEndPoint);
-	searchMsg.setRequestHeader('User-Agent', 'servicenow');
-	response = searchMsg.execute();
-	var body = response.getBody();
+    var searchEndPoint =
+        "https://qtg5aekc2iosjh93p.a1.typesense.net" +
+        "/collections/xkcd/documents/search" +
+        "?q=" + encodeURIComponent(terms) +
+        "&query_by=title,altTitle,transcript,topics" +
+        "&query_by_weights=127,80,80,1" +
+        "&num_typos=1" +
+        "&exclude_fields=embedding";
 
-	// search the body in two passes, first the section that contains the page title matches
-	// if nothing found there, we'll search the page text section which is a search of body text
-	var pageTitleBody = body.substr(0, body.indexOf('Page text matches'));
-	var pageTextBody = body.substr(body.indexOf('Page text matches'));
-	var comicNumbers = getComicNumbers(pageTitleBody);
-	comicNumbers = comicNumbers.length > 0 ? comicNumbers : getComicNumbers(pageTextBody);
+    var searchMsg = new sn_ws.RESTMessageV2();
+    searchMsg.setHttpMethod('GET');
+    searchMsg.setEndpoint(searchEndPoint);
 
-	if (comicNumbers.length > 0) {
-		// we have some comics so get a random one
-		var randomComic = Math.floor(Math.random() * comicNumbers.length);
-		endPoint = "https://xkcd.com/" + comicNumbers[randomComic] + "/info.0.json";
-		comicFound = true;
-	} else {
-		var randomComic = Math.floor(Math.random() * parseInt(jsonBody.num));
-		endPoint = "https://xkcd.com/" + randomComic + "/info.0.json";
-	}
+	// this is a public key, not specific to us.
+    searchMsg.setRequestHeader(
+        'X-TYPESENSE-API-KEY',
+        '8hLCPSQTYcBuK29zY5q6Xhin7ONxHy99'
+    );
+
+    response = searchMsg.execute();
+
+    if (response.getStatusCode() == 200) {
+
+        var searchResults = JSON.parse(response.getBody());
+        comicNumbers = [];
+
+        if (searchResults.hits) {
+            for (var i = 0; i < Math.min(searchResults.hits.length, 10); i++) {
+                comicNumbers.push(
+                    searchResults.hits[i].document.id
+                );
+            }
+        }
+
+        if (comicNumbers.length > 0) {
+
+            // Use the highest ranked result instead of random
+            endPoint =
+                "https://xkcd.com/" +
+                comicNumbers[0] +
+                "/info.0.json";
+
+            comicFound = true;
+
+        } else {
+
+            var randomComic =
+                Math.floor(Math.random() * parseInt(jsonBody.num));
+
+            endPoint =
+                "https://xkcd.com/" +
+                randomComic +
+                "/info.0.json";
+        }
+    }
 }
 
 var comicDataMsg = new sn_ws.RESTMessageV2();
 comicDataMsg.setHttpMethod('GET');
 comicDataMsg.setEndpoint(endPoint);
 comicDataMsg.setRequestHeader('User-Agent', 'servicenow');
-var response = comicDataMsg.execute();
+response = comicDataMsg.execute();
 var body = JSON.parse(response.getBody());
 
 if(comicNumbers && comicNumbers.length > 1){

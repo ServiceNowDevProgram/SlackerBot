@@ -12,9 +12,9 @@ var amount = match ? match[1] : "";
 var fromCurrency = match ? match[2] : "";
 var toCurrency = match ? match[3] : "";
 
-// Build the search URL using the Currency Converter API
-var baseUrl = 'https://api.exchangeratesapi.io/latest';
-var searchUrl = baseUrl + '?base=' + fromCurrency;
+// Build the search URL using the Frankfurter API (free, no API key required)
+var baseUrl = 'https://api.frankfurter.app/latest';
+var searchUrl = baseUrl + '?from=' + fromCurrency + '&to=' + toCurrency;
 
 // Make the API request
 var chatReq = new sn_ws.RESTMessageV2();
@@ -29,8 +29,8 @@ var responseData = JSON.parse(chatResponseBody);
 // Check if the API response contains exchange rates
 if (responseData.rates && responseData.rates[toCurrency]) {
   var exchangeRate = responseData.rates[toCurrency];
-  var convertedAmount = amount * exchangeRate;
-
+  var convertedAmount = (amount * exchangeRate).toFixed(2);
+  
   // Send a formatted message to Slack
   new x_snc_slackerbot.Slacker().send_chat(current, `${amount} ${fromCurrency} is equal to ${convertedAmount.toFixed(2)} ${toCurrency}`, false);
 } else {
